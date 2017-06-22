@@ -16,16 +16,15 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
+        createSemiCircle(with: CGPoint(x: 0, y: 0), and: 100, and: CGFloat(Double.pi/2), and: CGFloat(-Double.pi/2), and: UIColor.red)
+        
         
         // Create shape node to use during mouse interaction
         let w = (self.size.width + self.size.height) * 0.05
         self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        
+        
+        
         
         if let spinnyNode = self.spinnyNode {
             spinnyNode.lineWidth = 2.5
@@ -35,6 +34,20 @@ class GameScene: SKScene {
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
         }
+    }
+    
+    func createSemiCircle(with position: CGPoint, and radius: CGFloat, and startAngle: CGFloat, and endAngle: CGFloat, and color: UIColor){
+        
+        let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+        
+        let pathNode = SKShapeNode(path: bezierPath.cgPath)
+        pathNode.strokeColor = color
+        pathNode.fillColor = color
+        pathNode.lineWidth = 0
+        pathNode.position = position
+        
+        addChild(pathNode)
+        
     }
     
     
