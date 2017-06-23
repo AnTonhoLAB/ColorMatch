@@ -11,92 +11,93 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    let colors = [UIColor.red, UIColor.blue, UIColor.yellow, UIColor.green, UIColor.cyan, UIColor.brown, UIColor.lightGray]
+    
+    var circle = SKShapeNode()
+    
+    var subShapes = [SubShape]()
+    
+    var clicks = 0
+    
+    var radius = CGFloat()
+    
+    var time = TimeInterval()
+    var began = false
+    var velocity = TimeInterval(exactly: 0.2)
     
     override func didMove(to view: SKView) {
         
-        createSemiCircle(with: CGPoint(x: 0, y: 0), and: 100, and: CGFloat(Double.pi/2), and: CGFloat(-Double.pi/2), and: UIColor.red)
+        radius = (self.view?.frame.size.width)! * 0.20
         
+        circle.position = CGPoint(x: 0, y: -view.frame.size.height/2)
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        createSubShapesWith(number: 6)
         
+        for subShape in subShapes {
+            circle.addChild(subShape)
+        }
         
+        addChild(circle)
+    }
+    
+    func createSubShapesWith(number: Int){
+        let angle = Double(360/number)
         
+        var currentAngle = 90.0
         
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
+        for index in 0..<number {
+            let subShape = SubShape(radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), color: colors[index])
+            subShapes.append(subShape)
+            currentAngle += angle
         }
     }
-    
-    func createSemiCircle(with position: CGPoint, and radius: CGFloat, and startAngle: CGFloat, and endAngle: CGFloat, and color: UIColor){
-        
-        let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
-        
-        let pathNode = SKShapeNode(path: bezierPath.cgPath)
-        pathNode.strokeColor = color
-        pathNode.fillColor = color
-        pathNode.lineWidth = 0
-        pathNode.position = position
-        
-        addChild(pathNode)
-        
-    }
-    
     
     func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
+        
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
+        clicks += 1
         
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        if clicks == 1 {
+            began = true
+            let rotation = SKAction.move(to: CGPoint(x: 0, y: (self.view?.frame.size.height)!/2 ), duration: 5)
+            circle.run(rotation)
+        }
+        else if clicks == 2 {
+//            for subShape in subShapes{
+//                let move = SKAction.move(to: CGPoint(x: subShape.position.x + cos(circle.zRotation) * 200, y: subShape.position.y + sin(circle.zRotation)*200), duration: 5)
+//
+//                    subShape.run(move)
+//            }
+            
+            began = false
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        if(began){
+            if(currentTime - time >= velocity!){
+                let rotation = SKAction.rotate(byAngle: CGFloat(Double.pi/4.0), duration: velocity!)
+                circle.run(rotation)
+                time = currentTime
+            }
+        }
     }
 }
