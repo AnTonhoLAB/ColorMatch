@@ -20,8 +20,6 @@ class GameScene: SKScene {
     var clicks = 0
     
     var radius = CGFloat()
-    
-    var time = TimeInterval()
     var began = false
     var velocity = TimeInterval(exactly: 0.2)
     
@@ -67,8 +65,13 @@ class GameScene: SKScene {
         
         if clicks == 1 {
             began = true
-            let rotation = SKAction.move(to: CGPoint(x: 0, y: (self.view?.frame.size.height)!/2 ), duration: 5)
-            circle.run(rotation)
+            
+            let rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
+            let forever = SKAction.repeatForever(rotate)
+            circle.run(forever)
+            
+            let move = SKAction.move(to: CGPoint(x: 0, y: (self.view?.frame.size.height)!/2), duration: 5)
+            circle.run(move)
         }
         else if clicks == 2 {
 //            for subShape in subShapes{
@@ -92,12 +95,6 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
-        if(began){
-            if(currentTime - time >= velocity!){
-                let rotation = SKAction.rotate(byAngle: CGFloat(Double.pi/4.0), duration: velocity!)
-                circle.run(rotation)
-                time = currentTime
-            }
-        }
+        
     }
 }
