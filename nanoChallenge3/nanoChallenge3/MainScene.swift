@@ -56,12 +56,16 @@ class MainScene: SKScene {
         gameOver.position = CGPoint(x: 0, y: 0)
         gameOver.name = "GameOver";
         gameOver.isUserInteractionEnabled = false;
+        gameOver.zPosition = 1
         
         let circle = SKSpriteNode(imageNamed: "Circle")
-        circle.position = CGPoint(x: -gameOver.size.width/2 + circle.size.width/4, y: -gameOver.size.height/2 + circle.size.height/4)
         circle.name = "Circle";
         circle.isUserInteractionEnabled = false;
-        circle.size = CGSize(width: gameOver.size.height/2, height: gameOver.size.height/2)
+        circle.size = CGSize(width: circle.size.width-40, height: circle.size.height-40)
+        
+        circle.position = CGPoint(x: -gameOver.size.width/2 + circle.size.width/2, y: -gameOver.size.height/2 + circle.size.height/2)
+        
+        circle.zPosition = 2
         
         let gameOverNode = SKNode()
         gameOverNode.position = CGPoint(x: 0, y: 0)

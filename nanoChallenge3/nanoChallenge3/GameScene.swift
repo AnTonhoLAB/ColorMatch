@@ -11,7 +11,9 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let colors = [UIColor.red, UIColor.blue, UIColor.yellow, UIColor.green, UIColor.cyan, UIColor.brown, UIColor.lightGray]
+    let colors = [UIColor(red: 255.0/255.0, green: 83.0/255.0, blue: 83.0/255.0, alpha: 1),
+                  UIColor(red: 255.0/255.0, green: 190.0/255.0, blue: 71.0/255.0, alpha: 1),
+                  UIColor(red: 0.0/255.0, green: 204.0/255.0, blue: 215.0/255.0, alpha: 1), UIColor.red, UIColor.blue, UIColor.yellow, UIColor.green, UIColor.cyan, UIColor.brown, UIColor.lightGray]
     
     var circle = SKShapeNode()
     
@@ -25,11 +27,13 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        
+        
         radius = (self.view?.frame.size.width)! * 0.20
         
         circle.position = CGPoint(x: 0, y: -view.frame.size.height/2)
         
-        createSubShapesWith(number: 6)
+        createSubShapesWith(number: 3)
         
         for subShape in subShapes {
             circle.addChild(subShape)
