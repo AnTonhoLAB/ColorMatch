@@ -22,8 +22,8 @@ class GameViewController: UIViewController {
                 
                 scene.scaleMode = .aspectFill
                 let mainScene = scene as! MainScene
-                mainScene.createGameOverScene(sceneSize: self.view.frame.size)
-//                mainScene.createMenuScene(sceneSize: self.view.frame.size)
+//                mainScene.createGameOverScene(sceneSize: self.view.frame.size)
+                mainScene.createMenuScene(sceneSize: self.view.frame.size)
                 view.presentScene(mainScene)
                 
             }
