@@ -16,103 +16,96 @@ import GameplayKit
 class LevelScene: SKScene {
     var background = SKSpriteNode(imageNamed:"Background")
     
+    var buttons = [[SKSpriteNode]]()
     
+    var lastUnlockedLevel = 1
+    var lastUnlockedSublevel = 1
     
     override func didMove(to view: SKView) {
+        let levelsTitle = SKSpriteNode(imageNamed: "Levels")
         
+        levelsTitle.xScale = 2
+        levelsTitle.yScale = 2
+        levelsTitle.position = CGPoint(x: 0, y: (self.view?.frame.size.height)!/2 + levelsTitle.size.height/2)
+        levelsTitle.zPosition = 100
+        addChild(levelsTitle)
         
-        
-        
-        var lastUnlockedLevel = 1
-        var lastUnlockedSublevel = 1
-        
-//        var button11 =  SKSpriteNode (imageNamed: "level1.1")
-//        var button12 =  SKSpriteNode (imageNamed: "level1.2")
-//        var button13 =  SKSpriteNode (imageNamed: "level1.3")
-//        
-//        var button21 = SKSpriteNode (imageNamed: "level2.1")
-//        var button22 = SKSpriteNode (imageNamed: "level2.2")
-//        var button23 = SKSpriteNode (imageNamed: "level2.3")
-//        
-        
-        //var arrayAllButtons = [button11, button12, button13, button21, button22, button23]
-        
-        
-//        var button31 = SKSpriteNode (imageNamed: "level2.2")
-//        var button32 =  SKSpriteNode (imageNamed: "level2.2")
-//        var button33 =  SKSpriteNode (imageNamed: "level2.2")
-//        
-//        var button41 =  SKSpriteNode (imageNamed: "level2.2")
-//        var button42 = SKSpriteNode (imageNamed: "level2.2")
-//        var button43 = SKSpriteNode (imageNamed: "level2.2")
-//        
-        
-//        var arrayLevels1 = [button11, button12, button13]
-//        var arrayLevels2 = [button21, button22, button23]
-////        var arrayLevels3 = [button31, button32, button33]
-//        var arrayLevels4 = [button41, button42, button43]
-//       
-        var size: CGFloat = 70
-        var lineSpace: CGFloat = 25
+        var size: CGFloat!
+        let lineSpace: CGFloat = 25
         
         var initialX: CGFloat!
-        var x: CGFloat!
-        var initialY = size
-//        var cont = 0
-//        var cont2 = 0
-       
-        for cont in 1..<2
+        var currentX: CGFloat!
+        
+        var initialY: CGFloat!
+        
+        for level in 0..<4
         {
-            for cont2 in 1..<4
+            
+            var subLevels = [SKSpriteNode]()
+            
+            for subLevel in 0..<3
             {
-                let imageName = "Level_\(cont).\(cont2)"
-                
-
+                let imageName = "Level_\(level+1).\(subLevel+1)"
                 
                 let button = SKSpriteNode(imageNamed: imageName)
                 
                 button.xScale = 3
                 button.yScale = 3
                 
-                if(cont == 1 && cont2 == 1){
-                    initialX = -1*(button.size.width + lineSpace)
-                    x = initialX
+                if(level == 0 && subLevel == 0){
+                    size = button.size.width
+                    initialX = -1*(size + lineSpace)
+                    currentX = initialX
+                    
+                    initialY = size
                 }
                 
-//                size = button.size.width
+                button.size = CGSize(width: size, height: size)
                 
-                button.position = CGPoint(x: x, y: initialY)
+                button.position = CGPoint(x: currentX, y: initialY)
                 
-                //button.size.height = size
-                //button.size.width =  size
-                x = x + lineSpace + button.size.width
+                currentX = currentX + lineSpace + button.size.width
                 
-                //arrayAllButtons[cont2]
+                subLevels.append(button)
                 self.addChild(button)
-            
+                
             }
-            x =   initialX
             
-            initialY = initialY - 12.5
+            buttons.append(subLevels)
+            
+            currentX =   initialX
+            
+            initialY = initialY - size - 12.5
             
         }
         
-        
-//        button22.position = CGPoint(x: 0, y: 0)
-//        button22.texture = SKTexture.init(imageNamed: "level2.2")
-//        button22.xScale = 2
-//        button22.yScale = 2
-        
-//        background.position = CGPoint(x: 0.5, y: 0.5)
-//        //back.scaleMode = .aspectFill
         background.size.width = self.size.width
         background.size.height = self.size.height
-       addChild(background)
-//        addChild(button22)
+        addChild(background)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        
+        for (level,buttonsLevel) in buttons.enumerated() {
+            for (subLevel,buttonSubLevel) in buttonsLevel.enumerated() {
+                if buttonSubLevel.contains(touch.location(in: self)) {
+//                    buttonSubLevel.texture = SKTexture(imageNamed: "")
+                    if let scene = SKScene(fileNamed: "GameScene") {
+                        scene.scaleMode = .aspectFill
+                        
+                        print("Level: \(level+1) SubLevel: \(subLevel+1)")
+                        
+                        self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                    }
+                }
+            }
+            
+        }
     }
     
     
     
     
-
+    
 }
