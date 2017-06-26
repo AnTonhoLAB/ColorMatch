@@ -96,7 +96,11 @@ class LevelScene: SKScene {
                         
                         print("Level: \(level+1) SubLevel: \(subLevel+1)")
                         
-                        self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                        let gameScene = scene as! GameScene
+                        gameScene.fixLevelAccordingToLevelScreen(currentLevel: level+1, subLevel: subLevel+1)
+                        
+                        
+                        self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
                     }
                 }
             }

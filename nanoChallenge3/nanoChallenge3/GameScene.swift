@@ -114,12 +114,14 @@ class GameScene: SKScene {
     
     func loadInitialData() {
         
+        
+        
         self.colors = [vermelho, laranja, ciano, UIColor.red, UIColor.blue, UIColor.yellow, UIColor.green, UIColor.cyan, UIColor.brown, UIColor.lightGray]
-
+        
         self.circle.name = "InsideCircle"
         self.arcCircle.name = "OutsideCircle"
         
-      
+        
         
         radius = (self.view?.frame.size.width)! * 0.20
         
@@ -376,7 +378,6 @@ func updateLevel1(_ currentTime: TimeInterval) {
     
     func setConfigurationsForSubLevel1(numberOfColors:Int, insideCircleVelocity:Double, outsideCircleVelocity:Double, directionOutCircle:CGFloat, directionInsideCircle:CGFloat){
         
-        
         let outCircleToRemove = self.childNode(withName: "OutsideCircle")
         let insideCircleToRemove = self.childNode(withName: "InsideCircle")
         
@@ -448,6 +449,8 @@ func updateLevel1(_ currentTime: TimeInterval) {
     
     func setNextSubLevelAcordingToParameters(currentLevel:Int, currentSubLevel:Int){
         
+       
+        
         switch(currentLevel){
             
         case 1: firstLevelSetNextSubLevel(currentSubLevel: currentSubLevel)
@@ -459,6 +462,13 @@ func updateLevel1(_ currentTime: TimeInterval) {
             break
             
         }
+        
+    }
+    
+    func fixLevelAccordingToLevelScreen(currentLevel:Int, subLevel:Int){
+        
+        self.currentLevel = currentLevel
+        self.currentSubLevel = subLevel
         
     }
     
