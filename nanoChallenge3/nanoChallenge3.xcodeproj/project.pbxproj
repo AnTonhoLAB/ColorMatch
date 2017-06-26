@@ -22,6 +22,8 @@
 		9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9166F8C11EFD86A90071E84A /* MainScene.sks */; };
 		9166F8C41EFD86CE0071E84A /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166F8C31EFD86CE0071E84A /* MainScene.swift */; };
 		91BE9DCD1EFCA1900012877D /* SubShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE9DCC1EFCA1900012877D /* SubShape.swift */; };
+		91EB65321F01CB3C001A2BDD /* Credits.sks in Resources */ = {isa = PBXBuildFile; fileRef = 91EB65311F01CB3C001A2BDD /* Credits.sks */; };
+		91EB65341F01CB56001A2BDD /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EB65331F01CB56001A2BDD /* Credits.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		9166F8C11EFD86A90071E84A /* MainScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainScene.sks; sourceTree = "<group>"; };
 		9166F8C31EFD86CE0071E84A /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		91BE9DCC1EFCA1900012877D /* SubShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubShape.swift; sourceTree = "<group>"; };
+		91EB65311F01CB3C001A2BDD /* Credits.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Credits.sks; sourceTree = "<group>"; };
+		91EB65331F01CB56001A2BDD /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 				9166F8C31EFD86CE0071E84A /* MainScene.swift */,
 				8DB153B71F01855F00920BB6 /* LevelScene.sks */,
 				8DB153B91F01859400920BB6 /* LevelScene.swift */,
+				91EB65311F01CB3C001A2BDD /* Credits.sks */,
+				91EB65331F01CB56001A2BDD /* Credits.swift */,
 			);
 			path = nanoChallenge3;
 			sourceTree = "<group>";
@@ -152,6 +158,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91EB65321F01CB3C001A2BDD /* Credits.sks in Resources */,
 				6BAED4AF1EFC5AC600E10034 /* Main.storyboard in Resources */,
 				6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */,
 				8DB153B81F01855F00920BB6 /* LevelScene.sks in Resources */,
@@ -176,6 +183,7 @@
 				6BAED4AC1EFC5AC600E10034 /* GameViewController.swift in Sources */,
 				9166F8C41EFD86CE0071E84A /* MainScene.swift in Sources */,
 				6BAED4A41EFC5AC600E10034 /* AppDelegate.swift in Sources */,
+				91EB65341F01CB56001A2BDD /* Credits.swift in Sources */,
 				9165FA0F1EFE3CD1001D920B /* ShapeLevel2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
