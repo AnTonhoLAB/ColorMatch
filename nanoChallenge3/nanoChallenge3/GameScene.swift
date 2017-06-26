@@ -9,24 +9,39 @@
 import SpriteKit
 import GameplayKit
 
+
+enum GameStatus {
+    case GameOverStatus
+    case Runing
+    case NextSubLevel
+    case NextLevel
+}
+
+
 class GameScene: SKScene {
     
-    let colors = [UIColor(red: 255.0/255.0, green: 83.0/255.0, blue: 83.0/255.0, alpha: 1),
-                  UIColor(red: 255.0/255.0, green: 190.0/255.0, blue: 71.0/255.0, alpha: 1),
-                  UIColor(red: 0.0/255.0, green: 204.0/255.0, blue: 215.0/255.0, alpha: 1), UIColor.red, UIColor.blue, UIColor.yellow, UIColor.green, UIColor.cyan, UIColor.brown, UIColor.lightGray]
     
+    var currentLevel = 1
+    var currentSubLevel = 1
+    
+    let vermelho = UIColor(red: 255.0/255.0, green: 83.0/255.0, blue: 83.0/255.0, alpha: 1)
+    let laranja = UIColor(red: 255.0/255.0, green: 190.0/255.0, blue: 71.0/255.0, alpha: 1)
+    let ciano = UIColor(red: 0.0/255.0, green: 204.0/255.0, blue: 215.0/255.0, alpha: 1)
+    
+    var gameStatus = GameStatus.Runing
+    
+    var colors:[UIColor]!
     
     var touched = false
     var touchesCont = 0
     var numberOfColors = 3
-    var outCircle = SKShapeNode()
+    //var outCircle = SKShapeNode()
     var circle = SKShapeNode()
     var subShapes = [SubShape]()
     var radius = CGFloat()
     var velocity = TimeInterval(exactly: 0.2)
     
     var level = 1
-    
     
     
     var outCircles = [OutCircleShape]()
@@ -36,8 +51,8 @@ class GameScene: SKScene {
     var time = TimeInterval()
     var began = false
     
+    var arcCircle = SKShapeNode()
     
-    var bigCircle  = [OutCircleShape]()
     var redBall:SKShapeNode!
     
     
@@ -57,10 +72,11 @@ class GameScene: SKScene {
         }
         
         
-        //self.loadInitialData()
-        
         
     }
+    
+    
+    
     
     func level2Data(){
         
@@ -82,10 +98,6 @@ class GameScene: SKScene {
         }
         
         
-        
-        
-        
-        
         addChild(circle)
         
         let rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
@@ -102,40 +114,22 @@ class GameScene: SKScene {
     
     func loadInitialData() {
         
-        let rotateAction  = SKAction.rotate(byAngle: CGFloat( Float.pi), duration: 1)
-        let fasterRotation = SKAction.rotate(byAngle: -1*CGFloat (2 * (Float.pi)), duration: 1)
+        self.colors = [vermelho, laranja, ciano, UIColor.red, UIColor.blue, UIColor.yellow, UIColor.green, UIColor.cyan, UIColor.brown, UIColor.lightGray]
+
+        self.circle.name = "InsideCircle"
+        self.arcCircle.name = "OutsideCircle"
+        
+      
         
         radius = (self.view?.frame.size.width)! * 0.20
         
         circle.position = CGPoint(x: 0, y: 0)
         
-        let infiniteRotation = SKAction.repeatForever(rotateAction)
-        let infiniteRotationFaster = SKAction.repeatForever(fasterRotation)
+        self.setNextSubLevelAcordingToParameters(currentLevel: self.currentLevel, currentSubLevel: self.currentSubLevel)
         
         
-        createSubShapesWith(number: 3)
-        createOutCirclesWith(number: 3)
-        //createBigCircle(number: 3)
-        
-        for subShape in subShapes {
-            circle.addChild(subShape)
-        }
-        
-        addChild(circle)
-        
-        for semiCircle in self.outCircles{
-            
-            outCircle.addChild(semiCircle)
-            
-        }
-        
-        self.addChild(outCircle)
-        self.circle.run(infiniteRotation)
-        //self.outCircle.run(infiniteRotationFaster)
-        
-        
-        
-        
+        circle.zRotation = 0
+       
         
     }
     
@@ -143,7 +137,7 @@ class GameScene: SKScene {
         
         let angle = Double(360/number)
         
-        var currentAngle = 90.0
+        var currentAngle = 0.0
         
         for index in 0..<number {
             let subCircleShape = OutCircleShape(radius: radius*3, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), color: colors[index])
@@ -155,19 +149,10 @@ class GameScene: SKScene {
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     func createSubShapesWith(number: Int){
         let angle = Double(360/number)
         
-        var currentAngle = 90.0
+        var currentAngle = 0.0
         
         for index in 0..<number {
             let subShape = SubShape(radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), color: colors[index])
@@ -235,7 +220,7 @@ class GameScene: SKScene {
             let fadeEffect = SKAction.fadeOut(withDuration: 1)
             
             self.circle.removeAllActions()
-            self.outCircle.removeAllActions()
+            self.arcCircle.removeAllActions()
             
             ballNodeRemoved?.run(impulse)
             
@@ -244,49 +229,7 @@ class GameScene: SKScene {
             shape.run(fadeEffect)
             
         }
-        
-        
-        
-        let rotatee = GLKMathDegreesToRadians(360.0)
-        let rot = GLKMathRadiansToDegrees(Float(circle.zRotation)) / 360
-        print(rot)
-        //let numberOfColorsTimes2: Int = (numberOfColors) * 2
-        //        if (CGFloat (rotatee) < 2 * CGFloat.pi){
-        //
-        //
-        //            print("vamos")
-        //            gotItRight = 1
-        //
-        //        }
-        //        else {
-        
-        
-        let subtraction =  CGFloat (GLKMathRadiansToDegrees(Float.pi / Float (numberOfColors)))
-       // if (abs (fmod(circle.zRotation, CGFloat(rotatee))  -  fmod(outCircle.zRotation, CGFloat (rotatee)))
-           // < CGFloat.pi /  CGFloat (numberOfColors)) {
-            
-            
-            
-            
-            if (fmod (circle.zRotation, CGFloat(rotatee)) - subtraction <  CGFloat.pi / CGFloat (numberOfColors))
-            {
-            
-            gotItRight = 1
-            print("vamooo")
-        }
-        else{
-            gotItRight = 0
-            print ("nao vamo")
-        }
-        
-        
-        
-        // }
-        
-        
-    
-        
-        //circle.removeAllActions()
+   
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -312,6 +255,29 @@ class GameScene: SKScene {
         
     }
     
+
+    
+    func compareColors (c1:UIColor, c2:UIColor) -> Bool{
+        // some kind of weird rounding made the colors unequal so had to compare like this
+        
+        var red:CGFloat = 0
+        var green:CGFloat  = 0
+        var blue:CGFloat = 0
+        var alpha:CGFloat  = 0
+        c1.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        var red2:CGFloat = 0
+        var green2:CGFloat  = 0
+        var blue2:CGFloat = 0
+        var alpha2:CGFloat  = 0
+        c2.getRed(&red2, green: &green2, blue: &blue2, alpha: &alpha2)
+        
+        return (Int(red*255) == Int(red*255) && Int(green*255) == Int(green2*255) && Int(blue*255) == Int(blue*255) )
+        
+        
+    }
+    
+    
 func updateLevel1(_ currentTime: TimeInterval) {
         
         var removeCounter = 0
@@ -320,144 +286,181 @@ func updateLevel1(_ currentTime: TimeInterval) {
         if(touched){
             
             
+            let ballNodeRemoved = self.circle.childNode(withName: "ball_\(removeCounter)") as! SKShapeNode
             
+            let point = self.convert((ballNodeRemoved.position), from: self.circle)
             
-            /*
-             for circles in self.outCircles{
-             print("COR DO CIRCULO")
-             print(circles.color)
-             if let a = circles.physicsBody?.allContactedBodies(){
-             
-             
-             for body in a{
-             print("cor do body")
-             
-             
-             let bodyNode = body.node as! SKShapeNode
-             print(bodyNode.fillColor.cgColor)
-             
-             if bodyNode.fillColor.cgColor == circles.color.cgColor{
-             bodyNode.run(fadeEffect)
-             }
-             
-             }
-             }
-             */
-            
-            
-            
-            
-            
-            if self.circle.childNode(withName: "ball_\(removeCounter)") != nil{
+            if(sqrt(pow(point.x, 2) + pow(point.y, 2)) >= (self.outCircles.first?.radius)!-10){
                 
-                let ballNodeRemoved = self.circle.childNode(withName: "ball_\(removeCounter)") as! SKShapeNode
+                print("Colisao aleatoria")
                 
-                let point = self.convert((ballNodeRemoved.position), from: self.circle)
                 
-                //if(sqrt(pow(point.x, 2) + pow(point.y, 2)) >= (self.outCircles.first?.radius)!){
-                if pow(point.x, 2)  + pow(point.y, 2) >= pow (radius * 3, 2){
+                while(removeCounter<numberOfColors){
                     
-                    
-                    
-                    
-                    
-                    if (gotItRight == 1){
+                    if let circles = self.arcCircle.children as? [OutCircleShape]{
                         
-                        for child in circle.children{
-                            child.run(.stop())
-                            child.removeFromParent()
+                        
+                        for circleSelected in circles{
+                            
+                            
+                            if(self.compareColors(c1: circleSelected.color, c2: ballNodeRemoved.fillColor)){
+                                
+                                
+                                print("Mesma cor")
+                                
+                                for child in circleSelected.children{
+                                    
+                                    if(ballNodeRemoved.intersects(child)){
+                                        
+                                        print("Corrected Colision")
+                                        
+                                        self.gameStatus = .NextSubLevel
+                                        
+                                    }else{
+                                        
+                                        
+                                        self.gameStatus = .GameOverStatus
+                                        
+                                        
+                                    }
+                                }
+                                
+                                
+                            }
                             
                         }
-                        for child in outCircle.children{
-                            child.removeFromParent()
-                        }
-                        
-                        self.removeAllChildren()
-                        self.subShapes = []
-                        self.outCircles = []
-                        self.loadInitialData()
-                        
-                        
-                        
-                        
-                        
-                        
-                    }
-                        
-                    else {
-                        
-                        
-                        for child in circle.children{
-                            child.run(.stop())
-                            child.removeFromParent()
-                            
-                        }
-                        for child in outCircle.children{
-                            child.removeFromParent()
-                        }
-                        
-                        self.removeAllChildren()
-                        subShapes = []
-                        outCircles = []
-                        self.loadInitialData()
-                        
+
                         
                     }
                     
-                    
-                    
-                    // for circles in self.outCircles{
-                    
-                    //print(circles.zRotation)
-                    //print(ballNodeRemoved.zRotation)
-                    
-                    //print(circles.initialPosition)
-                    
-                    
-                    // let initialPointCircle = self.convert((circles?.initialPosition!)!, from: self.circle)
-                    // let finalPointCircle = self.convert((circles?.finalPosition!)!, from: self.circle)
-                    
-                    //print("\(ballNodeRemoved.name): \(point)")
-                    
-                    //print(initialPointCircle)
-                    
-                    //   if(circles.color == ballNodeRemoved.fillColor){
-                    
-                    
-                    
-                    //    }
-                    
-                    //if(circles?.color == ballNodeRemoved.strokeColor && point.x >= (circles?.initialPosition.x)! && point.x <= (circles?.finalPosition.x)!){
-                    
-                    //  print("colisiom")
-                    //}
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    // }
-                    
+                  removeCounter+=1
                     
                 }
                 
-                
-            }
+                if(self.gameStatus == .GameOverStatus){
+                    
+                    if let scene = SKScene(fileNamed: "MainScene") {
+                        scene.scaleMode = .aspectFill
+                        let mainScene = scene as! MainScene
+                        mainScene.createGameOverScene()
+                        self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                    }
+
+               }
+                else if(self.gameStatus == .NextSubLevel){
+                    
+                    self.touched = false
+                    
+                    self.currentSubLevel += 1
+                    
+                    if(self.currentSubLevel >= 4){
+                        
+                        exit(0)
+                    }
+                    
+                    self.setNextSubLevelAcordingToParameters(currentLevel: self.currentLevel, currentSubLevel: self.currentSubLevel)
+                    
+                }
             
+          }
+        
+        
+         
+      }
+
+    
+    
+   }
+    
+    
+    
+    func setConfigurationsForSubLevel1(numberOfColors:Int, insideCircleVelocity:Double, outsideCircleVelocity:Double, directionOutCircle:CGFloat, directionInsideCircle:CGFloat){
+        
+        
+        let outCircleToRemove = self.childNode(withName: "OutsideCircle")
+        let insideCircleToRemove = self.childNode(withName: "InsideCircle")
+        
+        outCircleToRemove?.removeFromParent()
+        insideCircleToRemove?.removeFromParent()
+        
+        outCircleToRemove?.removeAllChildren()
+        insideCircleToRemove?.removeAllChildren()
+        
+        let rotateAction  = SKAction.rotate(byAngle: directionInsideCircle * CGFloat( Float.pi), duration: insideCircleVelocity)
+        let fasterRotation = SKAction.rotate(byAngle: directionOutCircle *  CGFloat (2 * (Float.pi)), duration: outsideCircleVelocity)
+        
+        let infiniteRotation = SKAction.repeatForever(rotateAction)
+        let infiniteRotationFaster = SKAction.repeatForever(fasterRotation)
+        
+        
+        self.subShapes = []
+        self.outCircles = []
+        
+        
+        createSubShapesWith(number: numberOfColors)
+        createOutCirclesWith(number: numberOfColors)
+  
+        
+        for subShape in subShapes {
+            circle.addChild(subShape)
+        }
+        
+        addChild(circle)
+        
+        for semiCircle in self.outCircles{
             
+            arcCircle.addChild(semiCircle)
+            
+        }
+        
+        self.addChild(arcCircle)
+        self.circle.run(infiniteRotation)
+        self.arcCircle.run(infiniteRotationFaster)
+    }
+    
+    
+    func firstLevelSetNextSubLevel(currentSubLevel:Int){
+        
+        
+        switch(currentSubLevel){
+            
+        case 1: setConfigurationsForSubLevel1(numberOfColors: 3, insideCircleVelocity: 1, outsideCircleVelocity: 1, directionOutCircle: 0, directionInsideCircle: 1)
+            break
+        case 2: setConfigurationsForSubLevel1(numberOfColors: 3, insideCircleVelocity: 1, outsideCircleVelocity: 1, directionOutCircle: -1, directionInsideCircle: 1)
+            break
+        case 3: setConfigurationsForSubLevel1(numberOfColors: 4, insideCircleVelocity: 1, outsideCircleVelocity: 1, directionOutCircle: -1, directionInsideCircle: 1)
+            break
+            
+        default:
+            break
             
         }
         
         
+    }
+    
+    
+    
+    func secondLevelSetNextSubLevel(currentSubLevel:Int){
         
         
     }
-
     
-    
-    
+    func setNextSubLevelAcordingToParameters(currentLevel:Int, currentSubLevel:Int){
+        
+        switch(currentLevel){
+            
+        case 1: firstLevelSetNextSubLevel(currentSubLevel: currentSubLevel)
+            break
+            
+        case 2: secondLevelSetNextSubLevel(currentSubLevel: currentSubLevel)
+            break
+        default:
+            break
+            
+        }
+        
+    }
     
     
     
