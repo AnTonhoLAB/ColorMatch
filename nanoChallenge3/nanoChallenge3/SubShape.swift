@@ -10,6 +10,11 @@ import SpriteKit
 
 class SubShape: SKShapeNode{
     
+    var color:UIColor!
+    var positionCorrected:CGPoint!
+    
+    
+    
     init(radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, color: UIColor) {
         super.init()
         
@@ -21,6 +26,8 @@ class SubShape: SKShapeNode{
         pathNode.lineWidth = 0
         pathNode.position = position
         
+        self.color = color
+        
         addChild(pathNode)
         
         let line_path: CGMutablePath = CGMutablePath()
@@ -29,6 +36,16 @@ class SubShape: SKShapeNode{
         line_path.addLine(to: CGPoint(x: position.x + cos(startAngle) * radius, y: position.y + sin(startAngle)*radius))
         
         line_path.addLine(to: CGPoint(x: position.x + cos(endAngle) * radius, y: position.y + sin(endAngle)*radius))
+        
+        let correctedX = ((position.x + cos(startAngle)*radius) + (position.x + cos(endAngle) * radius)) / 2
+        
+        let correctedY = ((position.y + sin(startAngle)*radius) + (position.y + sin(endAngle)*radius)) / 2
+        
+        positionCorrected = CGPoint(x: correctedX, y: correctedY)
+
+        
+        
+        
         
         let linePathNode = SKShapeNode(path: line_path)
         
