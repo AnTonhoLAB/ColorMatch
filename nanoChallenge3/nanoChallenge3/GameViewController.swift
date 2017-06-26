@@ -16,14 +16,11 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "MainScene") {
-                // Set the scale mode to scale to fit the window
-                
                 scene.scaleMode = .aspectFill
                 let mainScene = scene as! MainScene
-//                mainScene.createGameOverScene(sceneSize: self.view.frame.size)
-                mainScene.createMenuScene(sceneSize: self.view.frame.size)
+                mainScene.createGameOverScene()
+//                mainScene.createMenuScene()
                 view.presentScene(mainScene)
                 
             }

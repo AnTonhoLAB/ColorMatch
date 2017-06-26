@@ -30,6 +30,8 @@ class ShapeLevel2: SKShapeNode{
         var currentAngleInDegrees = CGFloat(90)
         var currentAngleInRadians = CGFloat()
         
+        var zRotation = CGFloat(0)
+        
         for color in 0..<colors.count{
             for index in 1...numberOfNodesInEachColor[color]*2{
                 if index % 2 == 0 && colors[color] != UIColor.clear {
@@ -37,11 +39,20 @@ class ShapeLevel2: SKShapeNode{
                     
                     let point = CGPoint(x: position.x + cos(currentAngleInRadians) * radius, y: position.y + sin(currentAngleInRadians)*radius)
                     
-                    let circle = SKShapeNode(circleOfRadius: widthNodes/2)
-                    circle.fillColor = colors[color]
-                    circle.position = point
+                    let trace = SKShapeNode(rect: CGRect(x: 0, y: 0, width: widthNodes, height: widthNodes*3), cornerRadius: widthNodes/2 - 0.1)
+                    trace.fillColor = colors[color]
+                    trace.position = point
+                    trace.zRotation = zRotation
+                    zRotation += degreesToRadians(degrees: spacing*2)
                     
-                    addChild(circle)
+                    addChild(trace)
+                    
+//                    let circle = SKShapeNode(circleOfRadius: widthNodes/2)
+//                    circle.fillColor = colors[color]
+//                    circle.position = point
+//                    circle.zRotation = zRotation
+//                    
+//                    addChild(circle)
                 }
                 
                 currentAngleInDegrees += spacing
@@ -51,6 +62,10 @@ class ShapeLevel2: SKShapeNode{
     
     func degreesToRadians(degrees: CGFloat) -> CGFloat {
         return degrees*CGFloat(Double.pi/180)
+    }
+    
+    func radiansToDegrees(radians: CGFloat) -> CGFloat {
+        return CGFloat(radians/180)
     }
     
     required init?(coder aDecoder: NSCoder) {
