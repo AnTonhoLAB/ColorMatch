@@ -134,6 +134,11 @@ class MainScene: SKScene {
         if self.status == .menu {
             if buttonLevels.contains(touch.location(in: self)) {
                 buttonLevels.texture = SKTexture(imageNamed: "Button_Levels")
+                if let scene = SKScene(fileNamed: "LevelScene") {
+                    scene.scaleMode = .aspectFill
+                    self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                }
+
             }
             else if buttonPlay.contains(touch.location(in: self)) {
                 buttonPlay.texture = SKTexture(imageNamed: "Button_Play")
