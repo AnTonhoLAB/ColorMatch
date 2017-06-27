@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B562D7F1F02C2F4009E7B0E /* back.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6B562D7E1F02C2F4009E7B0E /* back.wav */; };
 		6BAED4A41EFC5AC600E10034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */; };
 		6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A51EFC5AC600E10034 /* GameScene.sks */; };
 		6BAED4A81EFC5AC600E10034 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A71EFC5AC600E10034 /* Actions.sks */; };
@@ -18,6 +17,7 @@
 		6BAED4B41EFC5AC600E10034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4B21EFC5AC600E10034 /* LaunchScreen.storyboard */; };
 		8DB153B81F01855F00920BB6 /* LevelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DB153B71F01855F00920BB6 /* LevelScene.sks */; };
 		8DB153BA1F01859400920BB6 /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB153B91F01859400920BB6 /* LevelScene.swift */; };
+		914232F11F02D9FD007C9064 /* back.wav in Resources */ = {isa = PBXBuildFile; fileRef = 914232F01F02D9FD007C9064 /* back.wav */; };
 		9164F1DE1F02AFDA00958747 /* LevelUpScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9164F1DD1F02AFDA00958747 /* LevelUpScene.sks */; };
 		9164F1E01F02AFFD00958747 /* LevelUpScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164F1DF1F02AFFD00958747 /* LevelUpScene.swift */; };
 		9165FA0F1EFE3CD1001D920B /* ShapeLevel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9165FA0E1EFE3CD1001D920B /* ShapeLevel2.swift */; };
@@ -32,7 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6B562D7E1F02C2F4009E7B0E /* back.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = back.wav; path = ../../gameSounds/back.wav; sourceTree = "<group>"; };
 		6BAED4A01EFC5AC600E10034 /* nanoChallenge3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nanoChallenge3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BAED4A51EFC5AC600E10034 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -45,6 +44,7 @@
 		6BAED4B51EFC5AC600E10034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DB153B71F01855F00920BB6 /* LevelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelScene.sks; sourceTree = "<group>"; };
 		8DB153B91F01859400920BB6 /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
+		914232F01F02D9FD007C9064 /* back.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = back.wav; path = ../../../Downloads/back.wav; sourceTree = "<group>"; };
 		9164F1DD1F02AFDA00958747 /* LevelUpScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelUpScene.sks; sourceTree = "<group>"; };
 		9164F1DF1F02AFFD00958747 /* LevelUpScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelUpScene.swift; sourceTree = "<group>"; };
 		9165FA0E1EFE3CD1001D920B /* ShapeLevel2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLevel2.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 			children = (
 				6BAED4A21EFC5AC600E10034 /* nanoChallenge3 */,
 				6BAED4A11EFC5AC600E10034 /* Products */,
-				6B562D7E1F02C2F4009E7B0E /* back.wav */,
+				914232F01F02D9FD007C9064 /* back.wav */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,12 +178,9 @@
 				6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */,
 				8DB153B81F01855F00920BB6 /* LevelScene.sks in Resources */,
 				6BAED4B11EFC5AC600E10034 /* Assets.xcassets in Resources */,
+				914232F11F02D9FD007C9064 /* back.wav in Resources */,
 				9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */,
-<<<<<<< Updated upstream
 				9164F1DE1F02AFDA00958747 /* LevelUpScene.sks in Resources */,
-=======
-				6B562D7F1F02C2F4009E7B0E /* back.wav in Resources */,
->>>>>>> Stashed changes
 				6BAED4B41EFC5AC600E10034 /* LaunchScreen.storyboard in Resources */,
 				6BAED4A81EFC5AC600E10034 /* Actions.sks in Resources */,
 			);

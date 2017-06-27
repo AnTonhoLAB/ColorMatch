@@ -34,10 +34,10 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
         
-        let path = Bundle.main.path(forResource: "back", ofType:"wav")!
-        let url = URL(fileURLWithPath: path)
-        
         do {
+            let path = Bundle.main.path(forResource: "back", ofType:"wav")!
+            let url = URL(fileURLWithPath: path)
+            
             let sound = try AVAudioPlayer(contentsOf: url)
             backgroundMusic = sound
             sound.play()
