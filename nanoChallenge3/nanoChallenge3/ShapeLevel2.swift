@@ -51,13 +51,6 @@ class ShapeLevel2: SKShapeNode{
                     zRotation += degreesToRadians(degrees: spacing*2)
                     
                     addChild(trace)
-                    
-//                    let circle = SKShapeNode(circleOfRadius: widthNodes/2)
-//                    circle.fillColor = colors[color]
-//                    circle.position = point
-//                    circle.zRotation = zRotation
-//                    
-//                    addChild(circle)
                 }
                 
                 currentAngleInDegrees += spacing
