@@ -22,6 +22,7 @@
 		9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9166F8C11EFD86A90071E84A /* MainScene.sks */; };
 		9166F8C41EFD86CE0071E84A /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166F8C31EFD86CE0071E84A /* MainScene.swift */; };
 		91BE9DCD1EFCA1900012877D /* SubShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE9DCC1EFCA1900012877D /* SubShape.swift */; };
+		ED0A2DDC1F01D8F60058E8D3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		9166F8C11EFD86A90071E84A /* MainScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainScene.sks; sourceTree = "<group>"; };
 		9166F8C31EFD86CE0071E84A /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		91BE9DCC1EFCA1900012877D /* SubShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubShape.swift; sourceTree = "<group>"; };
+		ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				6BAED4A51EFC5AC600E10034 /* GameScene.sks */,
 				6BAED4A71EFC5AC600E10034 /* Actions.sks */,
 				6BAED4A91EFC5AC600E10034 /* GameScene.swift */,
+				ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */,
 				8DB153B51F01526C00920BB6 /* OutCircleShape.swift */,
 				9165FA0E1EFE3CD1001D920B /* ShapeLevel2.swift */,
 				91BE9DCC1EFCA1900012877D /* SubShape.swift */,
@@ -174,6 +177,7 @@
 				8DB153B61F01526C00920BB6 /* OutCircleShape.swift in Sources */,
 				6BAED4AA1EFC5AC600E10034 /* GameScene.swift in Sources */,
 				6BAED4AC1EFC5AC600E10034 /* GameViewController.swift in Sources */,
+				ED0A2DDC1F01D8F60058E8D3 /* UserDefaultsManager.swift in Sources */,
 				9166F8C41EFD86CE0071E84A /* MainScene.swift in Sources */,
 				6BAED4A41EFC5AC600E10034 /* AppDelegate.swift in Sources */,
 				9165FA0F1EFE3CD1001D920B /* ShapeLevel2.swift in Sources */,

@@ -10,6 +10,8 @@ import SpriteKit
 
 class ShapeLevel2: SKShapeNode{
     
+    var radius:CGFloat!
+    
     init(radius: CGFloat, colors: [UIColor], numberOfNodesInEachColor: [Int]) {
         super.init()
         
@@ -18,6 +20,8 @@ class ShapeLevel2: SKShapeNode{
         for number in numberOfNodesInEachColor{
             numberOfNodes += CGFloat(number)
         }
+        
+        self.radius = radius
         
         numberOfNodes *= 2
         

@@ -37,9 +37,13 @@ class SubShape: SKShapeNode{
         
         line_path.addLine(to: CGPoint(x: position.x + cos(endAngle) * radius, y: position.y + sin(endAngle)*radius))
         
-        let correctedX = ((position.x + cos(startAngle)*radius) + (position.x + cos(endAngle) * radius)) / 2
+        var correctedX = ((position.x + cos(startAngle)*radius) + (position.x + cos(endAngle) * radius)) / 2
         
-        let correctedY = ((position.y + sin(startAngle)*radius) + (position.y + sin(endAngle)*radius)) / 2
+        correctedX *= 2
+        
+        var correctedY = ((position.y + sin(startAngle)*radius) + (position.y + sin(endAngle)*radius)) / 2
+        
+        correctedY *= 2
         
         positionCorrected = CGPoint(x: correctedX, y: correctedY)
 

@@ -21,14 +21,19 @@ enum GameStatus {
 class GameScene: SKScene {
     
     
-    var currentLevel = 1
-    var currentSubLevel = 1
+    var currentLevel = -1
+    var currentSubLevel = -1
+    
+    var vidas = 3
+    
     
     let vermelho = UIColor(red: 255.0/255.0, green: 83.0/255.0, blue: 83.0/255.0, alpha: 1)
     let laranja = UIColor(red: 255.0/255.0, green: 190.0/255.0, blue: 71.0/255.0, alpha: 1)
     let ciano = UIColor(red: 0.0/255.0, green: 204.0/255.0, blue: 215.0/255.0, alpha: 1)
     
     var gameStatus = GameStatus.Runing
+    
+    var userDefaults = UserDefaultsManager()
     
     var colors:[UIColor]!
     
@@ -60,63 +65,30 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        switch (level){
-            
-            case 1: self.loadInitialData()
-                break
-            case 2: self.level2Data()
-            break;
-        default: break
-           
+        //self.userDefaults.resetUserDefaults()
+        
+        
+        if(self.currentLevel < 0){
+        
+            self.currentLevel = self.userDefaults.getCurrentUserInfo(info: .CurrentLevel)
+            self.currentSubLevel = self.userDefaults.getCurrentUserInfo(info: .CurrentSubLevel)
             
         }
         
+        self.loadInitialData()
         
         
     }
     
-    
-    
-    
-    func level2Data(){
-        
-        let testShape = ShapeLevel2(radius: (self.view?.frame.size.width)! * 0.60, colors: [
-            UIColor(red: 255.0/255.0, green: 83.0/255.0, blue: 83.0/255.0, alpha: 1),
-            UIColor(red: 255.0/255.0, green: 190.0/255.0, blue: 71.0/255.0, alpha: 1),
-            UIColor(red: 0.0/255.0, green: 204.0/255.0, blue: 215.0/255.0, alpha: 1)], numberOfNodesInEachColor: [4, 10, 10])
-        
-        addChild(testShape)
-        
-        radius = (self.view?.frame.size.width)! * 0.20
-        
-        circle.position = CGPoint(x: 0, y: 0)
-        
-        createSubShapesWith(number: 3)
-        
-        for subShape in subShapes {
-            circle.addChild(subShape)
-        }
-        
-        
-        addChild(circle)
-        
-        let rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
-        let forever = SKAction.repeatForever(rotate)
-        circle.run(forever)
 
-        
-        
-    }
-    
-    
-    
     
     
     func loadInitialData() {
         
         
+        //self.updateSubLevelLabel()
         
-        self.colors = [vermelho, laranja, ciano, UIColor.red, UIColor.blue, UIColor.yellow, UIColor.green, UIColor.cyan, UIColor.brown, UIColor.lightGray]
+        self.colors = [vermelho, laranja, ciano, UIColor.brown, UIColor.blue, UIColor.red, UIColor.green, UIColor.cyan, UIColor.yellow, UIColor.lightGray]
         
         self.circle.name = "InsideCircle"
         self.arcCircle.name = "OutsideCircle"
@@ -126,6 +98,7 @@ class GameScene: SKScene {
         radius = (self.view?.frame.size.width)! * 0.20
         
         circle.position = CGPoint(x: 0, y: 0)
+ 
         
         self.setNextSubLevelAcordingToParameters(currentLevel: self.currentLevel, currentSubLevel: self.currentSubLevel)
         
@@ -179,58 +152,72 @@ class GameScene: SKScene {
         touchesCont = touchesCont + 1
         var ballCounter = 0
         
+       
+        
+        if(!touched){
+            
+            for shape in subShapes{
+                
+                
+                
+                self.redBall = SKShapeNode.init(circleOfRadius: 40)
+                
+                self.redBall?.fillColor = shape.color
+                
+                self.redBall?.position = shape.positionCorrected
+                
+                
+                self.redBall?.physicsBody = SKPhysicsBody.init(circleOfRadius: 40)
+                
+                self.redBall?.physicsBody?.affectedByGravity = false
+                
+                self.redBall?.name = "ball_\(ballCounter)"
+                
+                self.circle.addChild(self.redBall)
+                
+                ballCounter+=1
+                
+                
+                //print(shape.positionCorrected)
+                
+            }
+            
+            var removeCounter = 0
+            
+            for shape in subShapes{
+                
+                
+                let ballNodeRemoved = self.circle.childNode(withName: "ball_\(removeCounter)")
+                
+                let point = self.convert((ballNodeRemoved?.position)!, from: self.circle)
+                
+                let impulse = SKAction.applyImpulse(CGVector(dx: point.x, dy: point.y), duration: 1)
+                
+                let fadeEffect = SKAction.fadeOut(withDuration: 1)
+                
+                self.circle.removeAllActions()
+                self.arcCircle.removeAllActions()
+                
+                if let level2OutCircle = self.childNode(withName:"outCircleLvl2"){
+                    
+                    level2OutCircle.removeAllActions()
+                }
+                
+                ballNodeRemoved?.run(impulse)
+                
+                removeCounter+=1
+                
+                shape.run(fadeEffect)
+                
+            }
+            
+            
+        }
+        
+        
+        
+        
         touched = true
-        
-        
-        for shape in subShapes{
-            
-            
-            
-            self.redBall = SKShapeNode.init(circleOfRadius: 40)
-            
-            self.redBall?.fillColor = shape.color
-            
-            self.redBall?.position = shape.positionCorrected
-            
-            self.redBall?.physicsBody = SKPhysicsBody.init(circleOfRadius: 40)
-            
-            self.redBall?.physicsBody?.affectedByGravity = false
-            
-            self.redBall?.name = "ball_\(ballCounter)"
-            
-            self.circle.addChild(self.redBall)
-            
-            ballCounter+=1
-            
-            
-            
-            //print(shape.positionCorrected)
-            
-        }
-        
-        var removeCounter = 0
-        
-        for shape in subShapes{
-            
-            
-            let ballNodeRemoved = self.circle.childNode(withName: "ball_\(removeCounter)")
-            
-            let point = self.convert((ballNodeRemoved?.position)!, from: self.circle)
-            
-            let impulse = SKAction.applyImpulse(CGVector(dx: point.x, dy: point.y), duration: 1)
-            
-            let fadeEffect = SKAction.fadeOut(withDuration: 1)
-            
-            self.circle.removeAllActions()
-            self.arcCircle.removeAllActions()
-            
-            ballNodeRemoved?.run(impulse)
-            
-            removeCounter+=1
-            
-            shape.run(fadeEffect)
-            
-        }
    
     }
     
@@ -246,10 +233,13 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         
-        switch level {
+        switch self.currentLevel {
         case 1:
             updateLevel1(currentTime)
             break
+            
+        case 2:
+            updateLevel2(currentTime)
         default: break
             //circle.removeAllActions()
         }
@@ -280,7 +270,118 @@ class GameScene: SKScene {
     }
     
     
-func updateLevel1(_ currentTime: TimeInterval) {
+    func updateLevel2(_ currentTime: TimeInterval){
+        /*
+        
+        var removeCounter = 0
+        let fadeEffect = SKAction.fadeOut(withDuration: 1)
+        
+        if(touched){
+            
+            
+            let ballNodeRemoved = self.circle.childNode(withName: "ball_\(removeCounter)") as! SKShapeNode
+            
+            let outSideLevel2Circle = self.childNode(withName: "outCircleLvl2") as! ShapeLevel2
+            
+            let point = self.convert((ballNodeRemoved.position), from: self.circle)
+            
+            if(sqrt(pow(point.x, 2) + pow(point.y, 2)) >= outSideLevel2Circle.radius - 10){
+                
+                print("Colisao aleatoria")
+                
+                
+                while(removeCounter<numberOfColors){
+                    
+                    if let circles = outSideLevel2Circle.children as? [SKShapeNode]{
+                        
+                        
+                        print("Entrou")
+                        
+                        for circleSelected in circles{
+                            
+                            
+                             print("Entrou - EACH")
+                            
+                            if(self.compareColors(c1: circleSelected.fillColor, c2: ballNodeRemoved.fillColor)){
+                                
+                                print("Encontrou a cor")
+                                
+                                    if(ballNodeRemoved.intersects(circleSelected.)){
+                                        
+                                        print("Corrected Colision")
+                                        
+                                        //self.gameStatus = .NextSubLevel
+                                        
+                                        
+                                    }else{
+                                        
+                                        
+                                            self.gameStatus = .GameOverStatus
+                                            
+                                            self.userDefaults.resetUserDefaults()
+                                            
+                                        
+ 
+                                        
+                                    }
+                                }
+                                
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    removeCounter+=1
+                    
+                }
+                
+                if(self.gameStatus == .GameOverStatus){
+                    
+                    if let scene = SKScene(fileNamed: "MainScene") {
+                        scene.scaleMode = .aspectFill
+                        let mainScene = scene as! MainScene
+                        mainScene.createGameOverScene()
+                        self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                    }
+                    
+                }
+                else if(self.gameStatus == .NextSubLevel){
+                    
+                    self.touched = false
+                    
+                    self.currentSubLevel += 1
+                    
+                    self.userDefaults.updateDefaultsToNextSubLevel()
+                    
+                    if(self.currentSubLevel >= 4){
+                        
+                        self.currentLevel += 1
+                        self.userDefaults.updateDefaultstoNextLevel()
+                        
+                    }
+                    
+                    self.setNextSubLevelAcordingToParameters(currentLevel: self.currentLevel, currentSubLevel: self.currentSubLevel)
+                    
+                }
+                
+            }
+            
+ */
+            
+            
+}
+        
+        
+        
+        
+        
+        
+    
+
+    func updateLevel1(_ currentTime: TimeInterval) {
         
         var removeCounter = 0
         let fadeEffect = SKAction.fadeOut(withDuration: 1)
@@ -318,10 +419,14 @@ func updateLevel1(_ currentTime: TimeInterval) {
                                         
                                         self.gameStatus = .NextSubLevel
                                         
+                                        
                                     }else{
                                         
-                                        
-                                        self.gameStatus = .GameOverStatus
+                                            
+                                            self.gameStatus = .GameOverStatus
+                                            
+                                            self.userDefaults.resetUserDefaults()
+                                            
                                         
                                         
                                     }
@@ -355,10 +460,17 @@ func updateLevel1(_ currentTime: TimeInterval) {
                     
                     self.currentSubLevel += 1
                     
+                    self.userDefaults.updateDefaultsToNextSubLevel()
+                    
                     if(self.currentSubLevel >= 4){
                         
-                        exit(0)
+                        self.currentLevel = 1
+                        self.currentSubLevel = 1
+                        self.userDefaults.updateDefaultstoNextLevel()
+                        
                     }
+                    
+                   // self.updateSubLevelLabel()
                     
                     self.setNextSubLevelAcordingToParameters(currentLevel: self.currentLevel, currentSubLevel: self.currentSubLevel)
                     
@@ -444,6 +556,63 @@ func updateLevel1(_ currentTime: TimeInterval) {
     
     func secondLevelSetNextSubLevel(currentSubLevel:Int){
         
+        let testShape = ShapeLevel2(radius: (self.view?.frame.size.width)! * 0.60, colors: [
+            UIColor(red: 255.0/255.0, green: 83.0/255.0, blue: 83.0/255.0, alpha: 1),
+            UIColor(red: 255.0/255.0, green: 190.0/255.0, blue: 71.0/255.0, alpha: 1),
+            UIColor(red: 0.0/255.0, green: 204.0/255.0, blue: 215.0/255.0, alpha: 1)], numberOfNodesInEachColor: [4, 10, 10])
+        
+        testShape.name = "outCircleLvl2"
+        
+        addChild(testShape)
+        
+        
+        createSubShapesWith(number: 3)
+        
+        for subShape in subShapes {
+            circle.addChild(subShape)
+        }
+        
+        
+        addChild(circle)
+        
+        let rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
+        let forever = SKAction.repeatForever(rotate)
+        circle.run(forever)
+        testShape.run(forever)
+
+        
+        
+    }
+    
+    func setTopAndDownLayoutForGameScene(currentLevel:Int){
+        
+        
+        let topLayout = self.childNode(withName: "TopShape") as! SKSpriteNode
+        let downLayout = self.childNode(withName: "DownShape") as! SKSpriteNode
+        
+       
+        
+        switch(currentLevel){
+            
+        case 1:  topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv1top.png")))
+                 downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv1down.png")))
+            break
+        
+            
+        case 2:topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv2top.png")))
+              downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv2down.png")))
+            break
+            
+        case 3:topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv3top.png")))
+               downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv3down.png")))
+        
+        default:
+            break
+            
+            
+        }
+        
+        
         
     }
     
@@ -454,9 +623,11 @@ func updateLevel1(_ currentTime: TimeInterval) {
         switch(currentLevel){
             
         case 1: firstLevelSetNextSubLevel(currentSubLevel: currentSubLevel)
+                setTopAndDownLayoutForGameScene(currentLevel:currentLevel)
             break
             
         case 2: secondLevelSetNextSubLevel(currentSubLevel: currentSubLevel)
+                setTopAndDownLayoutForGameScene(currentLevel:currentLevel)
             break
         default:
             break
@@ -472,6 +643,13 @@ func updateLevel1(_ currentTime: TimeInterval) {
         
     }
     
+    func updateSubLevelLabel(){
+        
+        let subLevelLabel = self.childNode(withName: "subLevelLabel") as! SKLabelNode
+        
+        subLevelLabel.text = "\(self.currentSubLevel)/3"
+        
+    }
     
     
     
