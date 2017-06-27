@@ -23,6 +23,7 @@ class MainScene: SKScene {
     var buttonMenu: SKSpriteNode!
     
     //Menu
+    var nameNode: SKNode! = nil
     var buttonLevels: SKSpriteNode!
     var buttonPlay: SKSpriteNode!
     
@@ -34,6 +35,13 @@ class MainScene: SKScene {
         
         switch self.status {
         case Status.menu:
+            nameNode.xScale = 2
+            nameNode.yScale = 2
+            
+            let name = nameNode.childNode(withName: "Color_Match") as! SKSpriteNode
+            
+            nameNode.position = CGPoint(x: 0, y: name.frame.size.height)
+            
             firstButton = buttonPlay
             secondButton = buttonLevels
             break
@@ -73,6 +81,37 @@ class MainScene: SKScene {
     
     func createMenuScene(){
         self.status = .menu
+        
+        let name = SKSpriteNode(imageNamed: "Color_Match")
+        name.position = CGPoint(x: 0, y: 0)
+        name.name = "Color_Match";
+        name.isUserInteractionEnabled = false;
+        name.zPosition = 1
+        
+        let first_circle = SKSpriteNode(imageNamed: "circle_name")
+        first_circle.position = CGPoint(x: -first_circle.size.width + 9, y: name.size.height/2 - first_circle.size.height/2 - 20)
+        first_circle.name = "first_circle";
+        first_circle.isUserInteractionEnabled = false;
+        first_circle.zPosition = 2
+        
+        let second_circle = SKSpriteNode(imageNamed: "circle_name")
+        second_circle.position = CGPoint(x: first_circle.size.width + 4, y: name.size.height/2 - first_circle.size.height/2 - 20)
+        second_circle.name = "second_circle";
+        second_circle.isUserInteractionEnabled = false;
+        second_circle.zPosition = 2
+        
+        nameNode = SKNode()
+        nameNode.position = CGPoint(x: 0, y: 0)
+        nameNode.addChild(name)
+        nameNode.addChild(first_circle)
+        nameNode.addChild(second_circle)
+        
+        addChild(nameNode)
+        
+        let rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
+        let forever = SKAction.repeatForever(rotate)
+        first_circle.run(forever)
+        second_circle.run(forever)
         
         buttonLevels = SKSpriteNode(imageNamed: "Button_Levels")
         buttonLevels.name = "Button_Levels";
