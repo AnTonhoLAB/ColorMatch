@@ -89,7 +89,7 @@ class GameScene: SKScene {
             touched = true
         }
     }
-
+    
     override func update(_ currentTime: TimeInterval) {
         
         var matches = 0
@@ -118,12 +118,50 @@ class GameScene: SKScene {
                         
                         if(level == currentLevel && subLevel == currentSubLevel){
                             UserDefaultsManager.updateLevelAndSubLevel()
+                            if level == 2 && subLevel == 3 {
+                                if let scene = SKScene(fileNamed: "LevelScene") {
+                                    scene.scaleMode = .aspectFill
+                                    self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                                }
+                            }
+                            else if subLevel == 3 {
+                                if let scene = SKScene(fileNamed: "LevelUpScene") {
+                                    scene.scaleMode = .aspectFill
+                                    let levelUpScene = scene as! LevelUpScene
+                                    levelUpScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
+                                    self.view?.presentScene(levelUpScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                                    print("new level")
+                                }
+                            }
+                            else{
+                                if let scene = SKScene(fileNamed: "GameScene") {
+                                    scene.scaleMode = .aspectFill
+                                    let gameScene = scene as! GameScene
+                                    gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel+1)
+                                    self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                                }
+                            }
+                        }
+                        else if level == 2 && subLevel == 3 {
+                            if let scene = SKScene(fileNamed: "LevelScene") {
+                                scene.scaleMode = .aspectFill
+                                self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                            }
+                        }
+                        else if let scene = SKScene(fileNamed: "GameScene") {
+                            scene.scaleMode = .aspectFill
+                            let gameScene = scene as! GameScene
+                            
+                            if subLevel == 3 {
+                                gameScene.fixLevelAccordingToLevelScreen(level: level+1, subLevel: 1)
+                            }
+                            else{
+                                gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel+1)
+                            }
+                            self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
                         }
                         
-                        if let scene = SKScene(fileNamed: "LevelScene") {
-                            scene.scaleMode = .aspectFill
-                            self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                        }
+                        
                     }
                     else{
                         if let scene = SKScene(fileNamed: "MainScene") {

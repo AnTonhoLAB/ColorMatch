@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UserDefaultsManager.checkFirstTimeUsingApp(){
             UserDefaultsManager.registerLevelAndSubLevelToUserDefaults(level: 1, subLevel: 1)
         }
+        UserDefaultsManager.resetUserDefaults()
         
         return true
     }

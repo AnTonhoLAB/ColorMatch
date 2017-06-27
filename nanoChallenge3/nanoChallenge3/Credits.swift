@@ -9,9 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-
-
-
 class Credits: SKScene {
     
     var buttons = [SKSpriteNode]()
