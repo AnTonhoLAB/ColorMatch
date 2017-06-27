@@ -21,6 +21,8 @@ class MainScene: SKScene {
     var gameOverNode: SKNode! = nil
     var buttonRetry: SKSpriteNode!
     var buttonMenu: SKSpriteNode!
+    var level: Int!
+    var subLevel: Int!
     
     //Menu
     var nameNode: SKNode! = nil
@@ -55,8 +57,6 @@ class MainScene: SKScene {
             
             firstButton = buttonRetry
             secondButton = buttonMenu
-            break
-        default:
             break
         }
         
@@ -120,7 +120,9 @@ class MainScene: SKScene {
         buttonPlay.name = "Button_Play";
     }
     
-    func createGameOverScene(){
+    func createGameOverScene(level: Int, subLevel: Int){
+        self.level = level
+        self.subLevel = subLevel
         self.status = .gameOver
         
         let gameOver = SKSpriteNode(imageNamed: "Game_Over")
@@ -183,7 +185,21 @@ class MainScene: SKScene {
                 buttonPlay.texture = SKTexture(imageNamed: "Button_Play")
                 if let scene = SKScene(fileNamed: "GameScene") {
                     scene.scaleMode = .aspectFill
-                    self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                    let gameScene = scene as! GameScene
+                    
+                    var level = 0
+                    var subLevel = 0
+                    if UserDefaultsManager.checkFirstTimeUsingApp(){
+                        level = 1
+                        subLevel = 1
+                        UserDefaultsManager.registerLevelAndSubLevelToUserDefaults(level: 1, subLevel: 1)
+                    }
+                    else{
+                        level = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
+                        subLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
+                    }
+                    gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel)
+                    self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
                 }
             }
         }
@@ -216,7 +232,11 @@ class MainScene: SKScene {
                 buttonRetry.texture = SKTexture(imageNamed: "Button_Retry")
                 if let scene = SKScene(fileNamed: "GameScene") {
                     scene.scaleMode = .aspectFill
-                    self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                    
+                    let gameScene = scene as! GameScene
+                    gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel)
+                    
+                    self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
                 }
             }
             else if buttonMenu.contains(touch.location(in: self)) {

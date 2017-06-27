@@ -45,6 +45,7 @@ class ShapeLevel2: SKShapeNode{
                     
                     let trace = SKShapeNode(rect: CGRect(x: 0, y: 0, width: widthNodes, height: widthNodes*3), cornerRadius: widthNodes/2 - 0.1)
                     trace.fillColor = colors[color]
+                    trace.strokeColor = colors[color]
                     trace.position = point
                     trace.zRotation = zRotation
                     zRotation += degreesToRadians(degrees: spacing*2)

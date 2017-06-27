@@ -14,87 +14,57 @@ enum DefaultsOption {
     case CurrentSubLevel
 }
 
-class UserDefaultsManager: AnyObject {
-
+class UserDefaultsManager {
     
-    var currentLevel:Int!
-    var currentSubLevel:Int!
-    var userDefault:UserDefaults!
-    
-    
-    init() {
+    static func updateLevelAndSubLevel(){
+        let currentLevel = getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
+        let currentSubLevel = getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
         
-        self.userDefault = UserDefaults.standard
-        
-        if(self.checkFirstTimeUsingApp()){
-            
-            self.currentLevel = 1
-            self.currentSubLevel = 1
-            
-            self.registerLevelAndSubLevelToUserDefaults()
-            
-        }else{
-            
-            self.currentLevel = self.getCurrentUserInfo(info: .CurrentLevel)
-            self.currentSubLevel = self.getCurrentUserInfo(info: .CurrentSubLevel)
+        if currentLevel == 2 && currentSubLevel == 3{
+            //Ignore
         }
-        
+        else if(currentSubLevel < 3){
+            registerLevelAndSubLevelToUserDefaults(level: currentLevel, subLevel: currentSubLevel+1)
+        }
+        else{
+            registerLevelAndSubLevelToUserDefaults(level: currentLevel+1, subLevel: 1)
+        }
     }
     
-    func updateDefaultsToNextSubLevel(){
+    static func resetUserDefaults(){
+        let userDefault = UserDefaults.standard
         
-        self.currentSubLevel = self.currentSubLevel+1
-        
-        self.registerLevelAndSubLevelToUserDefaults()
-    }
-    
-    func updateDefaultstoNextLevel(){
-        
-        self.currentLevel = 1
-        
-        self.currentSubLevel = 1
-        
-        self.registerLevelAndSubLevelToUserDefaults()
-        
-    }
-    
-    func resetUserDefaults(){
-        
-        self.currentSubLevel = 1
-        self.currentLevel = 1
-        
-        self.registerLevelAndSubLevelToUserDefaults()
-        
+        userDefault.set(1, forKey: "CurrentLevel")
+        userDefault.set(1, forKey: "CurrentSubLevel")
     }
     
     
-    func checkFirstTimeUsingApp()->Bool{
-        
-        return !(self.userDefault.bool(forKey: "CurrentLevel"))
+    static func checkFirstTimeUsingApp()->Bool{
+        let userDefault = UserDefaults.standard
+        return !(userDefault.bool(forKey: "CurrentLevel"))
     }
     
-    func registerLevelAndSubLevelToUserDefaults(){
+    static func registerLevelAndSubLevelToUserDefaults(level: Int, subLevel: Int){
+        let userDefault = UserDefaults.standard
         
-        self.userDefault.set(self.currentLevel, forKey: "CurrentLevel")
-        self.userDefault.set(self.currentSubLevel, forKey: "CurrentSubLevel")
+        userDefault.set(level, forKey: "CurrentLevel")
+        userDefault.set(subLevel, forKey: "CurrentSubLevel")
         
     }
     
-    func getCurrentUserInfo(info:DefaultsOption)->Int{
+    static func getCurrentUserInfo(info:DefaultsOption)->Int{
+        
+        let userDefault = UserDefaults.standard
         
         var informationToBeReturned:Int!
         
             switch(info){
             
-            case .CurrentLevel: informationToBeReturned = self.userDefault.integer(forKey: "CurrentLevel")
+            case .CurrentLevel: informationToBeReturned = userDefault.integer(forKey: "CurrentLevel")
                 break
             
-            case .CurrentSubLevel: informationToBeReturned = self.userDefault.integer(forKey: "CurrentSubLevel")
+            case .CurrentSubLevel: informationToBeReturned = userDefault.integer(forKey: "CurrentSubLevel")
                 break
-            
-            default: informationToBeReturned = -1
-                break
-            
         }
         
         return informationToBeReturned

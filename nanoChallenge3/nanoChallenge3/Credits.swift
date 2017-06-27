@@ -73,7 +73,10 @@ class Credits: SKScene {
         
         for (index,button) in buttons.enumerated() {
             if button.contains(touch.location(in: self)) {
-                UIApplication.shared.openURL(NSURL(string:links[index])! as URL)
+                let url = URL(string: links[index])!
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
                 break
             }
         }

@@ -18,13 +18,13 @@ class LevelScene: SKScene {
     
     var buttons = [[SKSpriteNode]]()
     
-    var lastUnlockedLevel = 1
-    var lastUnlockedSublevel = 1
+    var lastUnlockedLevel: Int!
+    var lastUnlockedSublevel: Int!
     
     override func didMove(to view: SKView) {
         
-//        lastUnlockedLevel = self.userDefaults.getCurrentUserInfo(info: .CurrentLevel)
-//        lastUnlockedSublevel = self.userDefaults.getCurrentUserInfo(info: .CurrentSubLevel)
+        lastUnlockedLevel = UserDefaultsManager.getCurrentUserInfo(info: .CurrentLevel)
+        lastUnlockedSublevel = UserDefaultsManager.getCurrentUserInfo(info: .CurrentSubLevel)
         
         let levelsTitle = SKSpriteNode(imageNamed: "Levels")
         
@@ -42,21 +42,30 @@ class LevelScene: SKScene {
         
         var initialY: CGFloat!
         
-        for level in 0..<4
+        for level in 1...4
         {
             
             var subLevels = [SKSpriteNode]()
             
-            for subLevel in 0..<3
+            for subLevel in 1...3
             {
-                let imageName = "Level_\(level+1).\(subLevel+1)"
+                var imageName: String!
+                if level > lastUnlockedLevel!{
+                    imageName = "Level_\(level)_locked"
+                }
+                else if level == lastUnlockedLevel! && subLevel > lastUnlockedSublevel!{
+                    imageName = "Level_\(level)_locked"
+                }
+                else{
+                    imageName = "Level_\(level).\(subLevel)"
+                }
                 
                 let button = SKSpriteNode(imageNamed: imageName)
                 
                 button.xScale = 2
                 button.yScale = 2
                 
-                if(level == 0 && subLevel == 0){
+                if(level == 1 && subLevel == 1){
                     size = button.size.width
                     initialX = -1*(size + lineSpace)
                     currentX = initialX
@@ -93,15 +102,18 @@ class LevelScene: SKScene {
         
         for (level,buttonsLevel) in buttons.enumerated() {
             for (subLevel,buttonSubLevel) in buttonsLevel.enumerated() {
-                if buttonSubLevel.contains(touch.location(in: self)) {
-//                    buttonSubLevel.texture = SKTexture(imageNamed: "")
+                if level+1 > lastUnlockedLevel!{
+                    break
+                }
+                else if level+1 == lastUnlockedLevel! && subLevel+1 > lastUnlockedSublevel!{
+                    break
+                }
+                else if buttonSubLevel.contains(touch.location(in: self)) {
                     if let scene = SKScene(fileNamed: "GameScene") {
                         scene.scaleMode = .aspectFill
                         
-                        print("Level: \(level+1) SubLevel: \(subLevel+1)")
-                        
                         let gameScene = scene as! GameScene
-                        gameScene.fixLevelAccordingToLevelScreen(currentLevel: level+1, subLevel: subLevel+1)
+                        gameScene.fixLevelAccordingToLevelScreen(level: level+1, subLevel: subLevel+1)
                         
                         
                         self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
