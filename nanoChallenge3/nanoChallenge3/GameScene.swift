@@ -38,7 +38,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         setNextSubLevelAcordingToParameters(currentLevel: self.level, currentSubLevel: self.subLevel)
         
-        setTopAndDownLayoutForGameScene(currentLevel: 1)
+        setTopAndDownLayoutForGameScene(currentLevel: level)
         
     }
     
