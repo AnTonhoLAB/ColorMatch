@@ -40,6 +40,7 @@ class GameViewController: UIViewController {
             
             let sound = try AVAudioPlayer(contentsOf: url)
             backgroundMusic = sound
+            sound.numberOfLoops = -1
             sound.play()
         } catch {
             // couldn't load file :(

@@ -20,7 +20,7 @@ class UserDefaultsManager {
         let currentLevel = getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
         let currentSubLevel = getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
         
-        if currentLevel == 2 && currentSubLevel == 3{
+        if currentLevel == 4 && currentSubLevel == 3{
             //Ignore
         }
         else if(currentSubLevel < 3){

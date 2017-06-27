@@ -21,22 +21,16 @@ class ShapeLevel1: SKShapeNode{
         
         for index in 0..<colors.count {
             
-            let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), clockwise: true)
-            
-            let pathNode = SKShapeNode(path: bezierPath.cgPath)
-            pathNode.strokeColor = colors[index]
-//            pathNode.fillColor = colors[index]
-            pathNode.lineWidth = radius * 0.2
-            pathNode.position = position
-
-            
-            addChild(pathNode)
-            
-//            let node = SKShapeNode()
-//            node.addChild(pathNode)
-//            node.strokeColor = colors[index]
-//            
-//            addChild(node)
+            if colors[index] != UIColor.clear {
+                let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), clockwise: true)
+                
+                let pathNode = SKShapeNode(path: bezierPath.cgPath)
+                pathNode.strokeColor = colors[index]
+                pathNode.lineWidth = radius * 0.2
+                pathNode.position = position
+                
+                addChild(pathNode)
+            }
             
             currentAngle += angle
         }

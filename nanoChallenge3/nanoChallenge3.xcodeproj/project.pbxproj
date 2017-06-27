@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B562D871F02E0B7009E7B0E /* back.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6B562D861F02E0B7009E7B0E /* back.wav */; };
 		6BAED4A41EFC5AC600E10034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */; };
 		6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A51EFC5AC600E10034 /* GameScene.sks */; };
 		6BAED4A81EFC5AC600E10034 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A71EFC5AC600E10034 /* Actions.sks */; };
@@ -26,13 +25,13 @@
 		9197360C1F01DF2900D86AA1 /* SKViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197360B1F01DF2900D86AA1 /* SKViewExtension.swift */; };
 		919E62AE1F020B4400B3E0C6 /* ShapeLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E62AD1F020B4400B3E0C6 /* ShapeLevel1.swift */; };
 		91BE9DCD1EFCA1900012877D /* SubShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE9DCC1EFCA1900012877D /* SubShape.swift */; };
+		91C093111F02EA3E00D23BEF /* back.wav in Resources */ = {isa = PBXBuildFile; fileRef = 91C093101F02EA3E00D23BEF /* back.wav */; };
 		91EB65321F01CB3C001A2BDD /* Credits.sks in Resources */ = {isa = PBXBuildFile; fileRef = 91EB65311F01CB3C001A2BDD /* Credits.sks */; };
 		91EB65341F01CB56001A2BDD /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EB65331F01CB56001A2BDD /* Credits.swift */; };
 		ED0A2DDC1F01D8F60058E8D3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6B562D861F02E0B7009E7B0E /* back.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = back.wav; path = ../../../gameSounds/back.wav; sourceTree = "<group>"; };
 		6BAED4A01EFC5AC600E10034 /* nanoChallenge3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nanoChallenge3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BAED4A51EFC5AC600E10034 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		9197360B1F01DF2900D86AA1 /* SKViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKViewExtension.swift; sourceTree = "<group>"; };
 		919E62AD1F020B4400B3E0C6 /* ShapeLevel1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLevel1.swift; sourceTree = "<group>"; };
 		91BE9DCC1EFCA1900012877D /* SubShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubShape.swift; sourceTree = "<group>"; };
+		91C093101F02EA3E00D23BEF /* back.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = back.wav; path = ../../../../Downloads/back.wav; sourceTree = "<group>"; };
 		91EB65311F01CB3C001A2BDD /* Credits.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Credits.sks; sourceTree = "<group>"; };
 		91EB65331F01CB56001A2BDD /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 				9197360B1F01DF2900D86AA1 /* SKViewExtension.swift */,
 				919E62AD1F020B4400B3E0C6 /* ShapeLevel1.swift */,
 				9164F1DF1F02AFFD00958747 /* LevelUpScene.swift */,
-				6B562D861F02E0B7009E7B0E /* back.wav */,
+				91C093101F02EA3E00D23BEF /* back.wav */,
 			);
 			path = nanoChallenge3;
 			sourceTree = "<group>";
@@ -178,7 +178,7 @@
 				6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */,
 				8DB153B81F01855F00920BB6 /* LevelScene.sks in Resources */,
 				6BAED4B11EFC5AC600E10034 /* Assets.xcassets in Resources */,
-				6B562D871F02E0B7009E7B0E /* back.wav in Resources */,
+				91C093111F02EA3E00D23BEF /* back.wav in Resources */,
 				9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */,
 				9164F1DE1F02AFDA00958747 /* LevelUpScene.sks in Resources */,
 				6BAED4B41EFC5AC600E10034 /* LaunchScreen.storyboard in Resources */,

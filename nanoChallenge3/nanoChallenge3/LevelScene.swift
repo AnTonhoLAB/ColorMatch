@@ -10,11 +10,7 @@
 import SpriteKit
 import GameplayKit
 
-
-
-
 class LevelScene: SKScene {
-    var background = SKSpriteNode(imageNamed:"Background")
     
     var buttons = [[SKSpriteNode]]()
     
@@ -91,10 +87,6 @@ class LevelScene: SKScene {
             initialY = initialY - size - 12.5
             
         }
-        
-        background.size.width = self.size.width
-        background.size.height = self.size.height
-        addChild(background)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -123,9 +115,4 @@ class LevelScene: SKScene {
             
         }
     }
-    
-    
-    
-    
-    
 }
