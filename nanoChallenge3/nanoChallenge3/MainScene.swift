@@ -199,4 +199,11 @@ class MainScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         
     }
+    
+    override func shake() {
+        if let scene = SKScene(fileNamed: "Credits") {
+            scene.scaleMode = .aspectFill
+            self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        }
+    }
 }

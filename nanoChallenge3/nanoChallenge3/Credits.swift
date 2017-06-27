@@ -15,7 +15,7 @@ import GameplayKit
 class Credits: SKScene {
     
     var buttons = [SKSpriteNode]()
-    var links = ["https://www.facebook.com/douglas.gehring.3", "https://www.linkedin.com/in/eduardo-segura-fornari-a23728a7/", "https://www.linkedin.com/in/georgegomees/", "https://www.linkedin.com/in/laura-corssac-538914a2/", "Juliana"]
+    var links = ["https://www.facebook.com/douglas.gehring.3", "https://www.linkedin.com/in/eduardo-segura-fornari-a23728a7/", "https://www.linkedin.com/in/georgegomees/", "https://www.linkedin.com/in/laura-corssac-538914a2/", "https://www.behance.net/user/?username=jcaardoso"]
     
     let distanceButtons = 19
     
@@ -73,16 +73,18 @@ class Credits: SKScene {
         
         for (index,button) in buttons.enumerated() {
             if button.contains(touch.location(in: self)) {
-                print(links[index])
-                
                 UIApplication.shared.openURL(NSURL(string:links[index])! as URL)
                 break
             }
         }
     }
     
-    
-    
-    
-    
+    override func shake() {
+        if let scene = SKScene(fileNamed: "MainScene") {
+            scene.scaleMode = .aspectFill
+            let mainScene = scene as! MainScene
+            mainScene.createMenuScene()
+            self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        }
+    }
 }
