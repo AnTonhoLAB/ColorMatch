@@ -9,9 +9,12 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class GameViewController: UIViewController {
 
+    var backgroundMusic : AVAudioPlayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +32,17 @@ class GameViewController: UIViewController {
             
             view.showsFPS = true
             view.showsNodeCount = true
+        }
+        
+        let path = Bundle.main.path(forResource: "back", ofType:"wav")!
+        let url = URL(fileURLWithPath: path)
+        
+        do {
+            let sound = try AVAudioPlayer(contentsOf: url)
+            backgroundMusic = sound
+            sound.play()
+        } catch {
+            // couldn't load file :(
         }
     }
 

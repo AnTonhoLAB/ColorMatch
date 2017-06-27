@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B562D7F1F02C2F4009E7B0E /* back.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6B562D7E1F02C2F4009E7B0E /* back.wav */; };
 		6BAED4A41EFC5AC600E10034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */; };
 		6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A51EFC5AC600E10034 /* GameScene.sks */; };
 		6BAED4A81EFC5AC600E10034 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A71EFC5AC600E10034 /* Actions.sks */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B562D7E1F02C2F4009E7B0E /* back.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = back.wav; path = ../../gameSounds/back.wav; sourceTree = "<group>"; };
 		6BAED4A01EFC5AC600E10034 /* nanoChallenge3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nanoChallenge3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BAED4A51EFC5AC600E10034 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			children = (
 				6BAED4A21EFC5AC600E10034 /* nanoChallenge3 */,
 				6BAED4A11EFC5AC600E10034 /* Products */,
+				6B562D7E1F02C2F4009E7B0E /* back.wav */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,7 +179,11 @@
 				8DB153B81F01855F00920BB6 /* LevelScene.sks in Resources */,
 				6BAED4B11EFC5AC600E10034 /* Assets.xcassets in Resources */,
 				9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */,
+<<<<<<< Updated upstream
 				9164F1DE1F02AFDA00958747 /* LevelUpScene.sks in Resources */,
+=======
+				6B562D7F1F02C2F4009E7B0E /* back.wav in Resources */,
+>>>>>>> Stashed changes
 				6BAED4B41EFC5AC600E10034 /* LaunchScreen.storyboard in Resources */,
 				6BAED4A81EFC5AC600E10034 /* Actions.sks in Resources */,
 			);
