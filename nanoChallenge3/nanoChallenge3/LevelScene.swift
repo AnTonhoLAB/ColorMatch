@@ -22,6 +22,10 @@ class LevelScene: SKScene {
     var lastUnlockedSublevel = 1
     
     override func didMove(to view: SKView) {
+        
+//        lastUnlockedLevel = self.userDefaults.getCurrentUserInfo(info: .CurrentLevel)
+//        lastUnlockedSublevel = self.userDefaults.getCurrentUserInfo(info: .CurrentSubLevel)
+        
         let levelsTitle = SKSpriteNode(imageNamed: "Levels")
         
         levelsTitle.xScale = 2
@@ -49,8 +53,8 @@ class LevelScene: SKScene {
                 
                 let button = SKSpriteNode(imageNamed: imageName)
                 
-                button.xScale = 3
-                button.yScale = 3
+                button.xScale = 2
+                button.yScale = 2
                 
                 if(level == 0 && subLevel == 0){
                     size = button.size.width
