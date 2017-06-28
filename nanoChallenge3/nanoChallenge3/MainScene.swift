@@ -10,11 +10,11 @@ import SpriteKit
 import GameplayKit
 
 enum Status {
-    case menu, gameOver
+    case Menu, GameOver
 }
 
 class MainScene: SKScene {
-    var status = Status.menu
+    var status = Status.Menu
     var buttonsDistance = CGFloat(80)
     
     //Game Over
@@ -36,7 +36,7 @@ class MainScene: SKScene {
         var secondButton: SKSpriteNode!
         
         switch self.status {
-        case Status.menu:
+        case .Menu:
             nameNode.xScale = 2
             nameNode.yScale = 2
             
@@ -47,7 +47,7 @@ class MainScene: SKScene {
             firstButton = buttonPlay
             secondButton = buttonLevels
             break
-        case Status.gameOver:
+        case .GameOver:
             gameOverNode.xScale = 2
             gameOverNode.yScale = 2
             
@@ -82,7 +82,7 @@ class MainScene: SKScene {
     }
     
     func createMenuScene(){
-        self.status = .menu
+        self.status = .Menu
         
         let name = SKSpriteNode(imageNamed: "Name")
         name.position = CGPoint(x: 0, y: 0)
@@ -125,7 +125,7 @@ class MainScene: SKScene {
     func createGameOverScene(level: Int, subLevel: Int){
         self.level = level
         self.subLevel = subLevel
-        self.status = .gameOver
+        self.status = .GameOver
         
         let gameOver = SKSpriteNode(imageNamed: "Game_Over")
         gameOver.position = CGPoint(x: 0, y: 0)
@@ -157,24 +157,10 @@ class MainScene: SKScene {
         buttonRetry.name = "Button_Retry";
     }
     
-    func createSubShapesWith(number: Int){
-        
-    }
-    
-    func touchDown(atPoint pos : CGPoint) {
-        
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
         
-        if self.status == .menu {
+        if self.status == .Menu {
             if buttonLevels.contains(touch.location(in: self)) {
                 buttonLevels.texture = SKTexture(imageNamed: "Button_Levels")
                 if let scene = SKScene(fileNamed: "LevelScene") {
@@ -197,7 +183,7 @@ class MainScene: SKScene {
                 }
             }
         }
-        else if self.status == .gameOver {
+        else if self.status == .GameOver {
             if buttonRetry.contains(touch.location(in: self)) {
                 buttonRetry.texture = SKTexture(imageNamed: "Button_Retry")
             }
@@ -213,7 +199,7 @@ class MainScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
         
-        if self.status == .menu {
+        if self.status == .Menu {
             if buttonLevels.contains(touch.location(in: self)) {
                 buttonLevels.texture = SKTexture(imageNamed: "Button_Levels")
             }
@@ -221,7 +207,7 @@ class MainScene: SKScene {
                 buttonPlay.texture = SKTexture(imageNamed: "Button_Play")
             }
         }
-        else if self.status == .gameOver {
+        else if self.status == .GameOver {
             if buttonRetry.contains(touch.location(in: self)) {
                 buttonRetry.texture = SKTexture(imageNamed: "Button_Retry")
                 if let scene = SKScene(fileNamed: "GameScene") {
@@ -245,18 +231,13 @@ class MainScene: SKScene {
         }
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        
-    }
-    
     override func shake() {
-        if let scene = SKScene(fileNamed: "Credits") {
-            scene.scaleMode = .aspectFill
-            self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        if status == Status.Menu {
+            if let scene = SKScene(fileNamed: "CreditsScene") {
+                scene.scaleMode = .aspectFill
+                self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+            }
         }
     }
+    
 }

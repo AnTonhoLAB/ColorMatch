@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class Credits: SKScene {
+class CreditsScene: SKScene {
     
     var buttons = [SKSpriteNode]()
     var links = ["https://www.facebook.com/douglas.gehring.3", "https://www.linkedin.com/in/eduardo-segura-fornari-a23728a7/", "https://www.linkedin.com/in/georgegomees/", "https://www.linkedin.com/in/laura-corssac-538914a2/", "https://www.behance.net/user/?username=jcaardoso"]

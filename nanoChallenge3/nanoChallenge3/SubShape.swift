@@ -24,49 +24,35 @@ class SubShape: SKShapeNode{
         
         let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         
-        let pathNode = SKShapeNode(path: bezierPath.cgPath)
-        pathNode.strokeColor = color
-        pathNode.fillColor = color
-        pathNode.lineWidth = 0
-        pathNode.position = position
+        let semiCircle = SKShapeNode(path: bezierPath.cgPath)
+        semiCircle.strokeColor = color
+        semiCircle.fillColor = color
+        semiCircle.lineWidth = 0
+        semiCircle.position = position
+        addChild(semiCircle)
         
-        addChild(pathNode)
+        let mutablePath: CGMutablePath = CGMutablePath()
+        mutablePath.move(to: position)
+        mutablePath.addLine(to: CGPoint(x: position.x + cos(startAngle) * radius, y: position.y + sin(startAngle)*radius))
+        mutablePath.addLine(to: CGPoint(x: position.x + cos(endAngle) * radius, y: position.y + sin(endAngle)*radius))
         
-        let line_path: CGMutablePath = CGMutablePath()
-        line_path.move(to: position)
-        
-        line_path.addLine(to: CGPoint(x: position.x + cos(startAngle) * radius, y: position.y + sin(startAngle)*radius))
-        
-        line_path.addLine(to: CGPoint(x: position.x + cos(endAngle) * radius, y: position.y + sin(endAngle)*radius))
-        
-        let linePathNode = SKShapeNode(path: line_path)
-        
-        linePathNode.strokeColor = color
-        linePathNode.fillColor = color
-        linePathNode.lineWidth = 0
-        
-        addChild(linePathNode)
-        
+        let triangle = SKShapeNode(path: mutablePath)
+        triangle.strokeColor = color
+        triangle.fillColor = color
+        triangle.lineWidth = 0
+        addChild(triangle)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func degreesToRadians(degrees: CGFloat) -> CGFloat {
-        return degrees*CGFloat(Double.pi/180)
-    }
-    
-    func radiansToDegrees(radians: CGFloat) -> CGFloat {
-        return CGFloat((radians*180)/CGFloat(Double.pi))
-    }
-    
     func getAngle() -> CGFloat {
-        let startAngleInDegrees = radiansToDegrees(radians: startAngle)
-        let endAngleInDegrees = radiansToDegrees(radians: endAngle)
+        let startAngleInDegrees = CGFloat.radiansToDegrees(radians: startAngle)
+        let endAngleInDegrees = CGFloat.radiansToDegrees(radians: endAngle)
         let angleInDegrees = endAngleInDegrees - startAngleInDegrees
-        let rotationInDegrees = radiansToDegrees(radians: self.zRotation)
-        return degreesToRadians(degrees: startAngleInDegrees + angleInDegrees/2 + rotationInDegrees)
+        let rotationInDegrees = CGFloat.radiansToDegrees(radians: self.zRotation)
+        return CGFloat.degreesToRadians(degrees: startAngleInDegrees + angleInDegrees/2 + rotationInDegrees)
     }
     
     func getPoint() -> CGPoint {

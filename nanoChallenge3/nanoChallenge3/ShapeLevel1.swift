@@ -10,8 +10,6 @@ import SpriteKit
 
 class ShapeLevel1: SKShapeNode{
     
-    var radius:CGFloat!
-    
     init(radius: CGFloat, colors: [UIColor]) {
         super.init()
         
@@ -24,20 +22,16 @@ class ShapeLevel1: SKShapeNode{
             if colors[index] != UIColor.clear {
                 let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), clockwise: true)
                 
-                let pathNode = SKShapeNode(path: bezierPath.cgPath)
-                pathNode.strokeColor = colors[index]
-                pathNode.lineWidth = radius * 0.2
-                pathNode.position = position
+                let arc = SKShapeNode(path: bezierPath.cgPath)
+                arc.strokeColor = colors[index]
+                arc.lineWidth = radius * 0.2
+                arc.position = position
                 
-                addChild(pathNode)
+                addChild(arc)
             }
             
             currentAngle += angle
         }
-    }
-    
-    func degreesToRadians(degrees: CGFloat) -> CGFloat {
-        return degrees*CGFloat(Double.pi/180)
     }
     
     required init?(coder aDecoder: NSCoder) {

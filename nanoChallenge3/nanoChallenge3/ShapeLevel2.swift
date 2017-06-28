@@ -10,8 +10,6 @@ import SpriteKit
 
 class ShapeLevel2: SKShapeNode{
     
-    var radius:CGFloat!
-    
     init(radius: CGFloat, colors: [UIColor], numberOfNodesInEachColor: [Int]) {
         super.init()
         
@@ -20,8 +18,6 @@ class ShapeLevel2: SKShapeNode{
         for number in numberOfNodesInEachColor{
             numberOfNodes += CGFloat(number)
         }
-        
-        self.radius = radius
         
         numberOfNodes *= 2
         
@@ -39,31 +35,23 @@ class ShapeLevel2: SKShapeNode{
         for color in 0..<colors.count{
             for index in 1...numberOfNodesInEachColor[color]*2{
                 if index % 2 == 0 && colors[color] != UIColor.clear {
-                    currentAngleInRadians = degreesToRadians(degrees: currentAngleInDegrees)
+                    currentAngleInRadians = CGFloat.degreesToRadians(degrees: currentAngleInDegrees)
                     
                     let point = CGPoint(x: position.x + cos(currentAngleInRadians) * radius, y: position.y + sin(currentAngleInRadians)*radius)
                     
-                    let trace = SKShapeNode(rect: CGRect(x: 0, y: 0, width: widthNodes, height: widthNodes*3), cornerRadius: widthNodes/2 - 0.1)
-                    trace.fillColor = colors[color]
-                    trace.strokeColor = colors[color]
-                    trace.position = point
-                    trace.zRotation = zRotation
-                    zRotation += degreesToRadians(degrees: spacing*2)
+                    let dash = SKShapeNode(rect: CGRect(x: 0, y: 0, width: widthNodes, height: widthNodes*3), cornerRadius: widthNodes/2 - 0.1)
+                    dash.fillColor = colors[color]
+                    dash.strokeColor = colors[color]
+                    dash.position = point
+                    dash.zRotation = zRotation
                     
-                    addChild(trace)
+                    addChild(dash)
+                    zRotation += CGFloat.degreesToRadians(degrees: spacing*2)
                 }
                 
                 currentAngleInDegrees += spacing
             }
         }
-    }
-    
-    func degreesToRadians(degrees: CGFloat) -> CGFloat {
-        return degrees*CGFloat(Double.pi/180)
-    }
-    
-    func radiansToDegrees(radians: CGFloat) -> CGFloat {
-        return CGFloat(radians/180)
     }
     
     required init?(coder aDecoder: NSCoder) {

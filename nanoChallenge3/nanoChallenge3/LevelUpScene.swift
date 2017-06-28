@@ -14,11 +14,10 @@ class LevelUpScene: SKScene {
     var buttonLevel: SKSpriteNode!
     
     var level: Int!
-    var subLevel: Int!
     
     override func didMove(to view: SKView) {
-        let trophy = SKSpriteNode(imageNamed: "Trophy")
         
+        let trophy = SKSpriteNode(imageNamed: "Trophy")
         trophy.xScale = 2
         trophy.yScale = 2
         trophy.position = CGPoint(x: 0, y: 0)
@@ -26,7 +25,6 @@ class LevelUpScene: SKScene {
         addChild(trophy)
         
         let levelUp = SKSpriteNode(imageNamed: "LevelUp")
-        
         levelUp.xScale = 2
         levelUp.yScale = 2
         levelUp.position = CGPoint(x: 0, y: trophy.size.height/2 + levelUp.size.height/2 + 33)
@@ -52,7 +50,7 @@ class LevelUpScene: SKScene {
         levelUp.position = CGPoint(x: 0, y: levelUp.position.y - diference)
         buttonLevel.position = CGPoint(x: 0, y: buttonLevel.position.y - diference)
         
-        let lableLevel = SKLabelNode(fontNamed: "Arial-Black")
+        let lableLevel = SKLabelNode()
         lableLevel.text = "\(level+1)"
         lableLevel.fontSize = 72
         lableLevel.fontColor = SKColor.white
@@ -70,19 +68,14 @@ class LevelUpScene: SKScene {
             if let scene = SKScene(fileNamed: "GameScene") {
                 scene.scaleMode = .aspectFill
                 let gameScene = scene as! GameScene
-                if self.subLevel == 3 {
                     gameScene.fixLevelAccordingToLevelScreen(level: level+1, subLevel: 1)
-                }
-                else{
-                    gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel+1)
-                }
+                    
                 self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
             }
         }
     }
     
-    func setLevelAndSubLevel(level: Int, subLevel: Int){
+    func setLevelAndSubLevel(level: Int){
         self.level = level
-        self.subLevel = subLevel
     }
 }
