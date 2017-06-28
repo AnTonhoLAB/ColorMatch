@@ -40,6 +40,7 @@ class GameScene: SKScene {
         
         setTopAndDownLayoutForGameScene(currentLevel: level)
         
+        Background.movePointsIn(scene: self)
     }
     
     func createSmallCircleSubShapesWith(number: Int, speed: TimeInterval){
@@ -191,20 +192,23 @@ class GameScene: SKScene {
         
         switch(currentLevel){
             
-        case 1:  topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv1top.png")))
-        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv1down.png")))
+        case 1:
+            topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_1_Top")))
+            downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_1_Down")))
             break
             
-        case 2:topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv2top.png")))
-        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv2down.png")))
+        case 2:
+            topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_2_Top")))
+            downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_2_Down")))
             break
             
-        case 3:topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv3top.png")))
-        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv3down.png")))
+        case 3:topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_3_Top")))
+        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_3_Down")))
             break
             
-        case 4:topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv3top.png")))
-        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "lv3down.png")))
+        case 4:
+            topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_3_Top")))
+            downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_3_Down")))
             break
             
         default:

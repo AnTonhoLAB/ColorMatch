@@ -40,7 +40,7 @@ class MainScene: SKScene {
             nameNode.xScale = 2
             nameNode.yScale = 2
             
-            let name = nameNode.childNode(withName: "Color_Match") as! SKSpriteNode
+            let name = nameNode.childNode(withName: "Name") as! SKSpriteNode
             
             nameNode.position = CGPoint(x: 0, y: name.frame.size.height)
             
@@ -77,26 +77,28 @@ class MainScene: SKScene {
         addChild(firstButton)
         addChild(secondButton)
         
+        Background.movePointsIn(scene: self)
+        
     }
     
     func createMenuScene(){
         self.status = .menu
         
-        let name = SKSpriteNode(imageNamed: "Color_Match")
+        let name = SKSpriteNode(imageNamed: "Name")
         name.position = CGPoint(x: 0, y: 0)
-        name.name = "Color_Match";
+        name.name = "Name";
         name.isUserInteractionEnabled = false;
         name.zPosition = 1
         
-        let first_circle = SKSpriteNode(imageNamed: "circle_name")
+        let first_circle = SKSpriteNode(imageNamed: "Circle_Name")
         first_circle.position = CGPoint(x: -first_circle.size.width + 9, y: name.size.height/2 - first_circle.size.height/2 - 20)
-        first_circle.name = "first_circle";
+        first_circle.name = "Circle_Name";
         first_circle.isUserInteractionEnabled = false;
         first_circle.zPosition = 2
         
-        let second_circle = SKSpriteNode(imageNamed: "circle_name")
+        let second_circle = SKSpriteNode(imageNamed: "Circle_Name_2")
         second_circle.position = CGPoint(x: first_circle.size.width + 4, y: name.size.height/2 - first_circle.size.height/2 - 20)
-        second_circle.name = "second_circle";
+        second_circle.name = "Circle_Name_2";
         second_circle.isUserInteractionEnabled = false;
         second_circle.zPosition = 2
         
@@ -131,9 +133,9 @@ class MainScene: SKScene {
         gameOver.isUserInteractionEnabled = false;
         gameOver.zPosition = 1
         
-        let circle = SKSpriteNode(imageNamed: "Circle")
+        let circle = SKSpriteNode(imageNamed: "Circle_Game_Over")
         circle.position = CGPoint(x: -gameOver.size.width/2 + circle.size.width/2, y: -gameOver.size.height/2 + circle.size.height/2)
-        circle.name = "Circle";
+        circle.name = "Circle_Game_Over";
         circle.isUserInteractionEnabled = false;
         circle.zPosition = 2
         

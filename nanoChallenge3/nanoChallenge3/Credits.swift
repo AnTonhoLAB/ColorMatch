@@ -63,6 +63,8 @@ class Credits: SKScene {
         buttonJuliana.position = CGPoint(x: 0, y: buttonLaura.position.y - CGFloat(distanceButtons) - heightButtons)
         addChild(buttonJuliana)
         buttons.append(buttonJuliana)
+        
+        Background.movePointsIn(scene: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

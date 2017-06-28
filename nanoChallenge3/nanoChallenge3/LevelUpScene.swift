@@ -60,6 +60,8 @@ class LevelUpScene: SKScene {
         lableLevel.zPosition = 200
         addChild(lableLevel)
         
+        Background.movePointsIn(scene: self)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

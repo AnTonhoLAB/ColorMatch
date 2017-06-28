@@ -87,6 +87,8 @@ class LevelScene: SKScene {
             initialY = initialY - size - 12.5
             
         }
+        
+        Background.movePointsIn(scene: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
