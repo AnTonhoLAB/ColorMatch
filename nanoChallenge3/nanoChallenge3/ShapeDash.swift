@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class ShapeLevel2: SKShapeNode{
+class ShapeDash: SKShapeNode{
     
     init(radius: CGFloat, colors: [UIColor], numberOfNodesInEachColor: [Int]) {
         super.init()

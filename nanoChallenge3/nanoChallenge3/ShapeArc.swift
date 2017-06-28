@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class ShapeLevel1: SKShapeNode{
+class ShapeArc: SKShapeNode{
     
     init(radius: CGFloat, colors: [UIColor]) {
         super.init()
