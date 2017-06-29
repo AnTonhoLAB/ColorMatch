@@ -18,6 +18,7 @@ class GameScene: SKScene {
     //Big Circle
     var bigCircle: SKShapeNode!
     var bigCircleRadius: CGFloat!
+    var bigCircleShapeArc:ShapeArc!
     
     //Small Circle
     var smallCircleRadius: CGFloat!
@@ -72,15 +73,25 @@ class GameScene: SKScene {
                 removeChildren(in: smallCircleSubShapes)
                 
                 let circle = SKShapeNode(circleOfRadius: subShape.radius/2)
+                
+                circle.physicsBody = SKPhysicsBody.init(circleOfRadius: subShape.radius/2)
+                circle.physicsBody?.affectedByGravity = false
+                
+                
                 circle.zPosition = 1
                 circle.position = subShape.getPoint()
                 circle.fillColor = subShape.color
-                addChild(circle)
+                self.addChild(circle)
                 let newPoint = CGPoint(x: position.x + cos(subShape.getAngle()) * bigCircleRadius, y: position.y + sin(subShape.getAngle())*bigCircleRadius)
                 
                 circles.append(circle)
                 
-                let move = SKAction.move(to: newPoint, duration: timeToMove)
+                //print(subShape.getPoint().x)
+                //print(subShape.getPoint().y)
+                
+                let move = SKAction.applyImpulse(CGVector.init(dx: subShape.getPoint().x, dy: subShape.getPoint().y), duration: 1)
+                
+               // let move = SKAction.move(to: newPoint, duration: timeToMove)
                 
                 circle.run(move)
             }
@@ -93,22 +104,41 @@ class GameScene: SKScene {
         
         var matches = 0
         
+        
         if touched {
-            if(timeTouched != nil){
-                if(currentTime - timeToMove >= timeTouched){
+            
+                //let bigCircleArc = self.bigCircle as! ShapeArc
+            
+                if(sqrt(pow((circles.first?.position.x)!,2) + pow((circles.first?.position.y)!, 2)) >= self.bigCircleRadius){
                     touched = false
+                    
+                    print("Circles count: \(self.circles.count)")
                     
                     for circle in circles {
                         for shape in bigCircle.children{
                             
                             if circle.intersects(shape) {
+                            
+                                print("intersecting shape")
                                 if circle.fillColor == (shape as! SKShapeNode).strokeColor{
-                                    matches += 1
-                                    break
+                                    print("Mesma cor")
+                                    
+                                    
+                                    if(matches<self.circles.count){
+                                        
+                                        matches += 1
+                                        
+                                        
+                                    }
+                                    
+                                   // break
                                 }
                             }
                         }
                     }
+                    
+                    print("Circles count: \(circles.count)")
+                    print("Matches count: \(matches)")
                     
                     if matches == circles.count{
                         let currentLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
@@ -167,12 +197,10 @@ class GameScene: SKScene {
                         }
                     }
                 }
-            }
-            else{
-                timeTouched = currentTime
-            }
+            
         }
-        
+     
+ 
     }
     
     
@@ -217,6 +245,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], colors[1]])
+                
                 addChild(bigCircle)
                 createSmallCircleSubShapesWith(number: 2, speed: 2)
                 break
@@ -224,6 +253,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]])
+                
                 addChild(bigCircle)
                 createSmallCircleSubShapesWith(number: 3, speed: 1.5)
                 break
@@ -234,6 +264,7 @@ class GameScene: SKScene {
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]])
                 bigCircle.run(forever)
+                
                 addChild(bigCircle)
                 createSmallCircleSubShapesWith(number: 3, speed: 1.5)
             default:
@@ -247,6 +278,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
+                
                 addChild(bigCircle)
                 createSmallCircleSubShapesWith(number: 3, speed: 1.3)
                 break
@@ -266,6 +298,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
+                
                 bigCircle.run(forever)
                 addChild(bigCircle)
                 createSmallCircleSubShapesWith(number: 3, speed: 1)
@@ -280,6 +313,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], UIColor.clear, colors[1], UIColor.clear, colors[2], UIColor.clear])
+                
                 addChild(bigCircle)
                 createSmallCircleSubShapesWith(number: 3, speed: 1)
                 break
@@ -289,6 +323,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], UIColor.clear, colors[1], UIColor.clear, colors[2], UIColor.clear])
+                
                 bigCircle.run(forever)
                 addChild(bigCircle)
                 createSmallCircleSubShapesWith(number: 3, speed: 1)
@@ -299,6 +334,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], UIColor.clear, colors[1], UIColor.clear, colors[2], UIColor.clear])
+                
                 bigCircle.run(forever)
                 addChild(bigCircle)
                 createSmallCircleSubShapesWith(number: 3, speed: 0.7)
@@ -315,6 +351,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
+                
                 for subShapeBigCircle in bigCircle.children{
                     subShapeBigCircle.run(forever)
                 }
@@ -327,6 +364,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
+                
                 for subShapeBigCircle in bigCircle.children{
                     subShapeBigCircle.run(forever)
                 }
@@ -340,6 +378,7 @@ class GameScene: SKScene {
                 smallCircleRadius = (self.view?.frame.size.width)! * 0.20
                 bigCircleRadius = (self.view?.frame.width)! * 0.6
                 bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
+                 
                 for subShapeBigCircle in bigCircle.children{
                     subShapeBigCircle.run(forever)
                 }

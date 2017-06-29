@@ -10,12 +10,19 @@ import SpriteKit
 
 class ShapeArc: SKShapeNode{
     
+    var radius:CGFloat!
+    var numberOfSections:Int!
+    
     init(radius: CGFloat, colors: [UIColor]) {
         super.init()
         
         let angle = Double(360/colors.count)
         
         var currentAngle = 90.0
+        
+        self.radius = radius
+        self.numberOfSections = colors.count
+        
         
         for index in 0..<colors.count {
             
