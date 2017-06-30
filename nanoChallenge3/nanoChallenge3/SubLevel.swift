@@ -43,25 +43,19 @@ public class SubLevel {
         self.blocks = blocks
     }
     
-    func printBlocks(){
-        for block in self.blocks{
-            print("Speed = \(block.speed) - ColorsInt = \(block.colorsInt)")
-        }
-    }
-    
     func applySubLevelInScene(scene: SKScene) -> [SubShape]? {
         
         var subShapesMainCircle: [SubShape]?
         
-        let totalRadius = ((scene.view?.frame.size.width)!)*0.6
-        let ringWidth = totalRadius*0.2
+        let totalRadius = ((scene.view?.frame.size.width)!)*0.9
+        let ringWidth = totalRadius*0.1
         
         for (index, block) in blocks.enumerated() {
             if index == 0{
-                subShapesMainCircle = createMainCircle(block: block, radius: (totalRadius/CGFloat(blocks.count-1)) * 0.3, scene: scene)
+                subShapesMainCircle = createMainCircle(block: block, radius: totalRadius*0.18, scene: scene)
             }
             else {
-                createRing(block: block, radius: totalRadius/CGFloat(index), ringWidth: ringWidth, scene: scene)
+                createRing(block: block, radius: totalRadius-(ringWidth+(ringWidth/2))*CGFloat(index), ringWidth: ringWidth, scene: scene)
             }
         }
         
@@ -110,6 +104,104 @@ public class SubLevel {
             arc.physicsBody?.contactTestBitMask = 1
             arc.name = "arc"
             scene.addChild(arc)
+        }
+    }
+    
+    func getUnlockedTextureWithSizeForScene(scene: SKScene) -> SKTexture{
+        let unlockShapeNode = SKShapeNode()
+        
+        let totalRadius = ((scene.view?.frame.size.width)!)/6
+        let ringWidth = totalRadius*0.1
+        
+        for (index, block) in blocks.enumerated() {
+            if index == 0{
+                unlockedMainCircleForTexture(block: block, radius: totalRadius*0.18, shapeNode: unlockShapeNode)
+            }
+            else {
+                unlockedRingForTexture(block: block, radius: totalRadius-(ringWidth+(ringWidth/2))*CGFloat(index), ringWidth: ringWidth, shapeNode: unlockShapeNode)
+            }
+        }
+        
+        let square = SKShapeNode(rectOf: CGSize(width: totalRadius*2+ringWidth*2, height: totalRadius*2+ringWidth*2 ), cornerRadius: totalRadius*2/4)
+        square.strokeColor = UIColor.lightGray
+        square.lineWidth = ringWidth
+        square.position = CGPoint(x: 0, y: 0)
+        
+        unlockShapeNode.addChild(square)
+        
+        let texture = scene.view?.texture(from: unlockShapeNode)
+        return texture!
+    }
+    
+    func unlockedMainCircleForTexture(block: Block, radius: CGFloat, shapeNode: SKShapeNode){
+        let angle = Double(360/block.colorsInt.count)
+        
+        var currentAngle = 90.0
+        for index in 0..<block.colorsInt.count {
+            let subShape = SubShape(radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), color: GamePreferences.colors[block.colorsInt[index]])
+            shapeNode.addChild(subShape)
+            currentAngle += angle
+        }
+    }
+    
+    func unlockedRingForTexture(block: Block, radius: CGFloat, ringWidth: CGFloat, shapeNode: SKShapeNode){
+        let shapeArc = ShapeArc(radius: radius, ringWidth: ringWidth, colorsInt: block.colorsInt)
+        for arc in shapeArc.children{
+            arc.removeFromParent()
+            shapeNode.addChild(arc)
+        }
+    }
+    
+    func getLockedTextureWithSizeForScene(scene: SKScene) -> SKTexture{
+        let unlockShapeNode = SKShapeNode()
+        
+        let totalRadius = ((scene.view?.frame.size.width)!)/6
+        let ringWidth = totalRadius*0.1
+        
+        for (index, block) in blocks.enumerated() {
+            if index == 0{
+                lockedMainCircleForTexture(block: block, radius: totalRadius*0.18, shapeNode: unlockShapeNode)
+            }
+            else {
+                lockedRingForTexture(block: block, radius: totalRadius-(ringWidth+(ringWidth/2))*CGFloat(index), ringWidth: ringWidth, shapeNode: unlockShapeNode)
+            }
+        }
+        
+        let square = SKShapeNode(rectOf: CGSize(width: totalRadius*2+ringWidth*2, height: totalRadius*2+ringWidth*2 ), cornerRadius: totalRadius*2/4)
+        square.strokeColor = UIColor.lightGray
+        square.lineWidth = ringWidth
+        square.position = CGPoint(x: 0, y: 0)
+        
+        unlockShapeNode.addChild(square)
+        
+        let texture = scene.view?.texture(from: unlockShapeNode)
+        return texture!
+    }
+    
+    func lockedMainCircleForTexture(block: Block, radius: CGFloat, shapeNode: SKShapeNode){
+        let angle = Double(360/block.colorsInt.count)
+        
+        var currentAngle = 90.0
+        for index in 0..<block.colorsInt.count {
+            let subShape = SubShape(radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), color: GamePreferences.colors[block.colorsInt[index]])
+            for childSubShape in subShape.children{
+                let childSubShapeNode = childSubShape as! SKShapeNode
+                childSubShapeNode.strokeColor = UIColor.lightGray
+                childSubShapeNode.fillColor = UIColor.lightGray
+            }
+            shapeNode.addChild(subShape)
+            currentAngle += angle
+        }
+    }
+    
+    func lockedRingForTexture(block: Block, radius: CGFloat, ringWidth: CGFloat, shapeNode: SKShapeNode){
+        let shapeArc = ShapeArc(radius: radius, ringWidth: ringWidth, colorsInt: block.colorsInt)
+        for arc in shapeArc.children{
+            arc.removeFromParent()
+            let arcLightGray = arc as! SKShapeNode
+            arcLightGray.fillColor = UIColor.lightGray
+            arcLightGray.strokeColor = UIColor.lightGray
+            shapeNode.addChild(arcLightGray)
         }
     }
     

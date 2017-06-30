@@ -79,6 +79,12 @@ class MainScene: SKScene {
         
         Background.movePointsIn(scene: self)
         
+//        let texture = World.getLevel(level: 4)?.getSubLevel(subLevel: 2)?.getLockedTextureWithSizeForScene(scene: self)
+//
+//        let spriteNode = SKSpriteNode(texture: texture)
+//        spriteNode.position = CGPoint(x: 0, y: -100)
+//        addChild(spriteNode)
+        
     }
     
     func createMenuScene(){
@@ -110,9 +116,11 @@ class MainScene: SKScene {
         
         addChild(nameNode)
         
-        let rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
-        let forever = SKAction.repeatForever(rotate)
+        var rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
+        var forever = SKAction.repeatForever(rotate)
         first_circle.run(forever)
+        rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 2)
+        forever = SKAction.repeatForever(rotate)
         second_circle.run(forever)
         
         buttonLevels = SKSpriteNode(imageNamed: "Button_Levels")
