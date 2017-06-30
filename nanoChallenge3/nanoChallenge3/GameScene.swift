@@ -9,89 +9,55 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
-    
-    
+class GameScene: SKScene, SKPhysicsContactDelegate {
     var level: Int!
     var subLevel: Int!
     
-    //Big Circle
-    var bigCircle: SKShapeNode!
-    var bigCircleRadius: CGFloat!
-    var bigCircleShapeArc:ShapeArc!
-    
-    //Small Circle
-    var smallCircleRadius: CGFloat!
-    var smallCircleSubShapes = [SubShape]()
+    var shapeNoodesMainCircle = [SubShape]()
+    var circles = [SKShapeNode]()
+    var matches = 0
     
     var touched = false
-    let timeToMove = 0.5
-    var timeTouched: TimeInterval!
-    
-    var circles = [SKShapeNode]()
-    
-    let colors = [UIColor(red: 255.0/255.0, green: 83.0/255.0, blue: 83.0/255.0, alpha: 1),
-                  UIColor(red: 255.0/255.0, green: 190.0/255.0, blue: 71.0/255.0, alpha: 1),
-                  UIColor(red: 0.0/255.0, green: 204.0/255.0, blue: 215.0/255.0, alpha: 1),
-                  UIColor.brown, UIColor.blue, UIColor.red, UIColor.green, UIColor.cyan,
-                  UIColor.yellow, UIColor.lightGray]
     
     override func didMove(to view: SKView) {
-        setNextSubLevelAcordingToParameters(currentLevel: self.level, currentSubLevel: self.subLevel)
+        setNextSubLevelAcordingToParameters(level: self.level, subLevel: self.subLevel)
         
-        setTopAndDownLayoutForGameScene(currentLevel: level)
+        setTopAndDownLayoutForGameScene(level: level)
         
         Background.movePointsIn(scene: self)
-    }
-    
-    func createSmallCircleSubShapesWith(number: Int, speed: TimeInterval){
-        let rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: speed)
-        let forever = SKAction.repeatForever(rotate)
-        
-        let angle = Double(360/number)
-        
-        var currentAngle = 90.0
-        
-        for index in 0..<number {
-            let subShape = SubShape(radius: smallCircleRadius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), color: colors[index])
-            subShape.run(forever)
-            addChild(subShape)
-            smallCircleSubShapes.append(subShape)
-            currentAngle += angle
-        }
+        self.physicsWorld.contactDelegate = self
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !touched {
-            bigCircle.removeAllActions()
-            for subShapeBigCircle in bigCircle.children{
-                subShapeBigCircle.removeAllActions()
+            for child in children{
+                if child.name == "arc"{
+                    child.removeAllActions()
+                }
             }
             
-            for subShape in smallCircleSubShapes {
+            removeChildren(in: shapeNoodesMainCircle)
+            
+            for subShape in shapeNoodesMainCircle {
                 subShape.removeAllActions()
-                removeChildren(in: smallCircleSubShapes)
                 
                 let circle = SKShapeNode(circleOfRadius: subShape.radius/2)
                 
                 circle.physicsBody = SKPhysicsBody.init(circleOfRadius: subShape.radius/2)
                 circle.physicsBody?.affectedByGravity = false
-                
-                
+                circle.physicsBody?.categoryBitMask = 1
+                circle.physicsBody?.collisionBitMask = 2
+                circle.physicsBody?.contactTestBitMask = 2
                 circle.zPosition = 1
                 circle.position = subShape.getPoint()
                 circle.fillColor = subShape.color
+                circle.strokeColor = subShape.color
+                circle.name = "circle"
                 self.addChild(circle)
-                let newPoint = CGPoint(x: position.x + cos(subShape.getAngle()) * bigCircleRadius, y: position.y + sin(subShape.getAngle())*bigCircleRadius)
                 
                 circles.append(circle)
                 
-                //print(subShape.getPoint().x)
-                //print(subShape.getPoint().y)
-                
                 let move = SKAction.applyImpulse(CGVector.init(dx: subShape.getPoint().x, dy: subShape.getPoint().y), duration: 1)
-                
-               // let move = SKAction.move(to: newPoint, duration: timeToMove)
                 
                 circle.run(move)
             }
@@ -101,302 +67,103 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        
-        var matches = 0
-        
-        
-        if touched {
-            
-                //let bigCircleArc = self.bigCircle as! ShapeArc
-            
-                if(sqrt(pow((circles.first?.position.x)!,2) + pow((circles.first?.position.y)!, 2)) >= self.bigCircleRadius){
-                    touched = false
-                    
-                    print("Circles count: \(self.circles.count)")
-                    
-                    for circle in circles {
-                        for shape in bigCircle.children{
-                            
-                            if circle.intersects(shape) {
-                            
-                                print("intersecting shape")
-                                if circle.fillColor == (shape as! SKShapeNode).strokeColor{
-                                    print("Mesma cor")
-                                    
-                                    
-                                    if(matches<self.circles.count){
-                                        
-                                        matches += 1
-                                        
-                                        
-                                    }
-                                    
-                                   // break
-                                }
-                            }
-                        }
-                    }
-                    
-                    print("Circles count: \(circles.count)")
-                    print("Matches count: \(matches)")
-                    
-                    if matches == circles.count{
-                        let currentLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
-                        let currentSubLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
-                        
-                        if(level == currentLevel && subLevel == currentSubLevel){
-                            UserDefaultsManager.updateLevelAndSubLevel()
-                            if level == 4 && subLevel == 3 {
-                                if let scene = SKScene(fileNamed: "LevelScene") {
-                                    scene.scaleMode = .aspectFill
-                                    self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                                }
-                            }
-                            else if subLevel == 3 {
-                                if let scene = SKScene(fileNamed: "LevelUpScene") {
-                                    scene.scaleMode = .aspectFill
-                                    let levelUpScene = scene as! LevelUpScene
-                                    levelUpScene.setLevelAndSubLevel(level: level)
-                                    self.view?.presentScene(levelUpScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                                }
-                            }
-                            else{
-                                if let scene = SKScene(fileNamed: "GameScene") {
-                                    scene.scaleMode = .aspectFill
-                                    let gameScene = scene as! GameScene
-                                    gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel+1)
-                                    self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                                }
-                            }
-                        }
-                        else if level == 4 && subLevel == 3 {
-                            if let scene = SKScene(fileNamed: "LevelScene") {
-                                scene.scaleMode = .aspectFill
-                                self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                            }
-                        }
-                        else if let scene = SKScene(fileNamed: "GameScene") {
-                            scene.scaleMode = .aspectFill
-                            let gameScene = scene as! GameScene
-                            
-                            if subLevel == 3 {
-                                gameScene.fixLevelAccordingToLevelScreen(level: level+1, subLevel: 1)
-                            }
-                            else{
-                                gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel+1)
-                            }
-                            self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                        }
-                    }
-                    else{
-                        if let scene = SKScene(fileNamed: "MainScene") {
-                            scene.scaleMode = .aspectFill
-                            let mainScene = scene as! MainScene
-                            mainScene.createGameOverScene(level: level, subLevel: subLevel)
-                            self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                        }
-                    }
-                }
-            
+        for circle in circles{
+            let height = (self.view?.frame.size.height)!
+            let width = (self.view?.frame.size.width)!
+            let distance = CGFloat(100)
+            let x = circle.position.x
+            let y = circle.position.y
+            if y > height + distance || y < -(height + distance) || x > width + distance || x < -(width + distance){
+                goToGameOverScene()
+            }
         }
-     
- 
+        
+        if circles.count > 0 && matches == circles.count{
+            let currentLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
+            let currentSubLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
+            
+            if self.level == currentLevel && self.subLevel == currentSubLevel{
+                UserDefaultsManager.updateLevelAndSubLevel()
+                if level < World.numberOfLevels() && subLevel == World.getLevel(level: level)?.numberOfSubLevels(){
+                    goToLevelUpScene()
+                }
+                else{
+                    goToNextLevelOrSubLevel()
+                }
+            }
+            else{
+                goToNextLevelOrSubLevel()
+            }
+        }
+    }
+    
+    func goToGameOverScene(){
+        if let scene = SKScene(fileNamed: "MainScene") {
+            scene.scaleMode = .aspectFill
+            let mainScene = scene as! MainScene
+            mainScene.createGameOverScene(level: level, subLevel: subLevel)
+            self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        }
+    }
+    
+    func goToLevelUpScene(){
+        if let scene = SKScene(fileNamed: "LevelUpScene") {
+            scene.scaleMode = .aspectFill
+            let levelUpScene = scene as! LevelUpScene
+            levelUpScene.setLevel(level: level)
+            self.view?.presentScene(levelUpScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        }
+    }
+    
+    func goToNextLevelOrSubLevel(){
+        if let scene = SKScene(fileNamed: "GameScene") {
+            scene.scaleMode = .aspectFill
+            let gameScene = scene as! GameScene
+            if self.subLevel == World.getLevel(level: level)?.numberOfSubLevels(){
+                gameScene.setLevelAndSubLevel(level: level+1, subLevel: 1)
+            }
+            else{
+                gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel+1)
+            }
+            self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let shapeNodeBodyA = contact.bodyA.node as! SKShapeNode
+        let shapeNodeBodyB = contact.bodyB.node as! SKShapeNode
+        
+        shapeNodeBodyA.physicsBody?.isDynamic = false
+        shapeNodeBodyB.physicsBody?.isDynamic = false
+        
+        if shapeNodeBodyA.strokeColor == shapeNodeBodyB.strokeColor{
+            if !shapeNodeBodyB.attributeValues.keys.contains("checked"){
+                matches += 1
+                shapeNodeBodyB.attributeValues.updateValue(SKAttributeValue.init(), forKey: "checked")
+            }
+        }
+        else{
+            goToGameOverScene()
+        }
     }
     
     
-    func setTopAndDownLayoutForGameScene(currentLevel:Int){
+    func setTopAndDownLayoutForGameScene(level:Int){
         
         let topLayout = self.childNode(withName: "TopShape") as! SKSpriteNode
         let downLayout = self.childNode(withName: "DownShape") as! SKSpriteNode
         
-        switch(currentLevel){
-            
-        case 1:
-            topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_1_Top")))
-            downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_1_Down")))
-            break
-            
-        case 2:
-            topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_2_Top")))
-            downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_2_Down")))
-            break
-            
-        case 3:topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_3_Top")))
-        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_3_Down")))
-            break
-            
-        case 4:
-            topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_3_Top")))
-            downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_3_Down")))
-            break
-            
-        default:
-            break
-        }
-    }
-    
-    func setNextSubLevelAcordingToParameters(currentLevel:Int, currentSubLevel:Int){
-        
-        switch(currentLevel){
-            
-        case 1:
-            switch currentSubLevel {
-            case 1:
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], colors[1]])
-                
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 2, speed: 2)
-                break
-            case 2:
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]])
-                
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1.5)
-                break
-            case 3:
-                let rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 4)
-                let forever = SKAction.repeatForever(rotate)
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]])
-                bigCircle.run(forever)
-                
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1.5)
-            default:
-                break
-            }
-            break
-            
-        case 2:
-            switch currentSubLevel {
-            case 1:
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
-                
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1.3)
-                break
-            case 2:
-                let rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 4)
-                let forever = SKAction.repeatForever(rotate)
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
-                bigCircle.run(forever)
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1.3)
-                break
-            case 3:
-                let rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 3)
-                let forever = SKAction.repeatForever(rotate)
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
-                
-                bigCircle.run(forever)
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1)
-                break
-            default:
-                break
-            }
-            break
-        case 3:
-            switch currentSubLevel {
-            case 1:
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], UIColor.clear, colors[1], UIColor.clear, colors[2], UIColor.clear])
-                
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1)
-                break
-            case 2:
-                let rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 3)
-                let forever = SKAction.repeatForever(rotate)
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], UIColor.clear, colors[1], UIColor.clear, colors[2], UIColor.clear])
-                
-                bigCircle.run(forever)
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1)
-                break
-            case 3:
-                let rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 2.5)
-                let forever = SKAction.repeatForever(rotate)
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeArc(radius: bigCircleRadius, colors: [colors[0], UIColor.clear, colors[1], UIColor.clear, colors[2], UIColor.clear])
-                
-                bigCircle.run(forever)
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 0.7)
-                break
-            default:
-                break
-            }
-            break
-        case 4:
-            switch currentSubLevel {
-            case 1:
-                let rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 2.5)
-                let forever = SKAction.repeatForever(rotate)
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
-                
-                for subShapeBigCircle in bigCircle.children{
-                    subShapeBigCircle.run(forever)
-                }
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1)
-                break
-            case 2:
-                let rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 2.5)
-                let forever = SKAction.repeatForever(rotate)
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
-                
-                for subShapeBigCircle in bigCircle.children{
-                    subShapeBigCircle.run(forever)
-                }
-                bigCircle.run(forever)
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 1)
-                break
-            case 3:
-                let rotate = SKAction.rotate(byAngle: -1*CGFloat(Double.pi*2), duration: 2)
-                let forever = SKAction.repeatForever(rotate)
-                smallCircleRadius = (self.view?.frame.size.width)! * 0.20
-                bigCircleRadius = (self.view?.frame.width)! * 0.6
-                bigCircle = ShapeDash(radius: bigCircleRadius, colors: [colors[0], colors[1], colors[2]], numberOfNodesInEachColor: [4, 10, 10])
-                 
-                for subShapeBigCircle in bigCircle.children{
-                    subShapeBigCircle.run(forever)
-                }
-                bigCircle.run(forever)
-                addChild(bigCircle)
-                createSmallCircleSubShapesWith(number: 3, speed: 0.5)
-                break
-            default:
-                break
-            }
-            break
-        default:
-            break
-        }
+        topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(level)_Top")))
+        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(level)_Down")))
         
     }
     
-    func fixLevelAccordingToLevelScreen(level:Int, subLevel:Int){
+    func setNextSubLevelAcordingToParameters(level:Int, subLevel:Int){
+        let subLevel = World.getLevel(level: level)?.getSubLevel(subLevel: subLevel)
+        shapeNoodesMainCircle = (subLevel?.applySubLevelInScene(scene: self))!
+    }
+    
+    func setLevelAndSubLevel(level:Int, subLevel:Int){
         self.level = level
         self.subLevel = subLevel
     }

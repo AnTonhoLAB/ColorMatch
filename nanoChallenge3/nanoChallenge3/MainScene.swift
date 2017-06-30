@@ -178,7 +178,7 @@ class MainScene: SKScene {
                     let level = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
                     let subLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
                     
-                    gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel)
+                    gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
                     self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
                 }
             }
@@ -214,7 +214,7 @@ class MainScene: SKScene {
                     scene.scaleMode = .aspectFill
                     
                     let gameScene = scene as! GameScene
-                    gameScene.fixLevelAccordingToLevelScreen(level: level, subLevel: subLevel)
+                    gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
                     
                     self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
                 }

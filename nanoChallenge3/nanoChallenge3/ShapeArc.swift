@@ -10,33 +10,40 @@ import SpriteKit
 
 class ShapeArc: SKShapeNode{
     
-    var radius:CGFloat!
-    var numberOfSections:Int!
-    
-    init(radius: CGFloat, colors: [UIColor]) {
+    init(radius: CGFloat, ringWidth: CGFloat, colorsInt: [Int]) {
         super.init()
         
-        let angle = Double(360/colors.count)
+        let angle = Double(360/colorsInt.count)
         
         var currentAngle = 90.0
         
-        self.radius = radius
-        self.numberOfSections = colors.count
-        
-        
-        for index in 0..<colors.count {
+        for index in 0..<colorsInt.count {
             
-            if colors[index] != UIColor.clear {
-                let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), clockwise: true)
+            if colorsInt[index] >= 0 {
                 
-                let arc = SKShapeNode(path: bezierPath.cgPath)
-                arc.strokeColor = colors[index]
-                arc.lineWidth = radius * 0.2
-                arc.position = position
+                let radius2 = radius + ringWidth
+                
+                let startAngle = CGFloat.degreesToRadians(degrees: CGFloat(90 + angle/2))
+                let endAngle = CGFloat.degreesToRadians(degrees: CGFloat(90 - angle/2))
+                
+                let path = CGMutablePath()
+                path.addArc(center: CGPoint(x: 0, y: 0), radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+                path.addArc(center: CGPoint(x: 0, y: 0), radius: radius2, startAngle: endAngle, endAngle: startAngle, clockwise: false)
+                
+                let arc = SKShapeNode(path: path)
+                arc.fillColor = GamePreferences.colors[colorsInt[index]]
+                arc.strokeColor = GamePreferences.colors[colorsInt[index]]
+                arc.lineWidth = 1
+                arc.physicsBody = SKPhysicsBody(polygonFrom: path)
+                arc.physicsBody?.affectedByGravity = false
+                arc.physicsBody?.allowsRotation = false
+                arc.physicsBody?.isDynamic = false
+                arc.physicsBody?.pinned = false
+                arc.zRotation = CGFloat.degreesToRadians(degrees: CGFloat(currentAngle - angle/2))
                 
                 addChild(arc)
             }
-            
+
             currentAngle += angle
         }
     }

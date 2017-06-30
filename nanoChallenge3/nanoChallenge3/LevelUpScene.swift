@@ -68,14 +68,14 @@ class LevelUpScene: SKScene {
             if let scene = SKScene(fileNamed: "GameScene") {
                 scene.scaleMode = .aspectFill
                 let gameScene = scene as! GameScene
-                    gameScene.fixLevelAccordingToLevelScreen(level: level+1, subLevel: 1)
+                    gameScene.setLevelAndSubLevel(level: level+1, subLevel: 1)
                     
                 self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
             }
         }
     }
     
-    func setLevelAndSubLevel(level: Int){
+    func setLevel(level: Int){
         self.level = level
     }
 }
