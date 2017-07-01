@@ -59,4 +59,25 @@ class SubShape: SKShapeNode{
         return CGPoint(x: position.x + cos(getAngle()) * (radius/2), y: position.y + sin(getAngle())*(radius/2))
     }
     
+    func impulse() -> SKShapeNode{
+        self.removeAllChildren()
+        let circle = SKShapeNode(circleOfRadius: self.radius/2)
+        circle.physicsBody = SKPhysicsBody.init(circleOfRadius: self.radius/2)
+        circle.physicsBody?.affectedByGravity = false
+        circle.physicsBody?.categoryBitMask = 1
+        circle.physicsBody?.collisionBitMask = 2
+        circle.physicsBody?.contactTestBitMask = 2
+        circle.zPosition = 1
+        circle.position = getPoint()
+        circle.fillColor = self.color
+        circle.strokeColor = self.color
+        circle.name = "circle"
+        self.addChild(circle)
+        
+        let move = SKAction.applyImpulse(CGVector.init(dx: 15 * getPoint().x, dy: 15 * getPoint().y), duration: 1)
+        
+        circle.run(move)
+        return circle
+    }
+    
 }

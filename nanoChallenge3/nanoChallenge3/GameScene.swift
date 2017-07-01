@@ -36,30 +36,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             
-            removeChildren(in: shapeNoodesMainCircle)
+//            removeChildren(in: shapeNoodesMainCircle)
             
             for subShape in shapeNoodesMainCircle {
                 subShape.removeAllActions()
-                
-                let circle = SKShapeNode(circleOfRadius: subShape.radius/2)
-                
-                circle.physicsBody = SKPhysicsBody.init(circleOfRadius: subShape.radius/2)
-                circle.physicsBody?.affectedByGravity = false
-                circle.physicsBody?.categoryBitMask = 1
-                circle.physicsBody?.collisionBitMask = 2
-                circle.physicsBody?.contactTestBitMask = 2
-                circle.zPosition = 1
-                circle.position = subShape.getPoint()
-                circle.fillColor = subShape.color
-                circle.strokeColor = subShape.color
-                circle.name = "circle"
-                self.addChild(circle)
-                
-                circles.append(circle)
-                
-                let move = SKAction.applyImpulse(CGVector.init(dx: 15 * subShape.getPoint().x, dy: 15 * subShape.getPoint().y), duration: 1)
-                
-                circle.run(move)
+                circles.append(subShape.impulse())
             }
             
             touched = true
