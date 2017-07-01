@@ -60,15 +60,16 @@ class SubShape: SKShapeNode{
     }
     
     func impulse() -> SKShapeNode{
+        self.position = getPoint()
         self.removeAllChildren()
+        self.removeAllActions()
         let circle = SKShapeNode(circleOfRadius: self.radius/2)
-        circle.physicsBody = SKPhysicsBody.init(circleOfRadius: self.radius/2)
+        circle.physicsBody = SKPhysicsBody.init(circleOfRadius: (self.radius/2)*0.8)
         circle.physicsBody?.affectedByGravity = false
         circle.physicsBody?.categoryBitMask = 1
         circle.physicsBody?.collisionBitMask = 2
         circle.physicsBody?.contactTestBitMask = 2
         circle.zPosition = 1
-        circle.position = getPoint()
         circle.fillColor = self.color
         circle.strokeColor = self.color
         circle.name = "circle"

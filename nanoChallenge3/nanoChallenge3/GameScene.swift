@@ -36,10 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             
-//            removeChildren(in: shapeNoodesMainCircle)
-            
             for subShape in shapeNoodesMainCircle {
-                subShape.removeAllActions()
                 circles.append(subShape.impulse())
             }
             
