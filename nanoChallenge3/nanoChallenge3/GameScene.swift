@@ -57,7 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 circles.append(circle)
                 
-                let move = SKAction.applyImpulse(CGVector.init(dx: subShape.getPoint().x, dy: subShape.getPoint().y), duration: 1)
+                let move = SKAction.applyImpulse(CGVector.init(dx: 15 * subShape.getPoint().x, dy: 15 * subShape.getPoint().y), duration: 1)
                 
                 circle.run(move)
             }
@@ -86,6 +86,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 UserDefaultsManager.updateLevelAndSubLevel()
                 if level < World.numberOfLevels() && subLevel == World.getLevel(level: level)?.numberOfSubLevels(){
                     goToLevelUpScene()
+                }
+                else if level == World.numberOfLevels() && subLevel == World.getLevel(level: level)?.numberOfSubLevels(){
+                    goToLevelScene()
                 }
                 else{
                     goToNextLevelOrSubLevel()
@@ -126,6 +129,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel+1)
             }
             self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        }
+    }
+    
+    func goToLevelScene(){
+        if let scene = SKScene(fileNamed: "LevelScene") {
+            scene.scaleMode = .aspectFill
+            self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
         }
     }
     

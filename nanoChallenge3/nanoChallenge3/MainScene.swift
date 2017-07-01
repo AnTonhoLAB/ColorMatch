@@ -79,12 +79,6 @@ class MainScene: SKScene {
         
         Background.movePointsIn(scene: self)
         
-//        let texture = World.getLevel(level: 4)?.getSubLevel(subLevel: 2)?.getLockedTextureWithSizeForScene(scene: self)
-//
-//        let spriteNode = SKSpriteNode(texture: texture)
-//        spriteNode.position = CGPoint(x: 0, y: -100)
-//        addChild(spriteNode)
-        
     }
     
     func createMenuScene(){

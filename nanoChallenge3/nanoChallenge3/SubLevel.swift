@@ -22,8 +22,11 @@ struct Block {
 public class SubLevel {
     
     let blocks: [Block]!
+    let numberOfLevel: Int!
     
-    init(subLevelJson: [[String : Any]]) {
+    init(subLevelJson: [[String : Any]], numberOfLevel: Int) {
+        self.numberOfLevel = numberOfLevel
+        
         var blocks = [Block]()
         
         for block in subLevelJson{
@@ -107,7 +110,7 @@ public class SubLevel {
         }
     }
     
-    func getUnlockedTextureWithSizeForScene(scene: SKScene) -> SKTexture{
+    func getUnlockedTextureWith(scene: SKScene) -> SKTexture{
         let unlockShapeNode = SKShapeNode()
         
         let totalRadius = ((scene.view?.frame.size.width)!)/6
@@ -122,11 +125,11 @@ public class SubLevel {
             }
         }
         
-        let square = SKShapeNode(rectOf: CGSize(width: totalRadius*2+ringWidth*2, height: totalRadius*2+ringWidth*2 ), cornerRadius: totalRadius*2/4)
-        square.strokeColor = UIColor.lightGray
+        let borderColorInt = (numberOfLevel%4)-1 == -1 ? 3 : (numberOfLevel%4)-1
+        let square = SKShapeNode(rectOf: CGSize(width: totalRadius*2+(ringWidth*3)*2, height: totalRadius*2+(ringWidth*3)*2 ), cornerRadius: totalRadius*2/4)
+        square.strokeColor = GamePreferences.colors[borderColorInt]
         square.lineWidth = ringWidth
         square.position = CGPoint(x: 0, y: 0)
-        
         unlockShapeNode.addChild(square)
         
         let texture = scene.view?.texture(from: unlockShapeNode)
@@ -152,29 +155,34 @@ public class SubLevel {
         }
     }
     
-    func getLockedTextureWithSizeForScene(scene: SKScene) -> SKTexture{
-        let unlockShapeNode = SKShapeNode()
+    func getLockedTextureWith(scene: SKScene) -> SKTexture{
+        let lockedShapeNode = SKShapeNode()
         
         let totalRadius = ((scene.view?.frame.size.width)!)/6
         let ringWidth = totalRadius*0.1
         
         for (index, block) in blocks.enumerated() {
             if index == 0{
-                lockedMainCircleForTexture(block: block, radius: totalRadius*0.18, shapeNode: unlockShapeNode)
+                lockedMainCircleForTexture(block: block, radius: totalRadius*0.18, shapeNode: lockedShapeNode)
             }
             else {
-                lockedRingForTexture(block: block, radius: totalRadius-(ringWidth+(ringWidth/2))*CGFloat(index), ringWidth: ringWidth, shapeNode: unlockShapeNode)
+                lockedRingForTexture(block: block, radius: totalRadius-(ringWidth+(ringWidth/2))*CGFloat(index), ringWidth: ringWidth, shapeNode: lockedShapeNode)
             }
         }
         
-        let square = SKShapeNode(rectOf: CGSize(width: totalRadius*2+ringWidth*2, height: totalRadius*2+ringWidth*2 ), cornerRadius: totalRadius*2/4)
-        square.strokeColor = UIColor.lightGray
+        let square = SKShapeNode(rectOf: CGSize(width: totalRadius*2+(ringWidth*3)*2, height: totalRadius*2+(ringWidth*3)*2 ), cornerRadius: totalRadius*2/4)
+        square.strokeColor = GamePreferences.colors[4]
         square.lineWidth = ringWidth
         square.position = CGPoint(x: 0, y: 0)
+        lockedShapeNode.addChild(square)
         
-        unlockShapeNode.addChild(square)
+        let locked = SKSpriteNode(imageNamed: "Locked")
+        locked.xScale = 2
+        locked.yScale = 2
+        lockedShapeNode.addChild(locked)
         
-        let texture = scene.view?.texture(from: unlockShapeNode)
+        let texture = scene.view?.texture(from: lockedShapeNode)
+        
         return texture!
     }
     
@@ -186,8 +194,8 @@ public class SubLevel {
             let subShape = SubShape(radius: radius, startAngle: CGFloat(currentAngle * (Double.pi/180)), endAngle: CGFloat((currentAngle + angle) * (Double.pi/180)), color: GamePreferences.colors[block.colorsInt[index]])
             for childSubShape in subShape.children{
                 let childSubShapeNode = childSubShape as! SKShapeNode
-                childSubShapeNode.strokeColor = UIColor.lightGray
-                childSubShapeNode.fillColor = UIColor.lightGray
+                childSubShapeNode.strokeColor = GamePreferences.colors[4]
+                childSubShapeNode.fillColor = GamePreferences.colors[4]
             }
             shapeNode.addChild(subShape)
             currentAngle += angle
@@ -199,37 +207,10 @@ public class SubLevel {
         for arc in shapeArc.children{
             arc.removeFromParent()
             let arcLightGray = arc as! SKShapeNode
-            arcLightGray.fillColor = UIColor.lightGray
-            arcLightGray.strokeColor = UIColor.lightGray
+            arcLightGray.fillColor = GamePreferences.colors[4]
+            arcLightGray.strokeColor = GamePreferences.colors[4]
             shapeNode.addChild(arcLightGray)
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }

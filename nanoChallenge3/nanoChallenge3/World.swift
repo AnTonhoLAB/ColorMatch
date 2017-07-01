@@ -35,7 +35,7 @@ class World {
                 let data = try Data(contentsOf: file)
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let world = json as? [[[[String: Any]]]] {
-                    let level = Level(levelJson: world[level-1])
+                    let level = Level(levelJson: world[level-1], numberOfLevel: level)
                     return level
                 }
                 else {

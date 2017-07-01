@@ -14,6 +14,8 @@ class LevelScene: SKScene {
     
     var buttons = [[SKSpriteNode]]()
     
+    var buttonBack: SKSpriteNode!
+    
     var lastUnlockedLevel: Int!
     var lastUnlockedSublevel: Int!
     
@@ -31,36 +33,31 @@ class LevelScene: SKScene {
         
         var size: CGFloat!
         let columnSpace = CGFloat(25)
-        let lineSpace = CGFloat(12.5)
+        let lineSpace = CGFloat(25)
         
         var initialX: CGFloat!
         var currentX: CGFloat!
         
         var initialY: CGFloat!
         
-        for level in 1...4
+        for numberLevel in 1...4
         {
+            let level = World.getLevel(level: numberLevel)
             var subLevels = [SKSpriteNode]()
             
-            for subLevel in 1...3
+            for subLevelNumber in 1...3
             {
-                var imageName: String!
-                if level > lastUnlockedLevel!{
-                    imageName = "Level_\(level)_locked"
-                }
-                else if level == lastUnlockedLevel! && subLevel > lastUnlockedSublevel!{
-                    imageName = "Level_\(level)_locked"
+                var texture: SKTexture!
+                if (numberLevel > lastUnlockedLevel!) || (numberLevel == lastUnlockedLevel! && subLevelNumber > lastUnlockedSublevel!){
+                    texture = level?.getSubLevel(subLevel: subLevelNumber)?.getLockedTextureWith(scene: self)
                 }
                 else{
-                    imageName = "Level_\(level).\(subLevel)"
+                    texture = level?.getSubLevel(subLevel: subLevelNumber)?.getUnlockedTextureWith(scene: self)
                 }
                 
-                let button = SKSpriteNode(imageNamed: imageName)
+                let button = SKSpriteNode(texture: texture)
                 
-                button.xScale = 2
-                button.yScale = 2
-                
-                if(level == 1 && subLevel == 1){
+                if(numberLevel == 1 && subLevelNumber == 1){
                     size = button.size.width
                     initialX = -1*(size + columnSpace)
                     currentX = initialX
@@ -68,8 +65,8 @@ class LevelScene: SKScene {
                     initialY = size
                 }
                 
-                button.size = CGSize(width: size, height: size)
                 button.position = CGPoint(x: currentX, y: initialY)
+                //                button.size = CGSize(width: size, height: size)
                 
                 currentX = currentX + columnSpace + button.size.width
                 
@@ -86,6 +83,12 @@ class LevelScene: SKScene {
             
         }
         Background.movePointsIn(scene: self)
+        
+        buttonBack = SKSpriteNode(imageNamed: "Back")
+        buttonBack.position = CGPoint(x: -(view.frame.size.width)+buttonBack.size.width/2+25, y: (view.frame.size.height)-(buttonBack.size.height+25))
+        addChild(buttonBack)
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -106,5 +109,15 @@ class LevelScene: SKScene {
                 }
             }
         }
+        
+        if buttonBack.contains(touch.location(in: self)) {
+            if let scene = SKScene(fileNamed: "MainScene") {
+                scene.scaleMode = .aspectFill
+                let mainScene = scene as! MainScene
+                mainScene.createMenuScene()
+                self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+            }
+        }
+        
     }
 }

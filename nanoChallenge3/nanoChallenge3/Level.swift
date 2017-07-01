@@ -11,11 +11,13 @@ import SpriteKit
 
 class Level {
     var subLevels: [SubLevel]!
+    var numberOfLevel: Int!
     
-    init(levelJson: [[[String : Any]]]) {
+    init(levelJson: [[[String : Any]]], numberOfLevel: Int) {
+        self.numberOfLevel = numberOfLevel
         self.subLevels = [SubLevel]()
         for levelJsonAux in levelJson{
-            let subLevel = SubLevel(subLevelJson: levelJsonAux)
+            let subLevel = SubLevel(subLevelJson: levelJsonAux, numberOfLevel: numberOfLevel)
             self.subLevels.append(subLevel)
         }
     }

@@ -21,6 +21,7 @@
 		9164F1E01F02AFFD00958747 /* LevelUpScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164F1DF1F02AFFD00958747 /* LevelUpScene.swift */; };
 		9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9166F8C11EFD86A90071E84A /* MainScene.sks */; };
 		9166F8C41EFD86CE0071E84A /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166F8C31EFD86CE0071E84A /* MainScene.swift */; };
+		916E63B01F06EDB40033168C /* QanelasSoftDEMO-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 916E63AF1F06EBE30033168C /* QanelasSoftDEMO-ExtraBold.otf */; };
 		918C5EC61F031AE3003CBD41 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C5EC51F031AE3003CBD41 /* Background.swift */; };
 		9197360C1F01DF2900D86AA1 /* SKViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197360B1F01DF2900D86AA1 /* SKViewExtension.swift */; };
 		91B2C49C1F05CA9A00920E24 /* GamePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2C4951F05CA9A00920E24 /* GamePreferences.swift */; };
@@ -54,6 +55,7 @@
 		9164F1DF1F02AFFD00958747 /* LevelUpScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelUpScene.swift; sourceTree = "<group>"; };
 		9166F8C11EFD86A90071E84A /* MainScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainScene.sks; sourceTree = "<group>"; };
 		9166F8C31EFD86CE0071E84A /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		916E63AF1F06EBE30033168C /* QanelasSoftDEMO-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QanelasSoftDEMO-ExtraBold.otf"; sourceTree = "<group>"; };
 		918C5EC51F031AE3003CBD41 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		9197360B1F01DF2900D86AA1 /* SKViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKViewExtension.swift; sourceTree = "<group>"; };
 		91B2C4951F05CA9A00920E24 /* GamePreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePreferences.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				9197360B1F01DF2900D86AA1 /* SKViewExtension.swift */,
 				918C5EC51F031AE3003CBD41 /* Background.swift */,
 				91C093101F02EA3E00D23BEF /* back.wav */,
+				916E63AF1F06EBE30033168C /* QanelasSoftDEMO-ExtraBold.otf */,
 			);
 			path = nanoChallenge3;
 			sourceTree = "<group>";
@@ -164,7 +167,6 @@
 				TargetAttributes = {
 					6BAED49F1EFC5AC600E10034 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = JM5PLAS48Y;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -192,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				916E63B01F06EDB40033168C /* QanelasSoftDEMO-ExtraBold.otf in Resources */,
 				91EB65321F01CB3C001A2BDD /* CreditsScene.sks in Resources */,
 				6BAED4AF1EFC5AC600E10034 /* Main.storyboard in Resources */,
 				6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */,
@@ -352,13 +355,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JM5PLAS48Y;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = nanoChallenge3/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = BEPiD.nanoChallenge3;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.colormatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -366,13 +370,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JM5PLAS48Y;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = nanoChallenge3/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = BEPiD.nanoChallenge3;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.colormatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

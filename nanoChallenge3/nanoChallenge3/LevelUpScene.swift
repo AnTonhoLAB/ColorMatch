@@ -50,13 +50,14 @@ class LevelUpScene: SKScene {
         levelUp.position = CGPoint(x: 0, y: levelUp.position.y - diference)
         buttonLevel.position = CGPoint(x: 0, y: buttonLevel.position.y - diference)
         
-        let lableLevel = SKLabelNode()
-        lableLevel.text = "\(level+1)"
-        lableLevel.fontSize = 72
-        lableLevel.fontColor = SKColor.white
-        lableLevel.position = trophy.position
-        lableLevel.zPosition = 200
-        addChild(lableLevel)
+        let labelLevel = SKLabelNode()
+        labelLevel.text = "\(level+1)"
+        labelLevel.fontName = "QanelasSoftDEMO-ExtraBold"
+        labelLevel.fontSize = 72
+        labelLevel.fontColor = SKColor.white
+        labelLevel.position = trophy.position
+        labelLevel.zPosition = 200
+        addChild(labelLevel)
         
         Background.movePointsIn(scene: self)
         
