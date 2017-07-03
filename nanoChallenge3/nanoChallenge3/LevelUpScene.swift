@@ -55,7 +55,7 @@ class LevelUpScene: SKScene {
         labelLevel.fontName = "QanelasSoftDEMO-ExtraBold"
         labelLevel.fontSize = 72
         labelLevel.fontColor = SKColor.white
-        labelLevel.position = trophy.position
+        labelLevel.position = CGPoint(x: 0, y: trophy.position.y)
         labelLevel.zPosition = 200
         addChild(labelLevel)
         

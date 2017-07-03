@@ -140,9 +140,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let topLayout = self.childNode(withName: "TopShape") as! SKSpriteNode
         let downLayout = self.childNode(withName: "DownShape") as! SKSpriteNode
-        
-        topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(level)_Top")))
-        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(level)_Down")))
+        topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(((level%4)-1 == -1 ? 3 : (level%4)-1)+1)_Top")))
+        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(((level%4)-1 == -1 ? 3 : (level%4)-1)+1)_Down")))
         
     }
     
