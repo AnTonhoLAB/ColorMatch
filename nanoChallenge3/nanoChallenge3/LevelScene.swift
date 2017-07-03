@@ -18,6 +18,8 @@ enum StatusTouch {
 }
 
 class LevelScene: SKScene {
+    let spacing = CGFloat(25)
+    var sizeButton = CGFloat(0)
     
     var currentPage = 1
     
@@ -53,15 +55,13 @@ class LevelScene: SKScene {
         levelsTitle.zPosition = 100
         addChild(levelsTitle)
         
-        
-        let spacing = CGFloat(25)
         let numberOfLevels = World.numberOfLevels()
         numberOfPages = numberOfLevels%4==0 ? numberOfLevels/4 : numberOfLevels/4+1
         
         
         var texture = World.getLevel(level: 1)?.getSubLevel(subLevel: 1)?.getUnlockedTextureWith(scene: self)
         var buttonLevel = SKSpriteNode(texture: texture)
-        let sizeButton = buttonLevel.size.width
+        sizeButton = buttonLevel.size.width
         var initialX = -1*(sizeButton+spacing)
         let initialY = sizeButton
         
@@ -94,7 +94,7 @@ class LevelScene: SKScene {
                 currentX = initialX
                 currentY = currentY - (spacing + sizeButton)
             }
-            initialX = initialX + (self.view?.frame.size.width)!*2
+            initialX = initialX + 3*sizeButton + spacing*3 + 30//initialX + (self.view?.frame.size.width)!*2
             currentX = initialX
             currentY = initialY
         }
@@ -193,7 +193,7 @@ class LevelScene: SKScene {
                         paging = true
                         self.currentPage -= 1
                         for button in buttons{
-                            newPoint = CGPoint(x: button.position.x+((self.view?.frame.width)!*2), y: button.position.y)
+                            newPoint = CGPoint(x: button.position.x+(3*sizeButton + spacing*3 + 30), y: button.position.y)
                             move = SKAction.move(to: newPoint, duration: timeToPaging)
                             button.run(move)
                         }
@@ -204,7 +204,7 @@ class LevelScene: SKScene {
                         paging = true
                         self.currentPage += 1
                         for button in buttons{
-                            newPoint = CGPoint(x: button.position.x-((self.view?.frame.width)!*2), y: button.position.y)
+                            newPoint = CGPoint(x: button.position.x-(3*sizeButton + spacing*3 + 30), y: button.position.y)
                             move = SKAction.move(to: newPoint, duration: timeToPaging)
                             button.run(move)
                         }
