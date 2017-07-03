@@ -11,7 +11,7 @@ import AVFoundation
 public class MusicController{
     
     public var backgroundMusic : AVAudioPlayer!
-   
+    var atualMusic : String!
   
     
     public class func sharedInstance() -> MusicController {
@@ -22,18 +22,26 @@ public class MusicController{
     
     func backGroundMusic(music : String, type : String){
       
-        do {
-            
-            let path = Bundle.main.path(forResource: music, ofType:type)!
-            let url = URL(fileURLWithPath: path)
-            
-            let sound = try AVAudioPlayer(contentsOf: url)
-            backgroundMusic = sound
-            sound.numberOfLoops = -1
-            sound.play()
-        } catch {
-            print("couldn't load file :(")
+        
+        if (atualMusic == nil || atualMusic != music) {
+            do {
+                
+                let path = Bundle.main.path(forResource: music, ofType:type)!
+                let url = URL(fileURLWithPath: path)
+                
+                let sound = try AVAudioPlayer(contentsOf: url)
+                backgroundMusic = sound
+                sound.numberOfLoops = -1
+                sound.prepareToPlay()
+                sound.play()
+            } catch {
+                print("couldn't load file :(")
+            }
+
+            atualMusic = music
         }
+        
+        
     }
     
 

@@ -35,6 +35,7 @@ class MainScene: SKScene {
         var firstButton: SKSpriteNode!
         var secondButton: SKSpriteNode!
         
+        MusicController.sharedInstance().backGroundMusic(music: "back", type: "wav")
         switch self.status {
         case .Menu:
             nameNode.xScale = 2

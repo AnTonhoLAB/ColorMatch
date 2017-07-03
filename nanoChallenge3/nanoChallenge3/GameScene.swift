@@ -138,6 +138,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setTopAndDownLayoutForGameScene(level:Int){
         
+        let music = ((level%4)-1 == -1 ? 3 : (level%4)-1)+1
+        
+        MusicController.sharedInstance().backGroundMusic(music: "song\(music)", type: "mp3")
         let topLayout = self.childNode(withName: "TopShape") as! SKSpriteNode
         let downLayout = self.childNode(withName: "DownShape") as! SKSpriteNode
         topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(((level%4)-1 == -1 ? 3 : (level%4)-1)+1)_Top")))
