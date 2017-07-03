@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B089A441F0AE3DC009E7C77 /* song1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6B089A401F0AE3DC009E7C77 /* song1.mp3 */; };
+		6B089A451F0AE3DC009E7C77 /* song2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6B089A411F0AE3DC009E7C77 /* song2.mp3 */; };
+		6B089A461F0AE3DC009E7C77 /* song3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6B089A421F0AE3DC009E7C77 /* song3.mp3 */; };
+		6B089A471F0AE3DC009E7C77 /* song4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6B089A431F0AE3DC009E7C77 /* song4.mp3 */; };
 		6BAED4A41EFC5AC600E10034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */; };
 		6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A51EFC5AC600E10034 /* GameScene.sks */; };
 		6BAED4A81EFC5AC600E10034 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A71EFC5AC600E10034 /* Actions.sks */; };
@@ -39,6 +43,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B089A401F0AE3DC009E7C77 /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song1.mp3; sourceTree = "<group>"; };
+		6B089A411F0AE3DC009E7C77 /* song2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song2.mp3; sourceTree = "<group>"; };
+		6B089A421F0AE3DC009E7C77 /* song3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song3.mp3; sourceTree = "<group>"; };
+		6B089A431F0AE3DC009E7C77 /* song4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song4.mp3; sourceTree = "<group>"; };
 		6BAED4A01EFC5AC600E10034 /* nanoChallenge3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nanoChallenge3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BAED4A51EFC5AC600E10034 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -83,6 +91,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B089A3F1F0AE3A1009E7C77 /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				916E57761F0AB4010035C28D /* back.wav */,
+				6B089A401F0AE3DC009E7C77 /* song1.mp3 */,
+				6B089A411F0AE3DC009E7C77 /* song2.mp3 */,
+				6B089A421F0AE3DC009E7C77 /* song3.mp3 */,
+				6B089A431F0AE3DC009E7C77 /* song4.mp3 */,
+			);
+			name = Songs;
+			sourceTree = "<group>";
+		};
 		6BAED4971EFC5AC600E10034 = {
 			isa = PBXGroup;
 			children = (
@@ -102,7 +122,7 @@
 		6BAED4A21EFC5AC600E10034 /* nanoChallenge3 */ = {
 			isa = PBXGroup;
 			children = (
-				916E57761F0AB4010035C28D /* back.wav */,
+				6B089A3F1F0AE3A1009E7C77 /* Songs */,
 				6BAED4A71EFC5AC600E10034 /* Actions.sks */,
 				6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */,
 				91EB65311F01CB3C001A2BDD /* CreditsScene.sks */,
@@ -197,13 +217,17 @@
 			files = (
 				916E63B01F06EDB40033168C /* QanelasSoftDEMO-ExtraBold.otf in Resources */,
 				91EB65321F01CB3C001A2BDD /* CreditsScene.sks in Resources */,
+				6B089A471F0AE3DC009E7C77 /* song4.mp3 in Resources */,
 				6BAED4AF1EFC5AC600E10034 /* Main.storyboard in Resources */,
 				6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */,
+				6B089A451F0AE3DC009E7C77 /* song2.mp3 in Resources */,
 				8DB153B81F01855F00920BB6 /* LevelScene.sks in Resources */,
 				6BAED4B11EFC5AC600E10034 /* Assets.xcassets in Resources */,
+				6B089A461F0AE3DC009E7C77 /* song3.mp3 in Resources */,
 				9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */,
 				9164F1DE1F02AFDA00958747 /* LevelUpScene.sks in Resources */,
 				91B2C4A11F05CA9A00920E24 /* World.json in Resources */,
+				6B089A441F0AE3DC009E7C77 /* song1.mp3 in Resources */,
 				916E57771F0AB4010035C28D /* back.wav in Resources */,
 				6BAED4B41EFC5AC600E10034 /* LaunchScreen.storyboard in Resources */,
 				6BAED4A81EFC5AC600E10034 /* Actions.sks in Resources */,
