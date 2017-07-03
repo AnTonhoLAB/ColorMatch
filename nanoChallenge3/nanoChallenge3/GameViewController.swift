@@ -34,18 +34,18 @@ class GameViewController: UIViewController {
 //            view.showsNodeCount = true
         }
         
-//        do {
-//            
-//            let path = Bundle.main.path(forResource: "back", ofType:"wav")!
-//            let url = URL(fileURLWithPath: path)
-//            
-//            let sound = try AVAudioPlayer(contentsOf: url)
-//            backgroundMusic = sound
-//            sound.numberOfLoops = -1
-//            sound.play()
-//        } catch {
-//            print("couldn't load file :(")
-//        }
+        do {
+
+            let path = Bundle.main.path(forResource: "back", ofType:"wav")!
+            let url = URL(fileURLWithPath: path)
+
+            let sound = try AVAudioPlayer(contentsOf: url)
+            backgroundMusic = sound
+            sound.numberOfLoops = -1
+            sound.play()
+        } catch {
+            print("couldn't load file :(")
+        }
     }
 
     override var shouldAutorotate: Bool {
