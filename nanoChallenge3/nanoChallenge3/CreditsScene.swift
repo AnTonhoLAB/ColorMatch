@@ -14,57 +14,75 @@ class CreditsScene: SKScene {
     var buttons = [SKSpriteNode]()
     var links = ["https://www.facebook.com/douglas.gehring.3", "https://www.linkedin.com/in/eduardo-segura-fornari-a23728a7/", "https://www.linkedin.com/in/georgegomees/", "https://www.linkedin.com/in/laura-corssac-538914a2/", "https://www.behance.net/user/?username=jcaardoso"]
     
-    let distanceButtons = 19
+    let distanceButtons = CGFloat(19)
     
     var heightButtons: CGFloat!
     
     override func didMove(to view: SKView) {
+        self.backgroundColor = UIColor.white
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
         let levelsTitle = SKSpriteNode(imageNamed: "Credits")
-        
-        levelsTitle.xScale = 2
-        levelsTitle.yScale = 2
-        levelsTitle.position = CGPoint(x: 0, y: (self.view?.frame.size.height)!/2 + levelsTitle.size.height/2)
-        levelsTitle.zPosition = 100
-        addChild(levelsTitle)
-        
         let buttonDouglas = SKSpriteNode(imageNamed: "Button_Douglas")
-        buttonDouglas.xScale = 2
-        buttonDouglas.yScale = 2
-        buttonDouglas.position = CGPoint(x: 0, y: levelsTitle.position.y - buttonDouglas.size.height*2)
-        addChild(buttonDouglas)
-        buttons.append(buttonDouglas)
+        let buttonEduardo = SKSpriteNode(imageNamed: "Button_Eduardo")
+        let buttonGeorge = SKSpriteNode(imageNamed: "Button_George")
+        let buttonLaura = SKSpriteNode(imageNamed: "Button_Laura")
+        let buttonJuliana = SKSpriteNode(imageNamed: "Button_Juliana")
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            levelsTitle.xScale = 2
+            levelsTitle.yScale = 2
+            
+            buttonDouglas.xScale = 2
+            buttonDouglas.yScale = 2
+            
+            buttonEduardo.xScale = 2
+            buttonEduardo.yScale = 2
+            
+            buttonGeorge.xScale = 2
+            buttonGeorge.yScale = 2
+            
+            buttonLaura.xScale = 2
+            buttonLaura.yScale = 2
+            
+            buttonJuliana.xScale = 2
+            buttonJuliana.yScale = 2
+        }
         
         heightButtons = buttonDouglas.size.height
         
-        let buttonEduardo = SKSpriteNode(imageNamed: "Button_Eduardo")
-        buttonEduardo.xScale = 2
-        buttonEduardo.yScale = 2
+        let levelsTitlePositionY = (levelsTitle.size.height + (5*heightButtons) + (4*distanceButtons))/2
+        
+        levelsTitle.position = CGPoint(x: 0, y: levelsTitlePositionY)
+        
+        buttonDouglas.position = CGPoint(x: 0, y: levelsTitle.position.y - levelsTitle.size.height/2 - heightButtons - heightButtons/2)
+        
         buttonEduardo.position = CGPoint(x: 0, y: buttonDouglas.position.y - CGFloat(distanceButtons) - heightButtons)
-        addChild(buttonEduardo)
-        buttons.append(buttonEduardo)
-        
-        let buttonGeorge = SKSpriteNode(imageNamed: "Button_George")
-        buttonGeorge.xScale = 2
-        buttonGeorge.yScale = 2
         buttonGeorge.position = CGPoint(x: 0, y: buttonEduardo.position.y - CGFloat(distanceButtons) - heightButtons)
-        addChild(buttonGeorge)
-        buttons.append(buttonGeorge)
-        
-        let buttonLaura = SKSpriteNode(imageNamed: "Button_Laura")
-        buttonLaura.xScale = 2
-        buttonLaura.yScale = 2
         buttonLaura.position = CGPoint(x: 0, y: buttonGeorge.position.y - CGFloat(distanceButtons) - heightButtons)
-        addChild(buttonLaura)
-        buttons.append(buttonLaura)
-        
-        let buttonJuliana = SKSpriteNode(imageNamed: "Button_Juliana")
-        buttonJuliana.xScale = 2
-        buttonJuliana.yScale = 2
         buttonJuliana.position = CGPoint(x: 0, y: buttonLaura.position.y - CGFloat(distanceButtons) - heightButtons)
+        
+        levelsTitle.zPosition = 100
+        buttonDouglas.zPosition = 100
+        buttonEduardo.zPosition = 100
+        buttonGeorge.zPosition = 100
+        buttonLaura.zPosition = 100
+        buttonJuliana.zPosition = 100
+        
+        addChild(levelsTitle)
+        addChild(buttonDouglas)
+        addChild(buttonEduardo)
+        addChild(buttonGeorge)
+        addChild(buttonLaura)
         addChild(buttonJuliana)
+        
+        buttons.append(buttonDouglas)
+        buttons.append(buttonEduardo)
+        buttons.append(buttonGeorge)
+        buttons.append(buttonLaura)
         buttons.append(buttonJuliana)
         
-        Background.movePointsIn(scene: self)
+        Background.applyIn(scene: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,11 +100,9 @@ class CreditsScene: SKScene {
     }
     
     override func shake() {
-        if let scene = SKScene(fileNamed: "MainScene") {
-            scene.scaleMode = .aspectFill
-            let mainScene = scene as! MainScene
-            mainScene.createMenuScene()
-            self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-        }
+        let mainScene = MainScene(size: self.frame.size)
+        mainScene.scaleMode = .aspectFill
+        mainScene.createMenuScene()
+        self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
     }
 }

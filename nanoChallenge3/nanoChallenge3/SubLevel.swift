@@ -50,7 +50,7 @@ public class SubLevel {
         
         var subShapesMainCircle: [SubShape]?
         
-        let totalRadius = ((scene.view?.frame.size.width)!)*0.9
+        let totalRadius = ((scene.view?.frame.size.width)!)*0.45
         let ringWidth = totalRadius*0.1
         
         for (index, block) in blocks.enumerated() {
@@ -113,7 +113,7 @@ public class SubLevel {
     func getUnlockedTextureWith(scene: SKScene) -> SKTexture{
         let unlockShapeNode = SKShapeNode()
         
-        let totalRadius = ((scene.view?.frame.size.width)!)/6
+        let totalRadius = ((scene.view?.frame.size.width)!)*0.08
         let ringWidth = totalRadius*0.1
         
         for (index, block) in blocks.enumerated() {
@@ -130,6 +130,8 @@ public class SubLevel {
         square.strokeColor = GamePreferences.colors[borderColorInt]
         square.lineWidth = ringWidth
         square.position = CGPoint(x: 0, y: 0)
+        square.zPosition = -10
+        square.fillColor = UIColor.white
         unlockShapeNode.addChild(square)
         
         let texture = scene.view?.texture(from: unlockShapeNode)
@@ -158,7 +160,7 @@ public class SubLevel {
     func getLockedTextureWith(scene: SKScene) -> SKTexture{
         let lockedShapeNode = SKShapeNode()
         
-        let totalRadius = ((scene.view?.frame.size.width)!)/6
+        let totalRadius = ((scene.view?.frame.size.width)!)*0.08
         let ringWidth = totalRadius*0.1
         
         for (index, block) in blocks.enumerated() {
@@ -174,11 +176,11 @@ public class SubLevel {
         square.strokeColor = GamePreferences.colors[4]
         square.lineWidth = ringWidth
         square.position = CGPoint(x: 0, y: 0)
+        square.zPosition = -10
+        square.fillColor = UIColor.white
         lockedShapeNode.addChild(square)
         
         let locked = SKSpriteNode(imageNamed: "Locked")
-        locked.xScale = 2
-        locked.yScale = 2
         lockedShapeNode.addChild(locked)
         
         let texture = scene.view?.texture(from: lockedShapeNode)

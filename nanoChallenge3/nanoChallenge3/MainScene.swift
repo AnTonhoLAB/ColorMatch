@@ -15,71 +15,56 @@ enum Status {
 
 class MainScene: SKScene {
     var status = Status.Menu
-    var buttonsDistance = CGFloat(80)
+    
+    var titleNode: SKNode! = nil
+    
+    var firstButton: SKSpriteNode!
+    var secondButton: SKSpriteNode!
+    
+    var buttonsDistance = CGFloat(15)
     
     //Game Over
-    var gameOverNode: SKNode! = nil
-    var buttonRetry: SKSpriteNode!
-    var buttonMenu: SKSpriteNode!
     var level: Int!
     var subLevel: Int!
     
-    //Menu
-    var nameNode: SKNode! = nil
-    var buttonLevels: SKSpriteNode!
-    var buttonPlay: SKSpriteNode!
-    
-    
-    
     override func didMove(to view: SKView) {
-        var firstButton: SKSpriteNode!
-        var secondButton: SKSpriteNode!
+        self.backgroundColor = UIColor.white
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        MusicController.sharedInstance().backGroundMusic(music: "back", type: "wav")
-        switch self.status {
-        case .Menu:
-            nameNode.xScale = 2
-            nameNode.yScale = 2
-            
-            let name = nameNode.childNode(withName: "Name") as! SKSpriteNode
-            
-            nameNode.position = CGPoint(x: 0, y: name.frame.size.height)
-            
-            firstButton = buttonPlay
-            secondButton = buttonLevels
-            break
-        case .GameOver:
-            gameOverNode.xScale = 2
-            gameOverNode.yScale = 2
-            
-            let gameOver = gameOverNode.childNode(withName: "Game_Over") as! SKSpriteNode
-            
-            gameOverNode.position = CGPoint(x: 0, y: gameOver.frame.size.height)
-            
-            firstButton = buttonRetry
-            secondButton = buttonMenu
-            break
+        if status == .Menu {
+            MusicController.sharedInstance().backGroundMusic(music: "back", type: "wav")
         }
         
-        firstButton.xScale = 2
-        firstButton.yScale = 2
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            titleNode.xScale = 2
+            titleNode.yScale = 2
+            
+            firstButton.xScale = 2
+            firstButton.yScale = 2
+            
+            secondButton.xScale = 2
+            secondButton.yScale = 2
+            
+            buttonsDistance = CGFloat(30)
+        }
         
-        secondButton.xScale = 2
-        secondButton.yScale = 2
+        let title = titleNode.childNode(withName: "Title") as! SKSpriteNode
         
-        buttonsDistance = firstButton.size.height + 21
+        let spaces = (self.frame.size.height - (title.size.height + firstButton.size.height*2 + buttonsDistance))/3
+        
+        titleNode.position = CGPoint(x: 0, y: self.frame.size.height/2 - spaces - title.size.height/2)
         
         firstButton.isUserInteractionEnabled = false
         secondButton.isUserInteractionEnabled = false
         
-        secondButton.position = CGPoint(x: 0, y: -self.frame.height/2 + secondButton.size.height*2)
-        firstButton.position = CGPoint(x: 0, y: secondButton.position.y + buttonsDistance)
+        secondButton.position = CGPoint(x: 0, y: -self.frame.height/2 + spaces)
+        firstButton.position = CGPoint(x: 0, y: secondButton.position.y + firstButton.size.height + buttonsDistance)
         
+        addChild(titleNode)
         addChild(firstButton)
         addChild(secondButton)
         
-        Background.movePointsIn(scene: self)
-        
+        Background.applyIn(scene: self)
     }
     
     func createMenuScene(){
@@ -87,29 +72,25 @@ class MainScene: SKScene {
         
         let name = SKSpriteNode(imageNamed: "Name")
         name.position = CGPoint(x: 0, y: 0)
-        name.name = "Name";
+        name.name = "Title";
         name.isUserInteractionEnabled = false;
-        name.zPosition = 1
+        name.zPosition = 100
         
         let first_circle = SKSpriteNode(imageNamed: "Circle_Name")
         first_circle.position = CGPoint(x: -first_circle.size.width + 9, y: name.size.height/2 - first_circle.size.height/2 - 20)
-        first_circle.name = "Circle_Name";
         first_circle.isUserInteractionEnabled = false;
-        first_circle.zPosition = 2
+        first_circle.zPosition = name.zPosition+1
         
         let second_circle = SKSpriteNode(imageNamed: "Circle_Name_2")
         second_circle.position = CGPoint(x: first_circle.size.width + 4, y: name.size.height/2 - first_circle.size.height/2 - 20)
-        second_circle.name = "Circle_Name_2";
         second_circle.isUserInteractionEnabled = false;
-        second_circle.zPosition = 2
+        second_circle.zPosition = name.zPosition+1
         
-        nameNode = SKNode()
-        nameNode.position = CGPoint(x: 0, y: 0)
-        nameNode.addChild(name)
-        nameNode.addChild(first_circle)
-        nameNode.addChild(second_circle)
-        
-        addChild(nameNode)
+        titleNode = SKNode()
+        titleNode.position = CGPoint(x: 0, y: 0)
+        titleNode.addChild(name)
+        titleNode.addChild(first_circle)
+        titleNode.addChild(second_circle)
         
         var rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
         var forever = SKAction.repeatForever(rotate)
@@ -118,11 +99,8 @@ class MainScene: SKScene {
         forever = SKAction.repeatForever(rotate)
         second_circle.run(forever)
         
-        buttonLevels = SKSpriteNode(imageNamed: "Button_Levels")
-        buttonLevels.name = "Button_Levels";
-        
-        buttonPlay = SKSpriteNode(imageNamed: "Button_Play")
-        buttonPlay.name = "Button_Play";
+        secondButton = SKSpriteNode(imageNamed: "Button_Levels")
+        firstButton = SKSpriteNode(imageNamed: "Button_Play")
     }
     
     func createGameOverScene(level: Int, subLevel: Int){
@@ -132,114 +110,67 @@ class MainScene: SKScene {
         
         let gameOver = SKSpriteNode(imageNamed: "Game_Over")
         gameOver.position = CGPoint(x: 0, y: 0)
-        gameOver.name = "Game_Over";
+        gameOver.name = "Title";
         gameOver.isUserInteractionEnabled = false;
-        gameOver.zPosition = 1
+        gameOver.zPosition = 100
         
         let circle = SKSpriteNode(imageNamed: "Circle_Game_Over")
         circle.position = CGPoint(x: -gameOver.size.width/2 + circle.size.width/2, y: -gameOver.size.height/2 + circle.size.height/2)
-        circle.name = "Circle_Game_Over";
         circle.isUserInteractionEnabled = false;
-        circle.zPosition = 2
+        circle.zPosition = gameOver.zPosition+1
         
-        gameOverNode = SKNode()
-        gameOverNode.position = CGPoint(x: 0, y: 0)
-        gameOverNode.addChild(gameOver)
-        gameOverNode.addChild(circle)
-        
-        addChild(gameOverNode)
+        titleNode = SKNode()
+        titleNode.position = CGPoint(x: 0, y: 0)
+        titleNode.addChild(gameOver)
+        titleNode.addChild(circle)
         
         let rotate = SKAction.rotate(byAngle: CGFloat(Double.pi*2), duration: 2)
         let forever = SKAction.repeatForever(rotate)
         circle.run(forever)
         
-        buttonMenu = SKSpriteNode(imageNamed: "Button_Menu")
-        buttonMenu.name = "Button_Menu";
-        
-        buttonRetry = SKSpriteNode(imageNamed: "Button_Retry")
-        buttonRetry.name = "Button_Retry";
+        secondButton = SKSpriteNode(imageNamed: "Button_Menu")
+        firstButton = SKSpriteNode(imageNamed: "Button_Retry")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
         
         if self.status == .Menu {
-            if buttonLevels.contains(touch.location(in: self)) {
-                buttonLevels.texture = SKTexture(imageNamed: "Button_Levels")
-                if let scene = SKScene(fileNamed: "LevelScene") {
-                    scene.scaleMode = .aspectFill
-                    self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                }
-
+            if secondButton.contains(touch.location(in: self)) {
+                let levelScene = LevelScene(size: self.frame.size)
+                levelScene.scaleMode = .aspectFill
+                self.view?.presentScene(levelScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
             }
-            else if buttonPlay.contains(touch.location(in: self)) {
-                buttonPlay.texture = SKTexture(imageNamed: "Button_Play")
-                if let scene = SKScene(fileNamed: "GameScene") {
-                    scene.scaleMode = .aspectFill
-                    let gameScene = scene as! GameScene
-                    
-                    let level = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
-                    let subLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
-                    
-                    gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
-                    self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                }
+            else if firstButton.contains(touch.location(in: self)) {
+                let gameScene = GameScene(size: self.frame.size)
+                gameScene.scaleMode = .aspectFill
+                let level = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
+                let subLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
+                gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
+                self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
             }
         }
         else if self.status == .GameOver {
-            if buttonRetry.contains(touch.location(in: self)) {
-                buttonRetry.texture = SKTexture(imageNamed: "Button_Retry")
+            if firstButton.contains(touch.location(in: self)) {
+                let gameScene = GameScene(size: self.frame.size)
+                gameScene.scaleMode = .aspectFill
+                gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
+                self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
             }
-            else if buttonMenu.contains(touch.location(in: self)) {
-                buttonMenu.texture = SKTexture(imageNamed: "Button_Menu")
-            }
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        
-        if self.status == .Menu {
-            if buttonLevels.contains(touch.location(in: self)) {
-                buttonLevels.texture = SKTexture(imageNamed: "Button_Levels")
-            }
-            else if buttonPlay.contains(touch.location(in: self)) {
-                buttonPlay.texture = SKTexture(imageNamed: "Button_Play")
-            }
-        }
-        else if self.status == .GameOver {
-            if buttonRetry.contains(touch.location(in: self)) {
-                buttonRetry.texture = SKTexture(imageNamed: "Button_Retry")
-                if let scene = SKScene(fileNamed: "GameScene") {
-                    scene.scaleMode = .aspectFill
-                    
-                    let gameScene = scene as! GameScene
-                    gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
-                    
-                    self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                }
-            }
-            else if buttonMenu.contains(touch.location(in: self)) {
-                buttonMenu.texture = SKTexture(imageNamed: "Button_Menu")
-                if let scene = SKScene(fileNamed: "MainScene") {
-                    scene.scaleMode = .aspectFill
-                    let mainScene = scene as! MainScene
-                    mainScene.createMenuScene()
-                    self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                }
+            else if secondButton.contains(touch.location(in: self)) {
+                let mainScene = MainScene(size: self.frame.size)
+                mainScene.scaleMode = .aspectFill
+                mainScene.createMenuScene()
+                self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
             }
         }
     }
     
     override func shake() {
         if status == Status.Menu {
-            if let scene = SKScene(fileNamed: "CreditsScene") {
-                scene.scaleMode = .aspectFill
-                self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-            }
+            let creditsScene = CreditsScene(size: self.frame.size)
+            creditsScene.scaleMode = .aspectFill
+            self.view?.presentScene(creditsScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
         }
     }
     

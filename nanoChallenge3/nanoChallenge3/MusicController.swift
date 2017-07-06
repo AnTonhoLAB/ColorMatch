@@ -12,13 +12,10 @@ public class MusicController{
     
     public var backgroundMusic : AVAudioPlayer!
     var atualMusic : String!
-  
     
     public class func sharedInstance() -> MusicController {
         return MusicControllerInstance
     }
-    
-    
     
     func backGroundMusic(music : String, type : String){
       
@@ -41,9 +38,7 @@ public class MusicController{
             atualMusic = music
         }
         
-        
     }
     
-
 }
 private let MusicControllerInstance = MusicController()

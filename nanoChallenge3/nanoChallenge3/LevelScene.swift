@@ -18,7 +18,7 @@ enum StatusTouch {
 }
 
 class LevelScene: SKScene {
-    let spacing = CGFloat(25)
+    let spacing = CGFloat(15)
     var sizeButton = CGFloat(0)
     
     var currentPage = 1
@@ -36,28 +36,44 @@ class LevelScene: SKScene {
     var lastTouchX: CGFloat!
     var differenceBetweenFirstAndLastX = CGFloat(60)
     
+    var blocksDistance = CGFloat(20)
+    
     var paging = false
-    var         startPaging: TimeInterval!
+    var startPaging: TimeInterval!
     var timeToPaging = 0.5
     
     
     var statusTouch = StatusTouch.Neutral
     
     override func didMove(to view: SKView) {
-        
+        self.backgroundColor = UIColor.white
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         lastUnlockedLevel = UserDefaultsManager.getCurrentUserInfo(info: .CurrentLevel)
         lastUnlockedSublevel = UserDefaultsManager.getCurrentUserInfo(info: .CurrentSubLevel)
         
         let levelsTitle = SKSpriteNode(imageNamed: "Levels")
-        levelsTitle.xScale = 2
-        levelsTitle.yScale = 2
-        levelsTitle.position = CGPoint(x: 0, y: (self.view?.frame.size.height)!/2 + levelsTitle.size.height/2)
+        
+        buttonBack = SKSpriteNode(imageNamed: "Back")
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            levelsTitle.xScale = 2
+            levelsTitle.yScale = 2
+            
+            blocksDistance = 60
+        }
+        else{
+            buttonBack.xScale = 0.5
+            buttonBack.yScale = 0.5
+        }
+        levelsTitle.position = CGPoint(x: 0, y: (self.view?.frame.size.height)!/4 + levelsTitle.size.height)
         levelsTitle.zPosition = 100
         addChild(levelsTitle)
         
+        buttonBack.position = CGPoint(x: -(view.frame.size.width)/2+buttonBack.size.width/2+25, y: (view.frame.size.height)/2-buttonBack.size.height/2-25)
+        addChild(buttonBack)
+        
         let numberOfLevels = World.numberOfLevels()
         numberOfPages = numberOfLevels%4==0 ? numberOfLevels/4 : numberOfLevels/4+1
-        
         
         var texture = World.getLevel(level: 1)?.getSubLevel(subLevel: 1)?.getUnlockedTextureWith(scene: self)
         var buttonLevel = SKSpriteNode(texture: texture)
@@ -94,17 +110,12 @@ class LevelScene: SKScene {
                 currentX = initialX
                 currentY = currentY - (spacing + sizeButton)
             }
-            initialX = initialX + 3*sizeButton + spacing*3 + 30//initialX + (self.view?.frame.size.width)!*2
+            initialX = initialX + 3*sizeButton + spacing*3 + blocksDistance
             currentX = initialX
             currentY = initialY
         }
         
-        Background.movePointsIn(scene: self)
-        
-        buttonBack = SKSpriteNode(imageNamed: "Back")
-        buttonBack.position = CGPoint(x: -(view.frame.size.width)+buttonBack.size.width/2+25, y: (view.frame.size.height)-buttonBack.size.height-25)
-        addChild(buttonBack)
-        
+        Background.applyIn(scene: self)
         
     }
     
@@ -113,14 +124,11 @@ class LevelScene: SKScene {
         self.firstTouchX = touch.location(in: self).x
         self.lastTouchX = touch.location(in: self).x
         
-        
         if buttonBack.contains(touch.location(in: self)) {
-            if let scene = SKScene(fileNamed: "MainScene") {
-                scene.scaleMode = .aspectFill
-                let mainScene = scene as! MainScene
-                mainScene.createMenuScene()
-                self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-            }
+            let mainScene = MainScene(size: self.frame.size)
+            mainScene.scaleMode = .aspectFill
+            mainScene.createMenuScene()
+            self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
         }
         
     }
@@ -130,22 +138,16 @@ class LevelScene: SKScene {
         for button in self.buttons{
             if button.contains(touch.location(in: self)) {
                 if !button.attributeValues.keys.contains("locked"){
-                    if let scene = SKScene(fileNamed: "GameScene") {
-                        let level = Int((button.attributeValues.removeValue(forKey: "level")?.floatValue)!)
-                        let subLevel = Int((button.attributeValues.removeValue(forKey: "subLevel")?.floatValue)!)
-                        
-                        scene.scaleMode = .aspectFill
-                        let gameScene = scene as! GameScene
-                        
-                        gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
-                        self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-                    }
+                    let gameScene = GameScene(size: self.frame.size)
+                    let level = Int((button.attributeValues.removeValue(forKey: "level")?.floatValue)!)
+                    let subLevel = Int((button.attributeValues.removeValue(forKey: "subLevel")?.floatValue)!)
+                    gameScene.scaleMode = .aspectFill
+                    gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
+                    self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
                 }
             }
         }
     }
-    
-    
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
@@ -193,7 +195,7 @@ class LevelScene: SKScene {
                         paging = true
                         self.currentPage -= 1
                         for button in buttons{
-                            newPoint = CGPoint(x: button.position.x+(3*sizeButton + spacing*3 + 30), y: button.position.y)
+                            newPoint = CGPoint(x: button.position.x+(3*sizeButton + spacing*3 + blocksDistance), y: button.position.y)
                             move = SKAction.move(to: newPoint, duration: timeToPaging)
                             button.run(move)
                         }
@@ -204,7 +206,7 @@ class LevelScene: SKScene {
                         paging = true
                         self.currentPage += 1
                         for button in buttons{
-                            newPoint = CGPoint(x: button.position.x-(3*sizeButton + spacing*3 + 30), y: button.position.y)
+                            newPoint = CGPoint(x: button.position.x-(3*sizeButton + spacing*3 + blocksDistance), y: button.position.y)
                             move = SKAction.move(to: newPoint, duration: timeToPaging)
                             button.run(move)
                         }
@@ -217,8 +219,6 @@ class LevelScene: SKScene {
         }
         self.statusTouch = .Neutral
     }
-    
-    
     
     override func update(_ currentTime: TimeInterval) {
         if paging {

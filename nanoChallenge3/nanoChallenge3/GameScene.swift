@@ -20,11 +20,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var touched = false
     
     override func didMove(to view: SKView) {
+        self.backgroundColor = UIColor.white
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         setNextSubLevelAcordingToParameters(level: self.level, subLevel: self.subLevel)
         
         setTopAndDownLayoutForGameScene(level: level)
         
-        Background.movePointsIn(scene: self)
+        Background.applyIn(scene: self)
         self.physicsWorld.contactDelegate = self
     }
     
@@ -79,42 +81,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func goToGameOverScene(){
-        if let scene = SKScene(fileNamed: "MainScene") {
-            scene.scaleMode = .aspectFill
-            let mainScene = scene as! MainScene
-            mainScene.createGameOverScene(level: level, subLevel: subLevel)
-            self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-        }
+        let mainScene = MainScene(size: self.frame.size)
+        mainScene.scaleMode = .aspectFill
+        mainScene.createGameOverScene(level: level, subLevel: subLevel)
+        self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
     }
     
     func goToLevelUpScene(){
-        if let scene = SKScene(fileNamed: "LevelUpScene") {
-            scene.scaleMode = .aspectFill
-            let levelUpScene = scene as! LevelUpScene
-            levelUpScene.setLevel(level: level)
-            self.view?.presentScene(levelUpScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-        }
+        let levelUpScene = LevelUpScene(size: self.frame.size)
+        levelUpScene.scaleMode = .aspectFill
+        levelUpScene.setLevel(level: level)
+        self.view?.presentScene(levelUpScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        
     }
     
     func goToNextLevelOrSubLevel(){
-        if let scene = SKScene(fileNamed: "GameScene") {
-            scene.scaleMode = .aspectFill
-            let gameScene = scene as! GameScene
-            if self.subLevel == World.getLevel(level: level)?.numberOfSubLevels(){
-                gameScene.setLevelAndSubLevel(level: level+1, subLevel: 1)
-            }
-            else{
-                gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel+1)
-            }
-            self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        let gameScene = GameScene(size: self.frame.size)
+        gameScene.scaleMode = .aspectFill
+        if self.subLevel == World.getLevel(level: level)?.numberOfSubLevels(){
+            gameScene.setLevelAndSubLevel(level: level+1, subLevel: 1)
         }
+        else{
+            gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel+1)
+        }
+        self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
     }
     
     func goToLevelScene(){
-        if let scene = SKScene(fileNamed: "LevelScene") {
-            scene.scaleMode = .aspectFill
-            self.view?.presentScene(scene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
-        }
+        let levelScene = LevelScene(size: self.frame.size)
+        levelScene.scaleMode = .aspectFill
+        self.view?.presentScene(levelScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -137,15 +133,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func setTopAndDownLayoutForGameScene(level:Int){
+        let color = ((level%4)-1 == -1 ? 3 : (level%4)-1)+1
         
-        let music = ((level%4)-1 == -1 ? 3 : (level%4)-1)+1
+        MusicController.sharedInstance().backGroundMusic(music: "song\(color)", type: "mp3")
         
-        MusicController.sharedInstance().backGroundMusic(music: "song\(music)", type: "mp3")
-        let topLayout = self.childNode(withName: "TopShape") as! SKSpriteNode
-        let downLayout = self.childNode(withName: "DownShape") as! SKSpriteNode
-        topLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(((level%4)-1 == -1 ? 3 : (level%4)-1)+1)_Top")))
-        downLayout.run(SKAction.setTexture(SKTexture(imageNamed: "Level_\(((level%4)-1 == -1 ? 3 : (level%4)-1)+1)_Down")))
+        let topLayout = SKSpriteNode(imageNamed: "Level_\(color)_Top")
+        let downLayout = SKSpriteNode(imageNamed: "Level_\(color)_Down")
         
+        let scaleLayout = self.frame.size.width/topLayout.size.width
+        
+        topLayout.xScale = scaleLayout
+        topLayout.yScale = scaleLayout
+        
+        downLayout.xScale = scaleLayout
+        downLayout.yScale = scaleLayout
+        
+        topLayout.position = CGPoint(x: 0, y: self.frame.size.height/2 - topLayout.size.height/2)
+        downLayout.position = CGPoint(x: 0, y: -(self.frame.size.height/2) + downLayout.size.height/2)
+        
+        addChild(topLayout)
+        addChild(downLayout)
     }
     
     func setNextSubLevelAcordingToParameters(level:Int, subLevel:Int){

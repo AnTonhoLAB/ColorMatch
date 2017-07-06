@@ -13,18 +13,15 @@
 		6B089A471F0AE3DC009E7C77 /* song4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6B089A431F0AE3DC009E7C77 /* song4.mp3 */; };
 		6B089A491F0AE488009E7C77 /* MusicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B089A481F0AE488009E7C77 /* MusicController.swift */; };
 		6BAED4A41EFC5AC600E10034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */; };
-		6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A51EFC5AC600E10034 /* GameScene.sks */; };
+		6BAED4A61EFC5AC600E10034 /* BackgroundScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A51EFC5AC600E10034 /* BackgroundScene.sks */; };
 		6BAED4A81EFC5AC600E10034 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4A71EFC5AC600E10034 /* Actions.sks */; };
 		6BAED4AA1EFC5AC600E10034 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAED4A91EFC5AC600E10034 /* GameScene.swift */; };
 		6BAED4AC1EFC5AC600E10034 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAED4AB1EFC5AC600E10034 /* GameViewController.swift */; };
 		6BAED4AF1EFC5AC600E10034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4AD1EFC5AC600E10034 /* Main.storyboard */; };
 		6BAED4B11EFC5AC600E10034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4B01EFC5AC600E10034 /* Assets.xcassets */; };
 		6BAED4B41EFC5AC600E10034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BAED4B21EFC5AC600E10034 /* LaunchScreen.storyboard */; };
-		8DB153B81F01855F00920BB6 /* LevelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8DB153B71F01855F00920BB6 /* LevelScene.sks */; };
 		8DB153BA1F01859400920BB6 /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB153B91F01859400920BB6 /* LevelScene.swift */; };
-		9164F1DE1F02AFDA00958747 /* LevelUpScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9164F1DD1F02AFDA00958747 /* LevelUpScene.sks */; };
 		9164F1E01F02AFFD00958747 /* LevelUpScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164F1DF1F02AFFD00958747 /* LevelUpScene.swift */; };
-		9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9166F8C11EFD86A90071E84A /* MainScene.sks */; };
 		9166F8C41EFD86CE0071E84A /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166F8C31EFD86CE0071E84A /* MainScene.swift */; };
 		916E57771F0AB4010035C28D /* back.wav in Resources */ = {isa = PBXBuildFile; fileRef = 916E57761F0AB4010035C28D /* back.wav */; };
 		916E63B01F06EDB40033168C /* QanelasSoftDEMO-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 916E63AF1F06EBE30033168C /* QanelasSoftDEMO-ExtraBold.otf */; };
@@ -38,7 +35,6 @@
 		91B2C4A11F05CA9A00920E24 /* World.json in Resources */ = {isa = PBXBuildFile; fileRef = 91B2C49A1F05CA9A00920E24 /* World.json */; };
 		91B2C4A21F05CA9A00920E24 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2C49B1F05CA9A00920E24 /* World.swift */; };
 		91E5E1251F0351130017484B /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E5E1241F0351130017484B /* CGFloatExtension.swift */; };
-		91EB65321F01CB3C001A2BDD /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 91EB65311F01CB3C001A2BDD /* CreditsScene.sks */; };
 		91EB65341F01CB56001A2BDD /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EB65331F01CB56001A2BDD /* CreditsScene.swift */; };
 		ED0A2DDC1F01D8F60058E8D3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
@@ -51,7 +47,7 @@
 		6B089A481F0AE488009E7C77 /* MusicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicController.swift; sourceTree = "<group>"; };
 		6BAED4A01EFC5AC600E10034 /* nanoChallenge3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nanoChallenge3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6BAED4A51EFC5AC600E10034 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		6BAED4A51EFC5AC600E10034 /* BackgroundScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BackgroundScene.sks; sourceTree = "<group>"; };
 		6BAED4A71EFC5AC600E10034 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		6BAED4A91EFC5AC600E10034 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		6BAED4AB1EFC5AC600E10034 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -59,11 +55,8 @@
 		6BAED4B01EFC5AC600E10034 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6BAED4B31EFC5AC600E10034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BAED4B51EFC5AC600E10034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DB153B71F01855F00920BB6 /* LevelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelScene.sks; sourceTree = "<group>"; };
 		8DB153B91F01859400920BB6 /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
-		9164F1DD1F02AFDA00958747 /* LevelUpScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelUpScene.sks; sourceTree = "<group>"; };
 		9164F1DF1F02AFFD00958747 /* LevelUpScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelUpScene.swift; sourceTree = "<group>"; };
-		9166F8C11EFD86A90071E84A /* MainScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainScene.sks; sourceTree = "<group>"; };
 		9166F8C31EFD86CE0071E84A /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		916E57761F0AB4010035C28D /* back.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = back.wav; sourceTree = "<group>"; };
 		916E63AF1F06EBE30033168C /* QanelasSoftDEMO-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QanelasSoftDEMO-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -77,7 +70,6 @@
 		91B2C49A1F05CA9A00920E24 /* World.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = World.json; sourceTree = "<group>"; };
 		91B2C49B1F05CA9A00920E24 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		91E5E1241F0351130017484B /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
-		91EB65311F01CB3C001A2BDD /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 		91EB65331F01CB56001A2BDD /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +119,6 @@
 				6B089A3F1F0AE3A1009E7C77 /* Songs */,
 				6BAED4A71EFC5AC600E10034 /* Actions.sks */,
 				6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */,
-				91EB65311F01CB3C001A2BDD /* CreditsScene.sks */,
 				91B2C4951F05CA9A00920E24 /* GamePreferences.swift */,
 				91B2C4961F05CA9A00920E24 /* Level.swift */,
 				91B2C4971F05CA9A00920E24 /* ShapeArc.swift */,
@@ -136,13 +127,10 @@
 				91B2C49A1F05CA9A00920E24 /* World.json */,
 				91B2C49B1F05CA9A00920E24 /* World.swift */,
 				91EB65331F01CB56001A2BDD /* CreditsScene.swift */,
-				6BAED4A51EFC5AC600E10034 /* GameScene.sks */,
+				6BAED4A51EFC5AC600E10034 /* BackgroundScene.sks */,
 				6BAED4A91EFC5AC600E10034 /* GameScene.swift */,
-				8DB153B71F01855F00920BB6 /* LevelScene.sks */,
 				8DB153B91F01859400920BB6 /* LevelScene.swift */,
-				9164F1DD1F02AFDA00958747 /* LevelUpScene.sks */,
 				9164F1DF1F02AFFD00958747 /* LevelUpScene.swift */,
-				9166F8C11EFD86A90071E84A /* MainScene.sks */,
 				9166F8C31EFD86CE0071E84A /* MainScene.swift */,
 				ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */,
 				6B089A481F0AE488009E7C77 /* MusicController.swift */,
@@ -219,16 +207,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				916E63B01F06EDB40033168C /* QanelasSoftDEMO-ExtraBold.otf in Resources */,
-				91EB65321F01CB3C001A2BDD /* CreditsScene.sks in Resources */,
 				6B089A471F0AE3DC009E7C77 /* song4.mp3 in Resources */,
 				6BAED4AF1EFC5AC600E10034 /* Main.storyboard in Resources */,
-				6BAED4A61EFC5AC600E10034 /* GameScene.sks in Resources */,
+				6BAED4A61EFC5AC600E10034 /* BackgroundScene.sks in Resources */,
 				6B089A451F0AE3DC009E7C77 /* song2.mp3 in Resources */,
-				8DB153B81F01855F00920BB6 /* LevelScene.sks in Resources */,
 				6BAED4B11EFC5AC600E10034 /* Assets.xcassets in Resources */,
 				6B089A461F0AE3DC009E7C77 /* song3.mp3 in Resources */,
-				9166F8C21EFD86A90071E84A /* MainScene.sks in Resources */,
-				9164F1DE1F02AFDA00958747 /* LevelUpScene.sks in Resources */,
 				91B2C4A11F05CA9A00920E24 /* World.json in Resources */,
 				6B089A441F0AE3DC009E7C77 /* song1.mp3 in Resources */,
 				916E57771F0AB4010035C28D /* back.wav in Resources */,
@@ -391,7 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.colormatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -406,7 +390,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.colormatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
