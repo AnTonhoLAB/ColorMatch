@@ -1,5 +1,5 @@
 //
-//  ShapeLevel1.swift
+//  ShapeArc.swift
 //  nanoChallenge3
 //
 //  Created by Eduardo Fornari on 27/06/17.
@@ -31,8 +31,8 @@ class ShapeArc: SKShapeNode{
                 path.addArc(center: CGPoint(x: 0, y: 0), radius: radius2, startAngle: endAngle, endAngle: startAngle, clockwise: false)
                 
                 let arc = SKShapeNode(path: path)
-                arc.fillColor = GamePreferences.colors[colorsInt[index]]
-                arc.strokeColor = GamePreferences.colors[colorsInt[index]]
+                arc.fillColor = Preferences.colors[colorsInt[index]]
+                arc.strokeColor = Preferences.colors[colorsInt[index]]
                 arc.lineWidth = 1
                 arc.physicsBody = SKPhysicsBody(polygonFrom: path)
                 arc.physicsBody?.affectedByGravity = false

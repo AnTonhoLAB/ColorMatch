@@ -1,5 +1,5 @@
 //
-//  StartScene.swift
+//  MainScene.swift
 //  nanoChallenge3
 //
 //  Created by Eduardo Fornari on 23/06/17.
@@ -137,9 +137,9 @@ class MainScene: SKScene {
         
         if self.status == .Menu {
             if secondButton.contains(touch.location(in: self)) {
-                let levelScene = LevelScene(size: self.frame.size)
+                let levelScene = LevelsScene(size: self.frame.size)
                 levelScene.scaleMode = .aspectFill
-                self.view?.presentScene(levelScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                self.view?.presentScene(levelScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
             }
             else if firstButton.contains(touch.location(in: self)) {
                 let gameScene = GameScene(size: self.frame.size)
@@ -147,7 +147,7 @@ class MainScene: SKScene {
                 let level = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
                 let subLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
                 gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
-                self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
             }
         }
         else if self.status == .GameOver {
@@ -155,13 +155,13 @@ class MainScene: SKScene {
                 let gameScene = GameScene(size: self.frame.size)
                 gameScene.scaleMode = .aspectFill
                 gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel)
-                self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
             }
             else if secondButton.contains(touch.location(in: self)) {
                 let mainScene = MainScene(size: self.frame.size)
                 mainScene.scaleMode = .aspectFill
                 mainScene.createMenuScene()
-                self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+                self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
             }
         }
     }
@@ -170,7 +170,7 @@ class MainScene: SKScene {
         if status == Status.Menu {
             let creditsScene = CreditsScene(size: self.frame.size)
             creditsScene.scaleMode = .aspectFill
-            self.view?.presentScene(creditsScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+            self.view?.presentScene(creditsScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
         }
     }
     

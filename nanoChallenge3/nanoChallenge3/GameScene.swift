@@ -22,9 +22,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         self.backgroundColor = UIColor.white
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        setNextSubLevelAcordingToParameters(level: self.level, subLevel: self.subLevel)
+        setSubLevelAcordingToParameters(level: self.level, subLevel: self.subLevel)
         
-        setTopAndDownLayoutForGameScene(level: level)
+        setTopLayoutDownLayoutAndMusic(withLevel: level)
         
         Background.applyIn(scene: self)
         self.physicsWorld.contactDelegate = self
@@ -84,14 +84,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let mainScene = MainScene(size: self.frame.size)
         mainScene.scaleMode = .aspectFill
         mainScene.createGameOverScene(level: level, subLevel: subLevel)
-        self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
     }
     
     func goToLevelUpScene(){
         let levelUpScene = LevelUpScene(size: self.frame.size)
         levelUpScene.scaleMode = .aspectFill
         levelUpScene.setLevel(level: level)
-        self.view?.presentScene(levelUpScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        self.view?.presentScene(levelUpScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
         
     }
     
@@ -104,13 +104,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else{
             gameScene.setLevelAndSubLevel(level: level, subLevel: subLevel+1)
         }
-        self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
     }
     
     func goToLevelScene(){
-        let levelScene = LevelScene(size: self.frame.size)
+        let levelScene = LevelsScene(size: self.frame.size)
         levelScene.scaleMode = .aspectFill
-        self.view?.presentScene(levelScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        self.view?.presentScene(levelScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -132,7 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    func setTopAndDownLayoutForGameScene(level:Int){
+    func setTopLayoutDownLayoutAndMusic(withLevel level:Int){
         let color = ((level%4)-1 == -1 ? 3 : (level%4)-1)+1
         
         MusicController.sharedInstance().backGroundMusic(music: "song\(color)", type: "mp3")
@@ -155,7 +155,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(downLayout)
     }
     
-    func setNextSubLevelAcordingToParameters(level:Int, subLevel:Int){
+    func setSubLevelAcordingToParameters(level:Int, subLevel:Int){
         let subLevel = World.getLevel(level: level)?.getSubLevel(subLevel: subLevel)
         shapeNoodesMainCircle = (subLevel?.applySubLevelInScene(scene: self))!
     }

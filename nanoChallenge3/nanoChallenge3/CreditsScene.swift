@@ -1,5 +1,5 @@
 //
-//  Credits.swift
+//  CreditsScene.swift
 //  nanoChallenge3
 //
 //  Created by Eduardo Fornari on 26/06/17.
@@ -103,6 +103,6 @@ class CreditsScene: SKScene {
         let mainScene = MainScene(size: self.frame.size)
         mainScene.scaleMode = .aspectFill
         mainScene.createMenuScene()
-        self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+        self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
     }
 }

@@ -84,7 +84,7 @@ class LevelUpScene: SKScene {
             gameScene.scaleMode = .aspectFill
             gameScene.setLevelAndSubLevel(level: level+1, subLevel: 1)
             
-            self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: 1))
+            self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
         }
     }
     

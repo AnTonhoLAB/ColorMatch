@@ -1,5 +1,5 @@
 //
-//  SubShapes.swift
+//  SubShape.swift
 //  nanoChallenge3
 //
 //  Created by Eduardo Fornari on 22/06/17.
@@ -75,7 +75,13 @@ class SubShape: SKShapeNode{
         circle.name = "circle"
         self.addChild(circle)
         
-        let move = SKAction.applyImpulse(CGVector.init(dx: 15 * getPoint().x, dy: 15 * getPoint().y), duration: 1)
+        var ballSpeed = CGFloat(1.5)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            ballSpeed = CGFloat(5)
+        }
+        
+        let move = SKAction.applyImpulse(CGVector.init(dx: ballSpeed * getPoint().x, dy: ballSpeed * getPoint().y), duration: Preferences.durationTransitions)
         
         circle.run(move)
         return circle
