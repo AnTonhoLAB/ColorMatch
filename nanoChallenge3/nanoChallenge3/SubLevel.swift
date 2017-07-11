@@ -31,17 +31,10 @@ public class SubLevel {
         
         for block in subLevelJson{
             let blockSpeed = block["speed"] as! Double
-            let blockColorsNSArray = block["colors"] as? NSArray
             
-            var blockColorsInt = [Int]()
+            let blockColorsInt = block["colors"] as? [Int]
             
-            for color in blockColorsNSArray! {
-                if let colorTemp = color as? [String: Int] {
-                    let colorInt = colorTemp["color"]!
-                    blockColorsInt.append(colorInt)
-                }
-            }
-            blocks.append(Block(speed: blockSpeed, colorsInt: blockColorsInt))
+            blocks.append(Block(speed: blockSpeed, colorsInt: blockColorsInt!))
         }
         self.blocks = blocks
     }

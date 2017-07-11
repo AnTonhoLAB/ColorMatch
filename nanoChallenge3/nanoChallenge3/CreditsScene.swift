@@ -22,7 +22,7 @@ class CreditsScene: SKScene {
         self.backgroundColor = UIColor.white
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        let levelsTitle = SKSpriteNode(imageNamed: "Credits")
+        let creditsTitle = SKSpriteNode(imageNamed: "Credits")
         let buttonDouglas = SKSpriteNode(imageNamed: "Button_Douglas")
         let buttonEduardo = SKSpriteNode(imageNamed: "Button_Eduardo")
         let buttonGeorge = SKSpriteNode(imageNamed: "Button_George")
@@ -30,8 +30,8 @@ class CreditsScene: SKScene {
         let buttonJuliana = SKSpriteNode(imageNamed: "Button_Juliana")
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            levelsTitle.xScale = 2
-            levelsTitle.yScale = 2
+            creditsTitle.xScale = 2
+            creditsTitle.yScale = 2
             
             buttonDouglas.xScale = 2
             buttonDouglas.yScale = 2
@@ -51,25 +51,26 @@ class CreditsScene: SKScene {
         
         heightButtons = buttonDouglas.size.height
         
-        let levelsTitlePositionY = (levelsTitle.size.height + (5*heightButtons) + (4*distanceButtons))/2
+        var levelsTitlePositionY = (creditsTitle.size.height + (5 * heightButtons) + (4 * distanceButtons))
+        levelsTitlePositionY = levelsTitlePositionY/2
         
-        levelsTitle.position = CGPoint(x: 0, y: levelsTitlePositionY)
+        creditsTitle.position = CGPoint(x: 0, y: levelsTitlePositionY)
         
-        buttonDouglas.position = CGPoint(x: 0, y: levelsTitle.position.y - levelsTitle.size.height/2 - heightButtons - heightButtons/2)
+        buttonDouglas.position = CGPoint(x: 0, y: creditsTitle.position.y - creditsTitle.size.height/2 - heightButtons - heightButtons/2)
         
         buttonEduardo.position = CGPoint(x: 0, y: buttonDouglas.position.y - CGFloat(distanceButtons) - heightButtons)
         buttonGeorge.position = CGPoint(x: 0, y: buttonEduardo.position.y - CGFloat(distanceButtons) - heightButtons)
         buttonLaura.position = CGPoint(x: 0, y: buttonGeorge.position.y - CGFloat(distanceButtons) - heightButtons)
         buttonJuliana.position = CGPoint(x: 0, y: buttonLaura.position.y - CGFloat(distanceButtons) - heightButtons)
         
-        levelsTitle.zPosition = 100
+        creditsTitle.zPosition = 100
         buttonDouglas.zPosition = 100
         buttonEduardo.zPosition = 100
         buttonGeorge.zPosition = 100
         buttonLaura.zPosition = 100
         buttonJuliana.zPosition = 100
         
-        addChild(levelsTitle)
+        addChild(creditsTitle)
         addChild(buttonDouglas)
         addChild(buttonEduardo)
         addChild(buttonGeorge)
