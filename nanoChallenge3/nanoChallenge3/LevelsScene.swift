@@ -10,13 +10,6 @@
 import SpriteKit
 import GameplayKit
 
-enum StatusTouch {
-    case Neutral
-    case Left
-    case Right
-    case DontMove
-}
-
 class LevelsScene: SKScene {
     let spacing = CGFloat(15)
     var sizeButton = CGFloat(0)
@@ -32,18 +25,11 @@ class LevelsScene: SKScene {
     var lastUnlockedLevel: Int!
     var lastUnlockedSublevel: Int!
     
-    var firstTouchX: CGFloat!
-    var lastTouchX: CGFloat!
-    var differenceBetweenFirstAndLastX = CGFloat(60)
-    
     var blocksDistance = CGFloat(20)
     
     var paging = false
     var startPaging: TimeInterval!
-    var timeToPaging = 0.5
-    
-    
-    var statusTouch = StatusTouch.Neutral
+    var timeToPaging = 0.3
     
     override func didMove(to view: SKView) {
         self.backgroundColor = UIColor.white
@@ -123,26 +109,82 @@ class LevelsScene: SKScene {
         
         Background.applyIn(scene: self)
         
+        createGestureRecognizer()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        self.firstTouchX = touch.location(in: self).x
-        self.lastTouchX = touch.location(in: self).x
+    override func willMove(from view: SKView) {
+        super.willMove(from: view)
+        self.removeGestureRecognizers()
+    }
+    
+    func createGestureRecognizer() {
+        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.handleAction(with:)))
+        rightGesture.direction = .right
+        let leftGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.handleAction(with:)))
+        leftGesture.direction = .left
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(with:)))
         
-        if buttonBack.contains(touch.location(in: self)) {
+        self.view?.addGestureRecognizer(rightGesture)
+        self.view?.addGestureRecognizer(leftGesture)
+        self.view?.addGestureRecognizer(tapRecognizer)
+    }
+    
+    func removeGestureRecognizers() {
+        for gesture in self.view?.gestureRecognizers ?? [] {
+            self.view?.removeGestureRecognizer(gesture)
+        }
+    }
+    
+    func handleAction(with recognizer: UISwipeGestureRecognizer) {
+        if !paging {
+            var newPoint: CGPoint!
+            var move: SKAction!
+            switch recognizer.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                if currentPage > 1 {
+                    paging = true
+                    self.currentPage -= 1
+                    for button in buttons {
+                        newPoint = CGPoint(x: button.position.x+(3*sizeButton + spacing*3 + blocksDistance), y: button.position.y)
+                        move = SKAction.move(to: newPoint, duration: timeToPaging)
+                        button.run(move)
+                    }
+                }
+                break
+            case UISwipeGestureRecognizerDirection.left:
+                if currentPage < numberOfPages {
+                    paging = true
+                    self.currentPage += 1
+                    for button in buttons {
+                        newPoint = CGPoint(x: button.position.x-(3*sizeButton + spacing*3 + blocksDistance), y: button.position.y)
+                        move = SKAction.move(to: newPoint, duration: timeToPaging)
+                        button.run(move)
+                    }
+                }
+                break
+            default:
+                print("case not handled")
+            }
+        }
+    }
+    
+    func handleTap(with recognizer: UITapGestureRecognizer) {
+        let location = convertPoint(fromView: recognizer.location(in: recognizer.view))
+        
+        if buttonBack.contains(location) {
             let mainScene = MainScene(size: self.frame.size)
             mainScene.scaleMode = .aspectFill
             mainScene.createMenuScene()
             self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
         }
-        
+        else{
+            verifyButtonTouched(with: location)
+        }
     }
     
-    func verifyButtonTouched(touches: Set<UITouch>){
-        let touch = touches.first!
+    func verifyButtonTouched(with location: CGPoint){
         for button in self.buttons{
-            if button.contains(touch.location(in: self)) {
+            if button.contains(location) {
                 if !button.attributeValues.keys.contains("locked"){
                     let gameScene = GameScene(size: self.frame.size)
                     let level = Int((button.attributeValues.removeValue(forKey: "level")?.floatValue)!)
@@ -153,77 +195,6 @@ class LevelsScene: SKScene {
                 }
             }
         }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches{
-            if self.statusTouch == .Neutral{
-                self.lastTouchX = touch.location(in: self).x
-                if self.firstTouchX < self.lastTouchX{
-                    self.statusTouch = .Right
-                }
-                else{
-                    self.statusTouch = .Left
-                }
-            }
-            else{
-                if statusTouch == .Right{
-                    if self.lastTouchX > touch.location(in: self).x{
-                        self.statusTouch = .DontMove
-                    }
-                    else{
-                        self.lastTouchX  = touch.location(in: self).x
-                    }
-                }
-                else{
-                    if self.lastTouchX < touch.location(in: self).x{
-                        self.statusTouch = .DontMove
-                    }
-                    else{
-                        self.lastTouchX  = touch.location(in: self).x
-                    }
-                }
-            }
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !paging && self.statusTouch != .DontMove{
-            if abs(self.lastTouchX - self.firstTouchX)>differenceBetweenFirstAndLastX{
-                let touch = touches.first!
-                self.lastTouchX = touch.location(in: self).x
-                
-                var newPoint: CGPoint!
-                var move: SKAction!
-                
-                if self.statusTouch == .Right{
-                    if self.currentPage > 1{
-                        paging = true
-                        self.currentPage -= 1
-                        for button in buttons{
-                            newPoint = CGPoint(x: button.position.x+(3*sizeButton + spacing*3 + blocksDistance), y: button.position.y)
-                            move = SKAction.move(to: newPoint, duration: timeToPaging)
-                            button.run(move)
-                        }
-                    }
-                }
-                else{
-                    if self.currentPage < self.numberOfPages{
-                        paging = true
-                        self.currentPage += 1
-                        for button in buttons{
-                            newPoint = CGPoint(x: button.position.x-(3*sizeButton + spacing*3 + blocksDistance), y: button.position.y)
-                            move = SKAction.move(to: newPoint, duration: timeToPaging)
-                            button.run(move)
-                        }
-                    }
-                }
-            }
-            else{
-                verifyButtonTouched(touches: touches)
-            }
-        }
-        self.statusTouch = .Neutral
     }
     
     override func update(_ currentTime: TimeInterval) {
