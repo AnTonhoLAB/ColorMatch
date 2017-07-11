@@ -109,6 +109,16 @@ class LevelsScene: SKScene {
         
         Background.applyIn(scene: self)
         
+        currentPage = lastUnlockedLevel%4 == 0 ? (lastUnlockedLevel/4) : (lastUnlockedLevel/4 + 1)
+        
+        var newPoint: CGPoint!
+        for button in buttons {
+            var move = 3*sizeButton + spacing*3 + blocksDistance
+            move *= CGFloat(currentPage-1)
+            newPoint = CGPoint(x: button.position.x-(move), y: button.position.y)
+            button.position = newPoint
+        }
+        
         createGestureRecognizer()
     }
     
