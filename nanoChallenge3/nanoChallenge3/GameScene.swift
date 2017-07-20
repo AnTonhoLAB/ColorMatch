@@ -60,14 +60,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if circles.count > 0 && matches == circles.count{
             let currentLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
-            let currentSubLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
             
-            if self.level == currentLevel && self.subLevel == currentSubLevel{
-                UserDefaultsManager.updateLevelAndSubLevel()
-                if level < World.numberOfLevels() && subLevel == World.getLevel(level: level)?.numberOfSubLevels(){
+            if self.level == currentLevel && self.subLevel == 3{
+                
+                let numberOfLevels = World.numberOfLevels()
+                let numberOfSubLevelsInLevel = World.getLevel(level: level)?.numberOfSubLevels()
+                
+                if level < numberOfLevels && subLevel == numberOfSubLevelsInLevel{
+                    UserDefaultsManager.updateUserInfo(with: level+1, and: 1)
                     goToLevelUpScene()
                 }
-                else if level == World.numberOfLevels() && subLevel == World.getLevel(level: level)?.numberOfSubLevels(){
+                else if level == numberOfLevels && subLevel == numberOfSubLevelsInLevel{
+                    UserDefaultsManager.updateUserInfo(with: level, and: numberOfSubLevelsInLevel!)
                     goToLevelScene()
                 }
                 else{
@@ -83,7 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func goToGameOverScene(){
         let mainScene = MainScene(size: self.frame.size)
         mainScene.scaleMode = .aspectFill
-        mainScene.createGameOverScene(level: level, subLevel: subLevel)
+        mainScene.createGameOverScene(level: level, subLevel: 1)
         self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
     }
     

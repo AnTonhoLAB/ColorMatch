@@ -16,19 +16,8 @@ enum DefaultsOption {
 
 class UserDefaultsManager {
     
-    static func updateLevelAndSubLevel(){
-        let currentLevel = getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
-        let currentSubLevel = getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
-        
-        if currentLevel == World.numberOfLevels() && currentSubLevel == 3{
-            //Ignore
-        }
-        else if(currentSubLevel < 3){
-            registerLevelAndSubLevelToUserDefaults(level: currentLevel, subLevel: currentSubLevel+1)
-        }
-        else{
-            registerLevelAndSubLevelToUserDefaults(level: currentLevel+1, subLevel: 1)
-        }
+    static func updateUserInfo(with level: Int, and subLevel: Int){
+        registerLevelAndSubLevelToUserDefaults(level: level, subLevel: subLevel)
     }
     
     static func resetUserDefaults(){
