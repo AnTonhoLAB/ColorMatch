@@ -32,14 +32,14 @@ class Background {
                             forever = SKAction.repeatForever(rotate2)
                             point.run(forever)
                         }
-                        scene.isPaused = true
-                        scene.isPaused = false
                     }
                 }
                 
             }
             
         }
+        scene.isPaused = true
+        scene.isPaused = false
         
     }
     
