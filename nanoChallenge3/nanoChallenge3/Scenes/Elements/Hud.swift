@@ -12,8 +12,8 @@ class Hud: SKNode {
     init(with level: Level, and size: CGSize) {
         super.init()
         
-        let topLayout = SKSpriteNode(imageNamed: "Level_\(level.color)_Top")
-        let downLayout = SKSpriteNode(imageNamed: "Level_\(level.color)_Down")
+        let topLayout = SKSpriteNode(imageNamed: "Layout_Top_\(level.color)")
+        let downLayout = SKSpriteNode(imageNamed: "Layout_Down_\(level.color)")
         
         let scaleLayout = size.width/topLayout.size.width
         
