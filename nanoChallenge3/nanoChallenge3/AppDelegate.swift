@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 
 @UIApplicationMain
@@ -25,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //         Only set Crash reports if app is in production
         if( !GameConfiguration.debugMode ) {
+            Fabric.with([Crashlytics.self])
         }
     
         return true
