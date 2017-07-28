@@ -113,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				6BAED4A21EFC5AC600E10034 /* nanoChallenge3 */,
+				6BAED4B51EFC5AC600E10034 /* Info.plist */,
 				6BAED4A11EFC5AC600E10034 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,12 +132,11 @@
 				916675C41F2A9BF100661704 /* GameConfiguration.swift */,
 				91FFB1E51F2A99ED00709FFB /* Crashlytics.framework */,
 				91FFB1E41F2A99ED00709FFB /* Fabric.framework */,
-				6BAED4B51EFC5AC600E10034 /* Info.plist */,
 				6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */,
 				6BAED4AB1EFC5AC600E10034 /* GameViewController.swift */,
+				6B089A481F0AE488009E7C77 /* MusicController.swift */,
 				9151A2DE1F21831000D678E0 /* Scenes */,
 				9151A2DF1F21836700D678E0 /* Model */,
-				6B089A481F0AE488009E7C77 /* MusicController.swift */,
 				91E6AE611F25494900E88AC1 /* Extensions */,
 				6BAED4AD1EFC5AC600E10034 /* Main.storyboard */,
 				6BAED4B01EFC5AC600E10034 /* Assets.xcassets */,

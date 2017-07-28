@@ -8,12 +8,12 @@
 
 import SpriteKit
 
-enum OperationSystemType {
-    case macOs
-    case iOS
-    case tvOS
-    case watchOS
-}
+//enum OperationSystemType {
+//    case macOs
+//    case iOS
+//    case tvOS
+//    case watchOS
+//}
 
 class GameConfiguration {
     
@@ -25,7 +25,8 @@ class GameConfiguration {
             return false
         #endif
     }
-//    /// Tells the type of operational system the App is running in
+    
+//    Tells the type of operational system the App is running in
 //    static var osType: OperationSystemType {
 //        #if os(OSX)
 //            return .MacOS
