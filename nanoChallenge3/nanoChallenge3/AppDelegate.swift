@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 
 @UIApplicationMain
@@ -22,13 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaultsManager.registerLevelAndSubLevelToUserDefaults(level: 1, subLevel: 1)
         }
 //        UserDefaultsManager.resetUserDefaults()
-        // Only set Crash reports if app is in production
-//        if( !GameConfiguration.debugMode ) {
-//            Fabric.sharedSDK().debug = true
+//         Only set Crash reports if app is in production
+        if( !GameConfiguration.debugMode ) {
+            Fabric.sharedSDK().debug = true
+            Fabric.with([Crashlytics.self])
 //            Fabric.with([Crashlytics.self, GameAnalytics.self])
 ////            self.setGameAnalytics()
-//        }
-        
+        }
+    
         return true
     }
 
