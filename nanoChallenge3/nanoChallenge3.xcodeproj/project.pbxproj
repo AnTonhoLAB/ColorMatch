@@ -37,8 +37,6 @@
 		91B2C4A11F05CA9A00920E24 /* World.json in Resources */ = {isa = PBXBuildFile; fileRef = 91B2C49A1F05CA9A00920E24 /* World.json */; };
 		91B2C4A21F05CA9A00920E24 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2C49B1F05CA9A00920E24 /* World.swift */; };
 		91B92C091F20FEA0006ADBD5 /* MainCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B92C081F20FEA0006ADBD5 /* MainCircle.swift */; };
-		91CFE2011F2ACE71006374A0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FFB1E51F2A99ED00709FFB /* Crashlytics.framework */; };
-		91CFE2021F2ACE71006374A0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FFB1E41F2A99ED00709FFB /* Fabric.framework */; };
 		91E5E1251F0351130017484B /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E5E1241F0351130017484B /* CGFloatExtension.swift */; };
 		91EB65341F01CB56001A2BDD /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EB65331F01CB56001A2BDD /* CreditsScene.swift */; };
 		ED0A2DDC1F01D8F60058E8D3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */; };
@@ -79,8 +77,6 @@
 		91B92C081F20FEA0006ADBD5 /* MainCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCircle.swift; sourceTree = "<group>"; };
 		91E5E1241F0351130017484B /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
 		91EB65331F01CB56001A2BDD /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
-		91FFB1E41F2A99ED00709FFB /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
-		91FFB1E51F2A99ED00709FFB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,8 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91CFE2011F2ACE71006374A0 /* Crashlytics.framework in Frameworks */,
-				91CFE2021F2ACE71006374A0 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,8 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				916675C41F2A9BF100661704 /* GameConfiguration.swift */,
-				91FFB1E51F2A99ED00709FFB /* Crashlytics.framework */,
-				91FFB1E41F2A99ED00709FFB /* Fabric.framework */,
 				6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */,
 				6BAED4AB1EFC5AC600E10034 /* GameViewController.swift */,
 				6B089A481F0AE488009E7C77 /* MusicController.swift */,
@@ -143,6 +135,7 @@
 				6BAED4B21EFC5AC600E10034 /* LaunchScreen.storyboard */,
 				916E63AF1F06EBE30033168C /* QanelasSoftDEMO-ExtraBold.otf */,
 				6B089A3F1F0AE3A1009E7C77 /* Songs */,
+				91DF54BF1F2BA9B80049B97A /* Frameworks */,
 			);
 			path = nanoChallenge3;
 			sourceTree = "<group>";
@@ -185,6 +178,13 @@
 				91B2C4991F05CA9A00920E24 /* SubShapeMainCircle.swift */,
 			);
 			path = Elements;
+			sourceTree = "<group>";
+		};
+		91DF54BF1F2BA9B80049B97A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		91E6AE611F25494900E88AC1 /* Extensions */ = {
