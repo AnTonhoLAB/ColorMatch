@@ -22,9 +22,6 @@ class LevelsScene: SKScene {
     
     var buttonBack: SKSpriteNode!
     
-    var lastUnlockedLevel: Int!
-    var lastUnlockedSublevel: Int!
-    
     var blocksDistance = CGFloat(20)
     
     var paging = false
@@ -35,8 +32,8 @@ class LevelsScene: SKScene {
         super.didMove(to: view)
         self.backgroundColor = UIColor.white
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        lastUnlockedLevel = UserDefaultsManager.getCurrentUserInfo(info: .CurrentLevel)
-        lastUnlockedSublevel = UserDefaultsManager.getCurrentUserInfo(info: .CurrentSubLevel)
+        
+        let userInfo = UserInfoManager.getUserInfo()
         
         let levelsTitle = SKSpriteNode(imageNamed: "Levels")
         
@@ -80,7 +77,7 @@ class LevelsScene: SKScene {
                 level = World.getLevel(level: numberLevel)
                 
                 for numberSubLevel in 1...3{
-                    if (numberLevel > lastUnlockedLevel) || (numberLevel == lastUnlockedLevel && numberSubLevel > lastUnlockedSublevel){
+                    if (numberLevel > userInfo.level) || (numberLevel == userInfo.level && numberSubLevel > userInfo.subLevel){
                         
                         texture = level.getSubLevel(subLevel: numberSubLevel)?.getTextureWith(scene: self, andLockedState: true)
                         buttonLevel = SKSpriteNode(texture: texture)
@@ -110,7 +107,7 @@ class LevelsScene: SKScene {
         
         Background.applyIn(scene: self)
         
-        currentPage = lastUnlockedLevel%4 == 0 ? (lastUnlockedLevel/4) : (lastUnlockedLevel/4 + 1)
+        currentPage = userInfo.level%4 == 0 ? (userInfo.level/4) : (userInfo.level/4 + 1)
         
         var newPoint: CGPoint!
         for button in buttons {

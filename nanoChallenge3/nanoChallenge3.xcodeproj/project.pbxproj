@@ -29,6 +29,7 @@
 		916E63B01F06EDB40033168C /* QanelasSoftDEMO-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 916E63AF1F06EBE30033168C /* QanelasSoftDEMO-ExtraBold.otf */; };
 		918C5EC61F031AE3003CBD41 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C5EC51F031AE3003CBD41 /* Background.swift */; };
 		9197360C1F01DF2900D86AA1 /* SKViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9197360B1F01DF2900D86AA1 /* SKViewExtension.swift */; };
+		91A66B501F2C47E600EE65D2 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A66B4F1F2C47E600EE65D2 /* UserInfoManager.swift */; };
 		91B2C49C1F05CA9A00920E24 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2C4951F05CA9A00920E24 /* Preferences.swift */; };
 		91B2C49D1F05CA9A00920E24 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2C4961F05CA9A00920E24 /* Level.swift */; };
 		91B2C49E1F05CA9A00920E24 /* ShapeArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2C4971F05CA9A00920E24 /* ShapeArc.swift */; };
@@ -38,10 +39,10 @@
 		91B2C4A21F05CA9A00920E24 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2C49B1F05CA9A00920E24 /* World.swift */; };
 		91B92C091F20FEA0006ADBD5 /* MainCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B92C081F20FEA0006ADBD5 /* MainCircle.swift */; };
 		91E5E1251F0351130017484B /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E5E1241F0351130017484B /* CGFloatExtension.swift */; };
+		91E68F181F2C029A00944A2C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E68F171F2C029A00944A2C /* CloudKit.framework */; };
 		91E691EB1F2BB94000A8CB74 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E691E91F2BB94000A8CB74 /* Fabric.framework */; };
 		91E691EC1F2BB94000A8CB74 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E691EA1F2BB94000A8CB74 /* Crashlytics.framework */; };
 		91EB65341F01CB56001A2BDD /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EB65331F01CB56001A2BDD /* CreditsScene.swift */; };
-		ED0A2DDC1F01D8F60058E8D3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		916E63AF1F06EBE30033168C /* QanelasSoftDEMO-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QanelasSoftDEMO-ExtraBold.otf"; sourceTree = "<group>"; };
 		918C5EC51F031AE3003CBD41 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		9197360B1F01DF2900D86AA1 /* SKViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKViewExtension.swift; sourceTree = "<group>"; };
+		91A66B4F1F2C47E600EE65D2 /* UserInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		91B2C4951F05CA9A00920E24 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		91B2C4961F05CA9A00920E24 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		91B2C4971F05CA9A00920E24 /* ShapeArc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeArc.swift; sourceTree = "<group>"; };
@@ -78,10 +80,11 @@
 		91B92C081F20FEA0006ADBD5 /* MainCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCircle.swift; sourceTree = "<group>"; };
 		91C374AA1F2BB422005F2503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91E5E1241F0351130017484B /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		91E68F151F2C026B00944A2C /* nanoChallenge3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nanoChallenge3.entitlements; sourceTree = "<group>"; };
+		91E68F171F2C029A00944A2C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		91E691E91F2BB94000A8CB74 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		91E691EA1F2BB94000A8CB74 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		91EB65331F01CB56001A2BDD /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
-		ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E68F181F2C029A00944A2C /* CloudKit.framework in Frameworks */,
 				91E691EC1F2BB94000A8CB74 /* Crashlytics.framework in Frameworks */,
 				91E691EB1F2BB94000A8CB74 /* Fabric.framework in Frameworks */,
 			);
@@ -114,6 +118,7 @@
 			children = (
 				6BAED4A21EFC5AC600E10034 /* nanoChallenge3 */,
 				6BAED4A11EFC5AC600E10034 /* Products */,
+				91E68F161F2C029A00944A2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +133,7 @@
 		6BAED4A21EFC5AC600E10034 /* nanoChallenge3 */ = {
 			isa = PBXGroup;
 			children = (
+				91E68F151F2C026B00944A2C /* nanoChallenge3.entitlements */,
 				91C374AA1F2BB422005F2503 /* Info.plist */,
 				916675C41F2A9BF100661704 /* GameConfiguration.swift */,
 				6BAED4A31EFC5AC600E10034 /* AppDelegate.swift */,
@@ -167,7 +173,7 @@
 				91B2C4961F05CA9A00920E24 /* Level.swift */,
 				91B2C4951F05CA9A00920E24 /* Preferences.swift */,
 				91B2C4981F05CA9A00920E24 /* SubLevel.swift */,
-				ED0A2DDB1F01D8F60058E8D3 /* UserDefaultsManager.swift */,
+				91A66B4F1F2C47E600EE65D2 /* UserInfoManager.swift */,
 				91B2C49B1F05CA9A00920E24 /* World.swift */,
 				91B2C49A1F05CA9A00920E24 /* World.json */,
 			);
@@ -191,6 +197,14 @@
 			children = (
 				91E691E91F2BB94000A8CB74 /* Fabric.framework */,
 				91E691EA1F2BB94000A8CB74 /* Crashlytics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91E68F161F2C029A00944A2C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				91E68F171F2C029A00944A2C /* CloudKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -238,6 +252,14 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = JM5PLAS48Y;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -301,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91A66B501F2C47E600EE65D2 /* UserInfoManager.swift in Sources */,
 				91B92C091F20FEA0006ADBD5 /* MainCircle.swift in Sources */,
 				91B2C49D1F05CA9A00920E24 /* Level.swift in Sources */,
 				91B2C4A21F05CA9A00920E24 /* World.swift in Sources */,
@@ -312,7 +335,6 @@
 				6BAED4AC1EFC5AC600E10034 /* GameViewController.swift in Sources */,
 				91B2C49C1F05CA9A00920E24 /* Preferences.swift in Sources */,
 				91B2C49F1F05CA9A00920E24 /* SubLevel.swift in Sources */,
-				ED0A2DDC1F01D8F60058E8D3 /* UserDefaultsManager.swift in Sources */,
 				9166F8C41EFD86CE0071E84A /* MainScene.swift in Sources */,
 				6B089A491F0AE488009E7C77 /* MusicController.swift in Sources */,
 				916675C51F2A9BF100661704 /* GameConfiguration.swift in Sources */,
@@ -445,6 +467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = nanoChallenge3/nanoChallenge3.entitlements;
 				DEVELOPMENT_TEAM = JM5PLAS48Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,6 +487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = nanoChallenge3/nanoChallenge3.entitlements;
 				DEVELOPMENT_TEAM = JM5PLAS48Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

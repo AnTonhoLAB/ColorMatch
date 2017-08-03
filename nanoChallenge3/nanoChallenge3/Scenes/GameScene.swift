@@ -64,19 +64,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             if matches == mainCircle.children.count{
-                let currentLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
                 
-                if subLevel.level.number == currentLevel && self.subLevel.number == 3{
+                let userInfo = UserInfoManager.getUserInfo()
+                
+                if subLevel.level.number == userInfo.level && self.subLevel.number == 3{
                     
                     let numberOfLevels = World.numberOfLevels()
                     let numberOfSubLevelsInLevel = subLevel.level.numberOfSubLevels()
                     
                     if subLevel.level.number < numberOfLevels && subLevel.number == numberOfSubLevelsInLevel{
-                        UserDefaultsManager.updateUserInfo(with: subLevel.level.number+1, and: 1)
+                        UserInfoManager.updateUserInfo(with: subLevel.level.number+1, and: 1)
                         goToLevelUpScene()
                     }
                     else if subLevel.level.number == numberOfLevels && subLevel.number == numberOfSubLevelsInLevel{
-                        UserDefaultsManager.updateUserInfo(with: subLevel.level.number, and: numberOfSubLevelsInLevel)
+                        UserInfoManager.updateUserInfo(with: subLevel.level.number, and: numberOfSubLevelsInLevel)
                         goToLevelScene()
                     }
                     else{

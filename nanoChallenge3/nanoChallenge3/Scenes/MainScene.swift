@@ -145,9 +145,10 @@ class MainScene: SKScene {
             else if firstButton.contains(touch.location(in: self)) {
                 let gameScene = GameScene(size: self.frame.size)
                 gameScene.scaleMode = .aspectFill
-                let level = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentLevel)
-                let subLevel = UserDefaultsManager.getCurrentUserInfo(info: DefaultsOption.CurrentSubLevel)
-                gameScene.setSubLevel(with: level, and: subLevel)
+                
+                let userInfo = UserInfoManager.getUserInfo()
+                
+                gameScene.setSubLevel(with: userInfo.level, and: userInfo.subLevel)
                 self.view?.presentScene(gameScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
             }
         }
