@@ -25,9 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var userInfo = UserInfoManager.getUserInfo()
         
-        if userInfo.level! > World.numberOfLevels(){
-            userInfo.level = World.numberOfLevels()
+        let numberOfLevels = World.numberOfLevels()
+        
+        if userInfo.level! > numberOfLevels{
+            userInfo.level = numberOfLevels
             userInfo.subLevel = 3
+            UserInfoManager.saveLevelAndSubLevelUserDefaults(with: userInfo.level, and: userInfo.subLevel)
+        }
+        else if userInfo.subLevel == 3 && numberOfLevels > userInfo.level{
+            userInfo.level! += 1
+            userInfo.subLevel = 1
             UserInfoManager.saveLevelAndSubLevelUserDefaults(with: userInfo.level, and: userInfo.subLevel)
         }
         
@@ -41,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if levelCloudKit > World.numberOfLevels(){
                         levelCloudKit = World.numberOfLevels()
                         subLevelCloudKit = 3
+                    }
+                    else if subLevelCloudKit == 3 && numberOfLevels > levelCloudKit{
+                        levelCloudKit += 1
+                        subLevelCloudKit = 1
                     }
                     
                     if levelCloudKit > userInfo.level || (levelCloudKit == userInfo.level && subLevelCloudKit > userInfo.subLevel){
