@@ -1146,7 +1146,7 @@
   [
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                0,
@@ -1154,7 +1154,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                0,
@@ -1164,7 +1164,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1173,7 +1173,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                0,
@@ -1184,7 +1184,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                3,
@@ -1194,7 +1194,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                0,
@@ -1208,7 +1208,7 @@
   [
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                1,
@@ -1216,7 +1216,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1232,7 +1232,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                1,
@@ -1241,7 +1241,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1261,7 +1261,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1271,7 +1271,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1297,7 +1297,7 @@
   [
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                1,
@@ -1305,7 +1305,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1319,7 +1319,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1328,7 +1328,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1345,7 +1345,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1355,7 +1355,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1377,7 +1377,7 @@
   [
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                1,
@@ -1385,7 +1385,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1397,7 +1397,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1406,7 +1406,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1420,7 +1420,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1430,7 +1430,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1448,7 +1448,7 @@
   [
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                1,
@@ -1456,7 +1456,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1470,7 +1470,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1479,7 +1479,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1496,7 +1496,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1506,7 +1506,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1528,7 +1528,7 @@
   [
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                1,
@@ -1536,7 +1536,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1552,7 +1552,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                1,
@@ -1561,7 +1561,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1581,7 +1581,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1591,7 +1591,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1617,7 +1617,7 @@
   [
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                1,
@@ -1637,7 +1637,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                1,
@@ -1651,7 +1651,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                2,
@@ -1670,7 +1670,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1684,7 +1684,7 @@
     ],
    [
     {
-    "speed": 2,
+    "speed": 1,
     "times": 1,
     "colors": [
                0,
@@ -1704,7 +1704,7 @@
                ]
     },
     {
-    "speed": -2,
+    "speed": -1,
     "times": 1,
     "colors": [
                -1,
@@ -1718,7 +1718,7 @@
   [
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                0,
@@ -1726,7 +1726,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                0,
@@ -1734,7 +1734,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1744,7 +1744,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -1753,7 +1753,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                0,
@@ -1762,7 +1762,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1773,7 +1773,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                3,
@@ -1783,7 +1783,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1793,7 +1793,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                0,
@@ -1807,7 +1807,7 @@
   [
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                1,
@@ -1815,7 +1815,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1829,7 +1829,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1845,7 +1845,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                1,
@@ -1854,7 +1854,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1872,7 +1872,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1892,7 +1892,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -1902,7 +1902,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1924,7 +1924,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1950,7 +1950,7 @@
   [
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                1,
@@ -1958,7 +1958,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1970,7 +1970,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -1984,7 +1984,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -1993,7 +1993,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2008,7 +2008,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2025,7 +2025,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -2035,7 +2035,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2053,7 +2053,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2075,7 +2075,7 @@
   [
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                1,
@@ -2083,7 +2083,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2093,7 +2093,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2105,7 +2105,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -2114,7 +2114,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2126,7 +2126,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2140,7 +2140,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -2150,7 +2150,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2164,7 +2164,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2182,7 +2182,7 @@
   [
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                1,
@@ -2190,7 +2190,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2202,7 +2202,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2216,7 +2216,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -2225,7 +2225,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2240,7 +2240,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2257,7 +2257,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -2267,7 +2267,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2285,7 +2285,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2307,7 +2307,7 @@
   [
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                1,
@@ -2315,7 +2315,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2329,7 +2329,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2345,7 +2345,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                1,
@@ -2354,7 +2354,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2372,7 +2372,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2392,7 +2392,7 @@
     ],
    [
     {
-    "speed": 3,
+    "speed": 2,
     "times": 1,
     "colors": [
                2,
@@ -2402,7 +2402,7 @@
                ]
     },
     {
-    "speed": -3.5,
+    "speed": -2.5,
     "times": 1,
     "colors": [
                -1,
@@ -2424,7 +2424,7 @@
                ]
     },
     {
-    "speed": 3.5,
+    "speed": 2.5,
     "times": 1,
     "colors": [
                -1,
