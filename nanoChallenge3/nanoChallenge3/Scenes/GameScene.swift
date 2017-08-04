@@ -94,7 +94,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func goToGameOverScene(){
         let mainScene = MainScene(size: self.frame.size)
         mainScene.scaleMode = .aspectFill
-        mainScene.createGameOverScene(level: subLevel.level.number, subLevel: 1)
+        
+        let userInfo = UserInfoManager.getUserInfo()
+        
+        if userInfo.level > subLevel.level.number {
+            mainScene.createGameOverScene(level: subLevel.level.number, subLevel: subLevel.number)
+        }
+        else{
+            mainScene.createGameOverScene(level: subLevel.level.number, subLevel: 1)
+        }
+        
         self.view?.presentScene(mainScene, transition: SKTransition.fade(with: UIColor.lightGray, duration: Preferences.durationTransitions))
     }
     

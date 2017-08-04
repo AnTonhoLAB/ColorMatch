@@ -79,7 +79,7 @@ class SubShapeMainCircle: SKShapeNode{
         var ballSpeed = CGFloat(0.5)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            ballSpeed = CGFloat(5)
+            ballSpeed = CGFloat(1)
         }
 
         self.physicsBody?.applyImpulse(CGVector.init(dx: ballSpeed * getPoint().x, dy: ballSpeed * getPoint().y))
